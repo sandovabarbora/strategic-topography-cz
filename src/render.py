@@ -93,6 +93,41 @@ def build_map_svg(
         f'fill="none" stroke="#EFEAE0" stroke-width="0.7"/>'
     )
 
+    # Edge annotations — descriptive (not arrow labels). These reflect
+    # where the cluster centroids actually land in this UMAP layout:
+    # banking/institutional brands fall upper-left; consumer/mass-market
+    # brands fall lower-right; telecoms sit at the top; beverage on the
+    # right. The labels orient a first-time reader without overclaiming
+    # that UMAP axes have inherent semantic meaning.
+    mid_x = plot_lo + plot_w / 2
+    mid_y = plot_lo + plot_w / 2
+    edge_label_attrs = (
+        'font-family="Manrope, sans-serif" font-size="10" font-weight="600" '
+        'fill="#888" letter-spacing="0.12em" text-transform="uppercase"'
+    )
+    # Top edge
+    parts.append(
+        f'<text x="{mid_x:.1f}" y="{plot_lo - 12:.1f}" text-anchor="middle" '
+        f'{edge_label_attrs}>established / heritage register</text>'
+    )
+    # Bottom edge
+    parts.append(
+        f'<text x="{mid_x:.1f}" y="{plot_lo + plot_w + 22:.1f}" text-anchor="middle" '
+        f'{edge_label_attrs}>promo / retail rhythm</text>'
+    )
+    # Left edge — rotated 90° counter-clockwise
+    parts.append(
+        f'<text x="{plot_lo - 14:.1f}" y="{mid_y:.1f}" text-anchor="middle" '
+        f'transform="rotate(-90 {plot_lo - 14:.1f} {mid_y:.1f})" '
+        f'{edge_label_attrs}>institutional register</text>'
+    )
+    # Right edge — rotated 90° clockwise
+    parts.append(
+        f'<text x="{plot_lo + plot_w + 14:.1f}" y="{mid_y:.1f}" text-anchor="middle" '
+        f'transform="rotate(90 {plot_lo + plot_w + 14:.1f} {mid_y:.1f})" '
+        f'{edge_label_attrs}>consumer register</text>'
+    )
+
     # Compute centroid per cluster for the cluster-name label
     centroids: dict[int, tuple[float, float]] = {}
     brand_coords = coords[coords["type"] == "brand"]
