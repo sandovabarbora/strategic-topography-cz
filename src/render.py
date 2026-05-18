@@ -157,6 +157,49 @@ def build_map_svg(
             )
         parts.append("</g>")
 
+    # Strategic trajectory annotation: Air Bank's recommended move from
+    # its current position in Banking toward the edge of mass-market
+    # (the position held by Pilulka and Avast). Renders as a dashed
+    # editorial-red arc with a labeled head. Anchored in data coords
+    # so it stays correct when the underlying UMAP layout shifts.
+    air_bank = brand_coords[brand_coords["id"] == "Air Bank"]
+    avast = brand_coords[brand_coords["id"] == "Avast"]
+    pilulka = brand_coords[brand_coords["id"] == "Pilulka"]
+    if not air_bank.empty and not avast.empty and not pilulka.empty:
+        x0 = x_to_px(float(air_bank["x"].iloc[0]))
+        y0 = y_to_px(float(air_bank["y"].iloc[0]))
+        # Target: midpoint between Avast and Pilulka, pulled slightly
+        # back toward Air Bank so it sits on the edge rather than inside.
+        tx_data = (float(avast["x"].iloc[0]) + float(pilulka["x"].iloc[0])) / 2
+        ty_data = (float(avast["y"].iloc[0]) + float(pilulka["y"].iloc[0])) / 2
+        x1 = x_to_px(tx_data)
+        y1 = y_to_px(ty_data)
+        # Shorten so the arrow lands before the brand circles
+        dx, dy = x1 - x0, y1 - y0
+        length = (dx * dx + dy * dy) ** 0.5
+        ux, uy = dx / length, dy / length
+        x1 -= ux * 18
+        y1 -= uy * 18
+        x0 += ux * 12  # offset start so it doesn't overlap Air Bank circle
+        y0 += uy * 12
+        # Arrowhead points
+        head_len = 9
+        head_w = 6
+        bx, by = x1 - ux * head_len, y1 - uy * head_len
+        # Perpendicular for arrowhead wings
+        px, py = -uy, ux
+        h1x, h1y = bx + px * head_w, by + py * head_w
+        h2x, h2y = bx - px * head_w, by - py * head_w
+        accent = "oklch(0.46 0.16 25)"
+        parts.append(
+            f'<g class="trajectory" aria-label="Air Bank recommended strategic move from Banking neighborhood toward the edge of mass-market consumer">'
+            f'<line x1="{x0:.1f}" y1="{y0:.1f}" x2="{x1:.1f}" y2="{y1:.1f}" '
+            f'stroke="{accent}" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.9"/>'
+            f'<polygon points="{x1:.1f},{y1:.1f} {h1x:.1f},{h1y:.1f} {h2x:.1f},{h2y:.1f}" '
+            f'fill="{accent}" opacity="0.95"/>'
+            f'</g>'
+        )
+
     parts.append("</svg>")
     return "".join(parts)
 
