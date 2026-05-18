@@ -608,6 +608,68 @@ main {
     color: var(--ink);
 }
 
+/* ============ Appendix (collapsed details) ============ */
+
+.appendix {
+    border-top: 1px solid var(--rule);
+    padding: clamp(18px, 2.2vw, 26px) 0;
+}
+
+.appendix:last-of-type {
+    border-bottom: 1px solid var(--rule);
+}
+
+.appendix > summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.appendix > summary::-webkit-details-marker { display: none; }
+
+.appendix > summary::before {
+    content: "+";
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--accent);
+    line-height: 1;
+    width: 18px;
+    flex-shrink: 0;
+}
+
+.appendix[open] > summary::before {
+    content: "\2013";
+}
+
+.appendix > summary:hover {
+    color: var(--accent);
+}
+
+.appendix-body {
+    margin-top: clamp(20px, 2.5vw, 32px);
+    padding-left: 32px;
+}
+
+.appendix-lede {
+    margin: 0 0 clamp(24px, 3vw, 36px);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 62ch;
+}
+
+@media (max-width: 640px) {
+    .appendix-body { padding-left: 0; }
+}
+
 /* ============ Colophon ============ */
 
 footer {

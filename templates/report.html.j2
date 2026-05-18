@@ -63,72 +63,8 @@
 </aside>
 
 <section>
-    <div class="section-label"><span class="num">02</span><h2>Where the rising trends fall</h2></div>
-    <p class="section-intro">For each rising query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary and signals a sector gap in the corpus. Treat those as evidence of a corpus gap, not a recommended brand activation.</p>
-    <table class="opp-table">
-        <thead>
-            <tr>
-                <th>Trend</th>
-                <th class="num-col">Velocity</th>
-                <th>Nearest brands</th>
-                <th class="num-col">Saturation</th>
-            </tr>
-        </thead>
-        <tbody>
-{% for o in opportunities %}
-            <tr class="{% if o.low_confidence %}opp-low-conf{% endif %}">
-                <td class="opp-trend">
-                    {{ o.trend }}
-                    {% if o.low_confidence %}<span class="low-conf-badge">low signal</span>{% endif %}
-                </td>
-                <td class="num-col">{{ "%.0f" | format(o.velocity) }}</td>
-                <td class="opp-nearby">
-                    {{ o.near_brand_1 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_1_sim) }})</span>
-                    {% if o.near_brand_2 %} &middot; {{ o.near_brand_2 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_2_sim) }})</span>{% endif %}
-                    {% if o.near_brand_3 %} &middot; {{ o.near_brand_3 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_3_sim) }})</span>{% endif %}
-                </td>
-                <td class="num-col">{{ "%.2f" | format(o.saturation_score) }}</td>
-            </tr>
-{% endfor %}
-        </tbody>
-    </table>
-</section>
-
-<section>
-    <div class="section-label"><span class="num">03</span><h2>Patterns</h2></div>
-    <div class="patterns">
-{% for p in patterns %}
-        <article class="pattern">
-            <p class="num">{{ "%02d" | format(loop.index) }}</p>
-            <div>
-                <h3>{{ p.title }}</h3>
-                <p class="evidence">{{ p.evidence }}</p>
-                <p class="takeaway"><strong>Why it matters</strong>{{ p.takeaway }}</p>
-            </div>
-        </article>
-{% endfor %}
-    </div>
-</section>
-
-<section>
-    <div class="section-label"><span class="num">04</span><h2>Playbook</h2></div>
-    <p class="section-intro">Five moves a strategist or creative director can run on next week's pitch using this map.</p>
-    <div class="playbook">
-{% for move in playbook %}
-        <article class="play">
-            <p class="play-num">{{ "%02d" | format(loop.index) }}</p>
-            <div>
-                <h3>{{ move.title }}</h3>
-                <p class="play-body">{{ move.body }}</p>
-            </div>
-        </article>
-{% endfor %}
-    </div>
-</section>
-
-<section>
-    <div class="section-label"><span class="num">05</span><h2>What this looks like for one brand</h2></div>
-    <p class="section-intro">A walk-through of the same diagnostic applied to Air Bank. The point isn&apos;t Air Bank specifically &mdash; it&apos;s the shape of the strategist&apos;s decision once the map exists. Substitute any brand on the map and the steps stay the same.</p>
+    <div class="section-label"><span class="num">02</span><h2>One brand, end to end: Air Bank</h2></div>
+    <p class="section-intro">If the map is the diagnostic, this is what doing something with it looks like. The brand is Air Bank; the moves stay the same for any brand on the map. Four steps from &quot;where am I&quot; to &quot;what slides go in the deck.&quot;</p>
 
     <div class="worked">
         <article class="worked-step">
@@ -167,6 +103,82 @@
             </div>
         </article>
     </div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">03</span><h2>Appendix</h2></div>
+    <p class="section-intro">The reference material behind the diagnostic. Open whichever you need; the report above stands without them.</p>
+
+    <details class="appendix">
+        <summary>Four patterns the map reveals</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">Each pattern is a finding that the map made visible. Patterns explain <em>why</em> the four neighborhoods matter; the Air Bank walk-through shows how to act on them.</p>
+            <div class="patterns">
+{% for p in patterns %}
+                <article class="pattern">
+                    <p class="num">{{ "%02d" | format(loop.index) }}</p>
+                    <div>
+                        <h3>{{ p.title }}</h3>
+                        <p class="evidence">{{ p.evidence }}</p>
+                        <p class="takeaway"><strong>Why it matters</strong>{{ p.takeaway }}</p>
+                    </div>
+                </article>
+{% endfor %}
+            </div>
+        </div>
+    </details>
+
+    <details class="appendix">
+        <summary>Full playbook (five moves)</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">Five moves a strategist or creative director can run on next week&apos;s pitch. Moves 01&ndash;03 already show up in the Air Bank walk-through; 04 and 05 cover trends and re-scoring.</p>
+            <div class="playbook">
+{% for move in playbook %}
+                <article class="play">
+                    <p class="play-num">{{ "%02d" | format(loop.index) }}</p>
+                    <div>
+                        <h3>{{ move.title }}</h3>
+                        <p class="play-body">{{ move.body }}</p>
+                    </div>
+                </article>
+{% endfor %}
+            </div>
+        </div>
+    </details>
+
+    <details class="appendix">
+        <summary>Rising trends and where they fall on the map</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">For each rising Czech query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> mean the top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary, which is itself a finding (a sector gap in the corpus).</p>
+            <table class="opp-table">
+                <thead>
+                    <tr>
+                        <th>Trend</th>
+                        <th class="num-col">Velocity</th>
+                        <th>Nearest brands</th>
+                        <th class="num-col">Saturation</th>
+                    </tr>
+                </thead>
+                <tbody>
+{% for o in opportunities %}
+                    <tr class="{% if o.low_confidence %}opp-low-conf{% endif %}">
+                        <td class="opp-trend">
+                            {{ o.trend }}
+                            {% if o.low_confidence %}<span class="low-conf-badge">low signal</span>{% endif %}
+                        </td>
+                        <td class="num-col">{{ "%.0f" | format(o.velocity) }}</td>
+                        <td class="opp-nearby">
+                            {{ o.near_brand_1 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_1_sim) }})</span>
+                            {% if o.near_brand_2 %} &middot; {{ o.near_brand_2 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_2_sim) }})</span>{% endif %}
+                            {% if o.near_brand_3 %} &middot; {{ o.near_brand_3 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_3_sim) }})</span>{% endif %}
+                        </td>
+                        <td class="num-col">{{ "%.2f" | format(o.saturation_score) }}</td>
+                    </tr>
+{% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </details>
 </section>
 
 <footer>

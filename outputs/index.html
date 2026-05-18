@@ -616,6 +616,68 @@ main {
     color: var(--ink);
 }
 
+/* ============ Appendix (collapsed details) ============ */
+
+.appendix {
+    border-top: 1px solid var(--rule);
+    padding: clamp(18px, 2.2vw, 26px) 0;
+}
+
+.appendix:last-of-type {
+    border-bottom: 1px solid var(--rule);
+}
+
+.appendix > summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.appendix > summary::-webkit-details-marker { display: none; }
+
+.appendix > summary::before {
+    content: "+";
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--accent);
+    line-height: 1;
+    width: 18px;
+    flex-shrink: 0;
+}
+
+.appendix[open] > summary::before {
+    content: "\2013";
+}
+
+.appendix > summary:hover {
+    color: var(--accent);
+}
+
+.appendix-body {
+    margin-top: clamp(20px, 2.5vw, 32px);
+    padding-left: 32px;
+}
+
+.appendix-lede {
+    margin: 0 0 clamp(24px, 3vw, 36px);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 62ch;
+}
+
+@media (max-width: 640px) {
+    .appendix-body { padding-left: 0; }
+}
+
 /* ============ Colophon ============ */
 
 footer {
@@ -1101,205 +1163,8 @@ em, i { font-style: normal; font-weight: 600; }</style>
 </aside>
 
 <section>
-    <div class="section-label"><span class="num">02</span><h2>Where the rising trends fall</h2></div>
-    <p class="section-intro">For each rising query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary and signals a sector gap in the corpus. Treat those as evidence of a corpus gap, not a recommended brand activation.</p>
-    <table class="opp-table">
-        <thead>
-            <tr>
-                <th>Trend</th>
-                <th class="num-col">Velocity</th>
-                <th>Nearest brands</th>
-                <th class="num-col">Saturation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="">
-                <td class="opp-trend">
-                    umělá inteligence
-                </td>
-                <td class="num-col">280</td>
-                <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.83)</span>
- &middot; Avast<span class="opp-sim">(0.82)</span> &middot; Lidl<span class="opp-sim">(0.80)</span>                </td>
-                <td class="num-col">0.81</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    inflace 2026
-                </td>
-                <td class="num-col">220</td>
-                <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.79)</span>
- &middot; ČSOB<span class="opp-sim">(0.78)</span> &middot; Generali ČP<span class="opp-sim">(0.78)</span>                </td>
-                <td class="num-col">0.78</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    chatgpt česky
-                </td>
-                <td class="num-col">240</td>
-                <td class="opp-nearby">
-                    Česká spořitelna<span class="opp-sim">(0.81)</span>
- &middot; Generali ČP<span class="opp-sim">(0.81)</span> &middot; Avast<span class="opp-sim">(0.81)</span>                </td>
-                <td class="num-col">0.81</td>
-            </tr>
-            <tr class="opp-low-conf">
-                <td class="opp-trend">
-                    úroky hypotéka 2026
-<span class="low-conf-badge">low signal</span>                </td>
-                <td class="num-col">250</td>
-                <td class="opp-nearby">
-                    ČSOB<span class="opp-sim">(0.83)</span>
- &middot; Generali ČP<span class="opp-sim">(0.82)</span> &middot; Vodafone ČR<span class="opp-sim">(0.82)</span>                </td>
-                <td class="num-col">0.82</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    černý pátek 2026
-                </td>
-                <td class="num-col">230</td>
-                <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.82)</span>
- &middot; Seznam.cz<span class="opp-sim">(0.81)</span> &middot; Albert<span class="opp-sim">(0.81)</span>                </td>
-                <td class="num-col">0.81</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    akce lidl tento týden
-                </td>
-                <td class="num-col">260</td>
-                <td class="opp-nearby">
-                    Lidl<span class="opp-sim">(0.86)</span>
- &middot; Seznam.cz<span class="opp-sim">(0.83)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                </td>
-                <td class="num-col">0.84</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    fotovoltaika dotace
-                </td>
-                <td class="num-col">190</td>
-                <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.80)</span>
- &middot; Pilulka<span class="opp-sim">(0.80)</span> &middot; ČEZ<span class="opp-sim">(0.79)</span>                </td>
-                <td class="num-col">0.80</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    elektromobily 2026
-                </td>
-                <td class="num-col">200</td>
-                <td class="opp-nearby">
-                    Škoda Auto<span class="opp-sim">(0.82)</span>
- &middot; Vodafone ČR<span class="opp-sim">(0.81)</span> &middot; O2 ČR<span class="opp-sim">(0.80)</span>                </td>
-                <td class="num-col">0.81</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    voyo program
-                </td>
-                <td class="num-col">160</td>
-                <td class="opp-nearby">
-                    ČSOB<span class="opp-sim">(0.77)</span>
- &middot; Vodafone ČR<span class="opp-sim">(0.76)</span> &middot; Avast<span class="opp-sim">(0.76)</span>                </td>
-                <td class="num-col">0.76</td>
-            </tr>
-            <tr class="">
-                <td class="opp-trend">
-                    vitamíny d3
-                </td>
-                <td class="num-col">200</td>
-                <td class="opp-nearby">
-                    Pilulka<span class="opp-sim">(0.82)</span>
- &middot; Albert<span class="opp-sim">(0.82)</span> &middot; Lidl<span class="opp-sim">(0.81)</span>                </td>
-                <td class="num-col">0.81</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-<section>
-    <div class="section-label"><span class="num">03</span><h2>Patterns</h2></div>
-    <div class="patterns">
-        <article class="pattern">
-            <p class="num">01</p>
-            <div>
-                <h3>One institutional brand wearing eight logos.</h3>
-                <p class="evidence">All five Czech banks (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční), plus Generali, plus ČEZ, plus Škoda Auto land in one homepage neighborhood. Eight brands, four sectors (banking, insurance, energy, automotive), one register. The boundary lines we draw between these brands at the campaign level do not survive the homepage layer.</p>
-                <p class="takeaway"><strong>Why it matters</strong>"Established Czech institution" is a homepage template, not a sector. A challenger that wants to feel distinct from Česká spořitelna has to break out of the institutional template, not out of the banking sector. A bank that wants to feel different from ČEZ has the same problem.</p>
-            </div>
-        </article>
-        <article class="pattern">
-            <p class="num">02</p>
-            <div>
-                <h3>The mass-market neighborhood is a homepage-shape problem.</h3>
-                <p class="evidence">Nine brands across six sectors — Lidl, Albert, Rohlík (retail), McDonald's, KFC (QSR), Kofola (beverage), Pilulka (pharma), Seznam.cz (media), Avast (tech) — share one homepage template: short positioning line on top, product grid below, "akce / novinky / aktuální nabídka" everywhere. Avast (security software) lands here because their homepage looks like a supermarket aisle.</p>
-                <p class="takeaway"><strong>Why it matters</strong>The buyer who lands on any of these reads the same shape first. The campaign creative might be distinctive; the homepage is not. A brand that runs distinctive campaigns onto a generic homepage trains buyers to forget the distinctive part on contact.</p>
-            </div>
-        </article>
-        <article class="pattern">
-            <p class="num">03</p>
-            <div>
-                <h3>Telecoms own a tight, isolated neighborhood of three.</h3>
-                <p class="evidence">T-Mobile, O2 and Vodafone embed close to each other and far from every other brand. The "always-on connectivity / esim / mobilní tarif" language is differentiated enough to be its own territory, but homogeneous enough that the three competitors are essentially interchangeable inside it.</p>
-                <p class="takeaway"><strong>Why it matters</strong>No fourth brand can join the telecom neighborhood without becoming the fourth-best telecom. A new entrant could occupy any direction outside it (a telecom that reads as a lifestyle brand, a productivity brand, a cultural brand). The neighborhood boundary itself is the strategic opportunity.</p>
-            </div>
-        </article>
-        <article class="pattern">
-            <p class="num">04</p>
-            <div>
-                <h3>The neighborhood boundary IS the strategic decision boundary.</h3>
-                <p class="evidence">The most distinctive Czech brands sit close to a neighborhood boundary, not at its center. Air Bank holds the institutional neighborhood but barely — its language tilts toward consumer. Pilsner Urquell holds the food &amp; beverage neighborhood but tilts toward heritage / luxury. Strong brands are edge brands; safe brands are centroid brands.</p>
-                <p class="takeaway"><strong>Why it matters</strong>"Which competitor do we want to look like" is the wrong question. The right question is "which homepage neighborhood do we want to leave." Most brand strategies adjust within the neighborhood (Air Bank vs Komerční); the bigger move is between neighborhoods (Air Bank vs Avast vs Albert).</p>
-            </div>
-        </article>
-    </div>
-</section>
-
-<section>
-    <div class="section-label"><span class="num">04</span><h2>Playbook</h2></div>
-    <p class="section-intro">Five moves a strategist or creative director can run on next week's pitch using this map.</p>
-    <div class="playbook">
-        <article class="play">
-            <p class="play-num">01</p>
-            <div>
-                <h3>Score the client's homepage before writing the brief.</h3>
-                <p class="play-body">Run the client URL through the same pipeline as Episode 2. If they're in the mass-market neighborhood, every campaign starts with the same handicap: the homepage trains buyers to expect a promo template. If they're in the institutional neighborhood, campaign creative has to actively pull buyers out of "Czech legacy institution" framing.</p>
-            </div>
-        </article>
-        <article class="play">
-            <p class="play-num">02</p>
-            <div>
-                <h3>Identify your homepage's defining vocabulary, then refuse to use it.</h3>
-                <p class="play-body">Each homepage neighborhood has a TF-IDF token signature ("akce / novinky / magazín / leták" for mass-market; "bankou / silnější / partnerem" for institutional). A brief that wants to escape its neighborhood lists those tokens explicitly and rules them out. Escape is a word-level constraint, not just a creative ambition.</p>
-            </div>
-        </article>
-        <article class="play">
-            <p class="play-num">03</p>
-            <div>
-                <h3>Position against neighborhood boundaries, not against named competitors.</h3>
-                <p class="play-body">A pitch slide showing "we differ from Komerční banka because X" is intra-neighborhood wallpaper change. A pitch slide showing "we will move from the institutional neighborhood toward the consumer one — here's the homepage shape we'll adopt" is a real positioning move. Re-score after the rebrand. If the homepage didn't move neighborhoods, neither did the brand.</p>
-            </div>
-        </article>
-        <article class="play">
-            <p class="play-num">04</p>
-            <div>
-                <h3>Use Brief Generator for category-specific numerical targets.</h3>
-                <p class="play-body">The map tells you which neighborhood the client sits in. The <a href="https://sandovabarbora.github.io/spot-scorer/">Spot Scorer's Brief Generator</a> tells you the numerical targets a distinctive spot in that sector needs to hit. Topography identifies the trap; the brief generator gives the spec for breaking out of it.</p>
-            </div>
-        </article>
-        <article class="play">
-            <p class="play-num">05</p>
-            <div>
-                <h3>Read trends through the neighborhood lens, not the brand lens.</h3>
-                <p class="play-body">A rising query that lands in an empty zone of the map is a real opening for the brand whose neighborhood boundary touches that zone. A rising query that lands inside a dense neighborhood is an opportunity only for the brand willing to break its homepage vocabulary. Saturation score in the opportunity table is the diagnostic.</p>
-            </div>
-        </article>
-    </div>
-</section>
-
-<section>
-    <div class="section-label"><span class="num">05</span><h2>What this looks like for one brand</h2></div>
-    <p class="section-intro">A walk-through of the same diagnostic applied to Air Bank. The point isn&apos;t Air Bank specifically &mdash; it&apos;s the shape of the strategist&apos;s decision once the map exists. Substitute any brand on the map and the steps stay the same.</p>
+    <div class="section-label"><span class="num">02</span><h2>One brand, end to end: Air Bank</h2></div>
+    <p class="section-intro">If the map is the diagnostic, this is what doing something with it looks like. The brand is Air Bank; the moves stay the same for any brand on the map. Four steps from &quot;where am I&quot; to &quot;what slides go in the deck.&quot;</p>
 
     <div class="worked">
         <article class="worked-step">
@@ -1338,6 +1203,215 @@ em, i { font-style: normal; font-weight: 600; }</style>
             </div>
         </article>
     </div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">03</span><h2>Appendix</h2></div>
+    <p class="section-intro">The reference material behind the diagnostic. Open whichever you need; the report above stands without them.</p>
+
+    <details class="appendix">
+        <summary>Four patterns the map reveals</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">Each pattern is a finding that the map made visible. Patterns explain <em>why</em> the four neighborhoods matter; the Air Bank walk-through shows how to act on them.</p>
+            <div class="patterns">
+                <article class="pattern">
+                    <p class="num">01</p>
+                    <div>
+                        <h3>One institutional brand wearing eight logos.</h3>
+                        <p class="evidence">All five Czech banks (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční), plus Generali, plus ČEZ, plus Škoda Auto land in one homepage neighborhood. Eight brands, four sectors (banking, insurance, energy, automotive), one register. The boundary lines we draw between these brands at the campaign level do not survive the homepage layer.</p>
+                        <p class="takeaway"><strong>Why it matters</strong>"Established Czech institution" is a homepage template, not a sector. A challenger that wants to feel distinct from Česká spořitelna has to break out of the institutional template, not out of the banking sector. A bank that wants to feel different from ČEZ has the same problem.</p>
+                    </div>
+                </article>
+                <article class="pattern">
+                    <p class="num">02</p>
+                    <div>
+                        <h3>The mass-market neighborhood is a homepage-shape problem.</h3>
+                        <p class="evidence">Nine brands across six sectors — Lidl, Albert, Rohlík (retail), McDonald's, KFC (QSR), Kofola (beverage), Pilulka (pharma), Seznam.cz (media), Avast (tech) — share one homepage template: short positioning line on top, product grid below, "akce / novinky / aktuální nabídka" everywhere. Avast (security software) lands here because their homepage looks like a supermarket aisle.</p>
+                        <p class="takeaway"><strong>Why it matters</strong>The buyer who lands on any of these reads the same shape first. The campaign creative might be distinctive; the homepage is not. A brand that runs distinctive campaigns onto a generic homepage trains buyers to forget the distinctive part on contact.</p>
+                    </div>
+                </article>
+                <article class="pattern">
+                    <p class="num">03</p>
+                    <div>
+                        <h3>Telecoms own a tight, isolated neighborhood of three.</h3>
+                        <p class="evidence">T-Mobile, O2 and Vodafone embed close to each other and far from every other brand. The "always-on connectivity / esim / mobilní tarif" language is differentiated enough to be its own territory, but homogeneous enough that the three competitors are essentially interchangeable inside it.</p>
+                        <p class="takeaway"><strong>Why it matters</strong>No fourth brand can join the telecom neighborhood without becoming the fourth-best telecom. A new entrant could occupy any direction outside it (a telecom that reads as a lifestyle brand, a productivity brand, a cultural brand). The neighborhood boundary itself is the strategic opportunity.</p>
+                    </div>
+                </article>
+                <article class="pattern">
+                    <p class="num">04</p>
+                    <div>
+                        <h3>The neighborhood boundary IS the strategic decision boundary.</h3>
+                        <p class="evidence">The most distinctive Czech brands sit close to a neighborhood boundary, not at its center. Air Bank holds the institutional neighborhood but barely — its language tilts toward consumer. Pilsner Urquell holds the food &amp; beverage neighborhood but tilts toward heritage / luxury. Strong brands are edge brands; safe brands are centroid brands.</p>
+                        <p class="takeaway"><strong>Why it matters</strong>"Which competitor do we want to look like" is the wrong question. The right question is "which homepage neighborhood do we want to leave." Most brand strategies adjust within the neighborhood (Air Bank vs Komerční); the bigger move is between neighborhoods (Air Bank vs Avast vs Albert).</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </details>
+
+    <details class="appendix">
+        <summary>Full playbook (five moves)</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">Five moves a strategist or creative director can run on next week&apos;s pitch. Moves 01&ndash;03 already show up in the Air Bank walk-through; 04 and 05 cover trends and re-scoring.</p>
+            <div class="playbook">
+                <article class="play">
+                    <p class="play-num">01</p>
+                    <div>
+                        <h3>Score the client's homepage before writing the brief.</h3>
+                        <p class="play-body">Run the client URL through the same pipeline as Episode 2. If they're in the mass-market neighborhood, every campaign starts with the same handicap: the homepage trains buyers to expect a promo template. If they're in the institutional neighborhood, campaign creative has to actively pull buyers out of "Czech legacy institution" framing.</p>
+                    </div>
+                </article>
+                <article class="play">
+                    <p class="play-num">02</p>
+                    <div>
+                        <h3>Identify your homepage's defining vocabulary, then refuse to use it.</h3>
+                        <p class="play-body">Each homepage neighborhood has a TF-IDF token signature ("akce / novinky / magazín / leták" for mass-market; "bankou / silnější / partnerem" for institutional). A brief that wants to escape its neighborhood lists those tokens explicitly and rules them out. Escape is a word-level constraint, not just a creative ambition.</p>
+                    </div>
+                </article>
+                <article class="play">
+                    <p class="play-num">03</p>
+                    <div>
+                        <h3>Position against neighborhood boundaries, not against named competitors.</h3>
+                        <p class="play-body">A pitch slide showing "we differ from Komerční banka because X" is intra-neighborhood wallpaper change. A pitch slide showing "we will move from the institutional neighborhood toward the consumer one — here's the homepage shape we'll adopt" is a real positioning move. Re-score after the rebrand. If the homepage didn't move neighborhoods, neither did the brand.</p>
+                    </div>
+                </article>
+                <article class="play">
+                    <p class="play-num">04</p>
+                    <div>
+                        <h3>Use Brief Generator for category-specific numerical targets.</h3>
+                        <p class="play-body">The map tells you which neighborhood the client sits in. The <a href="https://sandovabarbora.github.io/spot-scorer/">Spot Scorer's Brief Generator</a> tells you the numerical targets a distinctive spot in that sector needs to hit. Topography identifies the trap; the brief generator gives the spec for breaking out of it.</p>
+                    </div>
+                </article>
+                <article class="play">
+                    <p class="play-num">05</p>
+                    <div>
+                        <h3>Read trends through the neighborhood lens, not the brand lens.</h3>
+                        <p class="play-body">A rising query that lands in an empty zone of the map is a real opening for the brand whose neighborhood boundary touches that zone. A rising query that lands inside a dense neighborhood is an opportunity only for the brand willing to break its homepage vocabulary. Saturation score in the opportunity table is the diagnostic.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </details>
+
+    <details class="appendix">
+        <summary>Rising trends and where they fall on the map</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">For each rising Czech query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> mean the top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary, which is itself a finding (a sector gap in the corpus).</p>
+            <table class="opp-table">
+                <thead>
+                    <tr>
+                        <th>Trend</th>
+                        <th class="num-col">Velocity</th>
+                        <th>Nearest brands</th>
+                        <th class="num-col">Saturation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td class="opp-trend">
+                            umělá inteligence
+                        </td>
+                        <td class="num-col">280</td>
+                        <td class="opp-nearby">
+                            Vodafone ČR<span class="opp-sim">(0.83)</span>
+ &middot; Avast<span class="opp-sim">(0.82)</span> &middot; Lidl<span class="opp-sim">(0.80)</span>                        </td>
+                        <td class="num-col">0.81</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            inflace 2026
+                        </td>
+                        <td class="num-col">220</td>
+                        <td class="opp-nearby">
+                            Vodafone ČR<span class="opp-sim">(0.79)</span>
+ &middot; ČSOB<span class="opp-sim">(0.78)</span> &middot; Generali ČP<span class="opp-sim">(0.78)</span>                        </td>
+                        <td class="num-col">0.78</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            chatgpt česky
+                        </td>
+                        <td class="num-col">240</td>
+                        <td class="opp-nearby">
+                            Česká spořitelna<span class="opp-sim">(0.81)</span>
+ &middot; Generali ČP<span class="opp-sim">(0.81)</span> &middot; Avast<span class="opp-sim">(0.81)</span>                        </td>
+                        <td class="num-col">0.81</td>
+                    </tr>
+                    <tr class="opp-low-conf">
+                        <td class="opp-trend">
+                            úroky hypotéka 2026
+<span class="low-conf-badge">low signal</span>                        </td>
+                        <td class="num-col">250</td>
+                        <td class="opp-nearby">
+                            ČSOB<span class="opp-sim">(0.83)</span>
+ &middot; Generali ČP<span class="opp-sim">(0.82)</span> &middot; Vodafone ČR<span class="opp-sim">(0.82)</span>                        </td>
+                        <td class="num-col">0.82</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            černý pátek 2026
+                        </td>
+                        <td class="num-col">230</td>
+                        <td class="opp-nearby">
+                            Vodafone ČR<span class="opp-sim">(0.82)</span>
+ &middot; Seznam.cz<span class="opp-sim">(0.81)</span> &middot; Albert<span class="opp-sim">(0.81)</span>                        </td>
+                        <td class="num-col">0.81</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            akce lidl tento týden
+                        </td>
+                        <td class="num-col">260</td>
+                        <td class="opp-nearby">
+                            Lidl<span class="opp-sim">(0.86)</span>
+ &middot; Seznam.cz<span class="opp-sim">(0.83)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                        </td>
+                        <td class="num-col">0.84</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            fotovoltaika dotace
+                        </td>
+                        <td class="num-col">190</td>
+                        <td class="opp-nearby">
+                            Vodafone ČR<span class="opp-sim">(0.80)</span>
+ &middot; Pilulka<span class="opp-sim">(0.80)</span> &middot; ČEZ<span class="opp-sim">(0.79)</span>                        </td>
+                        <td class="num-col">0.80</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            elektromobily 2026
+                        </td>
+                        <td class="num-col">200</td>
+                        <td class="opp-nearby">
+                            Škoda Auto<span class="opp-sim">(0.82)</span>
+ &middot; Vodafone ČR<span class="opp-sim">(0.81)</span> &middot; O2 ČR<span class="opp-sim">(0.80)</span>                        </td>
+                        <td class="num-col">0.81</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            voyo program
+                        </td>
+                        <td class="num-col">160</td>
+                        <td class="opp-nearby">
+                            ČSOB<span class="opp-sim">(0.77)</span>
+ &middot; Vodafone ČR<span class="opp-sim">(0.76)</span> &middot; Avast<span class="opp-sim">(0.76)</span>                        </td>
+                        <td class="num-col">0.76</td>
+                    </tr>
+                    <tr class="">
+                        <td class="opp-trend">
+                            vitamíny d3
+                        </td>
+                        <td class="num-col">200</td>
+                        <td class="opp-nearby">
+                            Pilulka<span class="opp-sim">(0.82)</span>
+ &middot; Albert<span class="opp-sim">(0.82)</span> &middot; Lidl<span class="opp-sim">(0.81)</span>                        </td>
+                        <td class="num-col">0.81</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </details>
 </section>
 
 <footer>
