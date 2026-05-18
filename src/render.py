@@ -204,6 +204,93 @@ def build_map_svg(
     return "".join(parts)
 
 
+def build_brief_data(
+    coords: pd.DataFrame,
+    clusters: pd.DataFrame,
+) -> dict[str, dict[str, object]]:
+    """Pre-compute the brief artifact data for every brand in the dataset.
+
+    For each brand, derive:
+      - current cluster (name, id) and its top TF-IDF tokens
+      - target cluster = the nearest other cluster centroid in 2D
+      - target's top tokens (what to adopt)
+      - realistic edge neighbors = top 2 brands in target cluster closest
+        to this brand
+      - aspirational direction = next 3 brands in target cluster
+      - not-the-goal = the 2 brands in target cluster farthest from this brand
+      - peers = other brands in the same cluster
+
+    The JS in the page reads this dict and renders the brief on selection.
+    """
+    brand_coords = coords[coords["type"] == "brand"].set_index("id")
+    cluster_lookup = clusters.set_index("brand")
+    cluster_ids = sorted(clusters["cluster_id"].unique())
+    cluster_names = {cid: clusters[clusters["cluster_id"] == cid]["cluster_name"].iloc[0]
+                     for cid in cluster_ids}
+    cluster_tokens = {cid: list(clusters[clusters["cluster_id"] == cid]["cluster_top_tokens"].iloc[0])
+                      for cid in cluster_ids}
+
+    centroids: dict[int, tuple[float, float]] = {}
+    for cid in cluster_ids:
+        cluster_brands = set(clusters[clusters["cluster_id"] == cid]["brand"])
+        sub = brand_coords[brand_coords.index.isin(cluster_brands)]
+        if not sub.empty:
+            centroids[cid] = (float(sub["x"].mean()), float(sub["y"].mean()))
+
+    out: dict[str, dict[str, object]] = {}
+    for brand in brand_coords.index:
+        if brand not in cluster_lookup.index:
+            continue
+        bx = float(brand_coords.loc[brand, "x"])
+        by = float(brand_coords.loc[brand, "y"])
+        current_cid = int(cluster_lookup.loc[brand, "cluster_id"])
+
+        # Nearest other cluster centroid
+        other = []
+        for cid in cluster_ids:
+            if cid == current_cid or cid not in centroids:
+                continue
+            cx, cy = centroids[cid]
+            d = ((bx - cx) ** 2 + (by - cy) ** 2) ** 0.5
+            other.append((cid, d))
+        if not other:
+            continue
+        other.sort(key=lambda x: x[1])
+        target_cid = other[0][0]
+
+        # Rank target cluster brands by distance to current brand
+        target_brand_ids = list(clusters[clusters["cluster_id"] == target_cid]["brand"])
+        with_dist: list[tuple[str, float]] = []
+        for tb in target_brand_ids:
+            if tb not in brand_coords.index:
+                continue
+            tx = float(brand_coords.loc[tb, "x"])
+            ty = float(brand_coords.loc[tb, "y"])
+            d = ((bx - tx) ** 2 + (by - ty) ** 2) ** 0.5
+            with_dist.append((tb, d))
+        with_dist.sort(key=lambda x: x[1])
+
+        realistic = [b for b, _ in with_dist[:2]]
+        aspirational = [b for b, _ in with_dist[2:5]]
+        avoid = [b for b, _ in with_dist[-2:]] if len(with_dist) > 5 else []
+
+        peers = [b for b in clusters[clusters["cluster_id"] == current_cid]["brand"].tolist()
+                 if b != brand]
+
+        out[brand] = {
+            "brand": brand,
+            "current_cluster": cluster_names[current_cid],
+            "target_cluster": cluster_names[target_cid],
+            "drop_tokens": cluster_tokens[current_cid],
+            "adopt_tokens": cluster_tokens[target_cid],
+            "peers": peers,
+            "realistic": realistic,
+            "aspirational": aspirational,
+            "avoid": avoid,
+        }
+    return out
+
+
 def build_cluster_panel_data(clusters: pd.DataFrame) -> list[dict[str, object]]:
     """One record per cluster: id, name, color, brand list, top tokens.
 
@@ -315,6 +402,7 @@ def render_report(
         map_svg=build_map_svg(coords, clusters, trends),
         legend=build_legend_html(clusters),
         cluster_panel_json=json.dumps(build_cluster_panel_data(clusters), ensure_ascii=False),
+        brief_data_json=json.dumps(build_brief_data(coords, clusters), ensure_ascii=False),
         opportunities=top_opps,
         patterns=patterns,
         playbook=playbook,

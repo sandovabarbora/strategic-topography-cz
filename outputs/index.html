@@ -638,6 +638,73 @@ main {
     color: var(--ink);
 }
 
+/* ============ Brief generator picker ============ */
+
+.generator-caveat {
+    margin: -16px 0 clamp(20px, 2.5vw, 28px);
+    padding: 14px 18px;
+    background: oklch(0.96 0.03 80);
+    border: 1px solid oklch(0.85 0.06 80);
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 70ch;
+}
+
+.generator-caveat strong {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.generator-controls {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: clamp(20px, 2.5vw, 28px);
+    padding: 18px 20px;
+    background: var(--rule-soft);
+    border-radius: 4px;
+}
+
+.generator-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.generator-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 8px 32px 8px 12px;
+    font: inherit;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    cursor: pointer;
+    flex: 1;
+    max-width: 320px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px 7px;
+}
+
+.generator-select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.generated-brief:empty {
+    display: none;
+}
+
 /* ============ Brief artifact (the literal output) ============ */
 
 .brief-artifact {
@@ -1445,7 +1512,23 @@ em, i { font-style: normal; font-weight: 600; }</style>
 </section>
 
 <section>
-    <div class="section-label"><span class="num">03</span><h2>Appendix</h2></div>
+    <div class="section-label"><span class="num">03</span><h2>Generate the same brief for any brand</h2></div>
+    <p class="section-intro">The Air Bank brief above is one application of the diagnostic; this generator runs the same algorithm for any brand in the dataset. Token lists come from the TF&#8209;IDF signature of each cluster; trajectory candidates come from each brand&apos;s nearest non-current cluster centroid and the brands in it ranked by 2D distance.</p>
+
+    <p class="generator-caveat"><strong>The generator is mechanical.</strong> Geometrically nearest does not mean strategically right. Pilsner Urquell&apos;s nearest neighborhood is mass-market consumer, but recommending a premium beer drift toward Lidl is obviously wrong. Use the output as a structured starting point for a strategist&apos;s judgment, not as a directive. The Air Bank brief above shows what the human edit looks like.</p>
+
+    <div class="generator-controls">
+        <label for="brief-brand-picker" class="generator-label">Brand</label>
+        <select id="brief-brand-picker" class="generator-select">
+            <option value="">&mdash; pick a brand &mdash;</option>
+        </select>
+    </div>
+
+    <div id="generated-brief" class="generated-brief"></div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">04</span><h2>Appendix</h2></div>
     <p class="section-intro">The reference material behind the diagnostic. Open whichever you need; the report above stands without them.</p>
 
     <details class="appendix">
@@ -1702,6 +1785,109 @@ em, i { font-style: normal; font-weight: 600; }</style>
 </footer>
 
 </main>
+
+<script id="brief-data" type="application/json">{"Lidl": {"brand": "Lidl", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Albert", "Rohlík", "McDonald's ČR", "KFC ČR", "Kofola", "Pilulka", "Seznam.cz", "Avast"], "realistic": ["Pilsner Urquell", "Staropramen"], "aspirational": ["Mattoni"], "avoid": []}, "Albert": {"brand": "Albert", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Rohlík", "McDonald's ČR", "KFC ČR", "Kofola", "Pilulka", "Seznam.cz", "Avast"], "realistic": ["Staropramen", "Pilsner Urquell"], "aspirational": ["Mattoni"], "avoid": []}, "Rohlík": {"brand": "Rohlík", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Albert", "McDonald's ČR", "KFC ČR", "Kofola", "Pilulka", "Seznam.cz", "Avast"], "realistic": ["Pilsner Urquell", "Staropramen"], "aspirational": ["Mattoni"], "avoid": []}, "McDonald's ČR": {"brand": "McDonald's ČR", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Albert", "Rohlík", "KFC ČR", "Kofola", "Pilulka", "Seznam.cz", "Avast"], "realistic": ["Staropramen", "Pilsner Urquell"], "aspirational": ["Mattoni"], "avoid": []}, "KFC ČR": {"brand": "KFC ČR", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Albert", "Rohlík", "McDonald's ČR", "Kofola", "Pilulka", "Seznam.cz", "Avast"], "realistic": ["Staropramen", "Pilsner Urquell"], "aspirational": ["Mattoni"], "avoid": []}, "Kofola": {"brand": "Kofola", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Albert", "Rohlík", "McDonald's ČR", "KFC ČR", "Pilulka", "Seznam.cz", "Avast"], "realistic": ["Mattoni", "Pilsner Urquell"], "aspirational": ["Staropramen"], "avoid": []}, "Mattoni": {"brand": "Mattoni", "current_cluster": "Beverage", "target_cluster": "Mass-market consumer", "drop_tokens": ["vody", "let", "našem", "pivovar", "život"], "adopt_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "peers": ["Pilsner Urquell", "Staropramen"], "realistic": ["Kofola", "Rohlík"], "aspirational": ["Pilulka", "KFC ČR", "Albert"], "avoid": ["Seznam.cz", "Avast"]}, "Pilsner Urquell": {"brand": "Pilsner Urquell", "current_cluster": "Beverage", "target_cluster": "Mass-market consumer", "drop_tokens": ["vody", "let", "našem", "pivovar", "život"], "adopt_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "peers": ["Mattoni", "Staropramen"], "realistic": ["Rohlík", "Lidl"], "aspirational": ["Pilulka", "Seznam.cz", "Albert"], "avoid": ["Kofola", "McDonald's ČR"]}, "Staropramen": {"brand": "Staropramen", "current_cluster": "Beverage", "target_cluster": "Mass-market consumer", "drop_tokens": ["vody", "let", "našem", "pivovar", "život"], "adopt_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "peers": ["Mattoni", "Pilsner Urquell"], "realistic": ["Albert", "Lidl"], "aspirational": ["Pilulka", "Avast", "Rohlík"], "avoid": ["McDonald's ČR", "Kofola"]}, "ČSOB": {"brand": "ČSOB", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["Česká spořitelna", "Fio banka", "Air Bank", "Komerční banka", "Škoda Auto", "ČEZ", "Generali ČP"], "realistic": ["T-Mobile ČR", "O2 ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "Česká spořitelna": {"brand": "Česká spořitelna", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Fio banka", "Air Bank", "Komerční banka", "Škoda Auto", "ČEZ", "Generali ČP"], "realistic": ["O2 ČR", "T-Mobile ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "Fio banka": {"brand": "Fio banka", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Česká spořitelna", "Air Bank", "Komerční banka", "Škoda Auto", "ČEZ", "Generali ČP"], "realistic": ["O2 ČR", "T-Mobile ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "Air Bank": {"brand": "Air Bank", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Česká spořitelna", "Fio banka", "Komerční banka", "Škoda Auto", "ČEZ", "Generali ČP"], "realistic": ["O2 ČR", "T-Mobile ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "Komerční banka": {"brand": "Komerční banka", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Česká spořitelna", "Fio banka", "Air Bank", "Škoda Auto", "ČEZ", "Generali ČP"], "realistic": ["O2 ČR", "T-Mobile ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "T-Mobile ČR": {"brand": "T-Mobile ČR", "current_cluster": "Telecom", "target_cluster": "Banking + heavy industry", "drop_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "adopt_tokens": ["banka", "škoda", "čez", "fio", "česká"], "peers": ["O2 ČR", "Vodafone ČR"], "realistic": ["ČEZ", "Generali ČP"], "aspirational": ["Česká spořitelna", "Škoda Auto", "Air Bank"], "avoid": ["Fio banka", "Komerční banka"]}, "O2 ČR": {"brand": "O2 ČR", "current_cluster": "Telecom", "target_cluster": "Banking + heavy industry", "drop_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "adopt_tokens": ["banka", "škoda", "čez", "fio", "česká"], "peers": ["T-Mobile ČR", "Vodafone ČR"], "realistic": ["ČEZ", "Česká spořitelna"], "aspirational": ["Generali ČP", "Škoda Auto", "Fio banka"], "avoid": ["ČSOB", "Komerční banka"]}, "Vodafone ČR": {"brand": "Vodafone ČR", "current_cluster": "Telecom", "target_cluster": "Banking + heavy industry", "drop_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "adopt_tokens": ["banka", "škoda", "čez", "fio", "česká"], "peers": ["T-Mobile ČR", "O2 ČR"], "realistic": ["Škoda Auto", "ČEZ"], "aspirational": ["Generali ČP", "Česká spořitelna", "ČSOB"], "avoid": ["Fio banka", "Komerční banka"]}, "Škoda Auto": {"brand": "Škoda Auto", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Česká spořitelna", "Fio banka", "Air Bank", "Komerční banka", "ČEZ", "Generali ČP"], "realistic": ["Vodafone ČR", "T-Mobile ČR"], "aspirational": ["O2 ČR"], "avoid": []}, "ČEZ": {"brand": "ČEZ", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Česká spořitelna", "Fio banka", "Air Bank", "Komerční banka", "Škoda Auto", "Generali ČP"], "realistic": ["O2 ČR", "T-Mobile ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "Generali ČP": {"brand": "Generali ČP", "current_cluster": "Banking + heavy industry", "target_cluster": "Telecom", "drop_tokens": ["banka", "škoda", "čez", "fio", "česká"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["ČSOB", "Česká spořitelna", "Fio banka", "Air Bank", "Komerční banka", "Škoda Auto", "ČEZ"], "realistic": ["T-Mobile ČR", "O2 ČR"], "aspirational": ["Vodafone ČR"], "avoid": []}, "Pilulka": {"brand": "Pilulka", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Albert", "Rohlík", "McDonald's ČR", "KFC ČR", "Kofola", "Seznam.cz", "Avast"], "realistic": ["Staropramen", "Pilsner Urquell"], "aspirational": ["Mattoni"], "avoid": []}, "Seznam.cz": {"brand": "Seznam.cz", "current_cluster": "Mass-market consumer", "target_cluster": "Beverage", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["vody", "let", "našem", "pivovar", "život"], "peers": ["Lidl", "Albert", "Rohlík", "McDonald's ČR", "KFC ČR", "Kofola", "Pilulka", "Avast"], "realistic": ["Pilsner Urquell", "Staropramen"], "aspirational": ["Mattoni"], "avoid": []}, "Avast": {"brand": "Avast", "current_cluster": "Mass-market consumer", "target_cluster": "Telecom", "drop_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"], "adopt_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"], "peers": ["Lidl", "Albert", "Rohlík", "McDonald's ČR", "KFC ČR", "Kofola", "Pilulka", "Seznam.cz"], "realistic": ["Vodafone ČR", "T-Mobile ČR"], "aspirational": ["O2 ČR"], "avoid": []}}</script>
+<script>
+(function() {
+    const dataEl = document.getElementById("brief-data");
+    const picker = document.getElementById("brief-brand-picker");
+    const out = document.getElementById("generated-brief");
+    if (!dataEl || !picker || !out) return;
+    const briefs = JSON.parse(dataEl.textContent);
+    const brandNames = Object.keys(briefs).sort();
+    brandNames.forEach(b => {
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = b;
+        picker.appendChild(opt);
+    });
+
+    function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+    function el(tag, opts) {
+        const node = document.createElement(tag);
+        if (opts && opts.cls) node.className = opts.cls;
+        if (opts && opts.text != null) node.textContent = opts.text;
+        return node;
+    }
+    function tokenList(tokens, goodClass) {
+        const ul = el("ul", { cls: goodClass ? "brief-tokens brief-tokens-good" : "brief-tokens" });
+        tokens.forEach(t => {
+            const li = el("li");
+            li.textContent = t;
+            ul.appendChild(li);
+        });
+        return ul;
+    }
+
+    function renderBrief(brand) {
+        clear(out);
+        const b = briefs[brand];
+        if (!b) return;
+        const card = el("aside", { cls: "brief-artifact" });
+        card.setAttribute("aria-label", brand + " homepage repositioning brief");
+
+        const head = el("header", { cls: "brief-head" });
+        head.appendChild(el("p", { cls: "brief-eyebrow", text: "HOMEPAGE REPOSITIONING BRIEF · 1 PAGE" }));
+        head.appendChild(el("p", { cls: "brief-title", text: b.brand }));
+        card.appendChild(head);
+
+        // Where you are / Where you need to go
+        const row1 = el("div", { cls: "brief-grid" });
+        const c1 = el("div", { cls: "brief-cell" });
+        c1.appendChild(el("p", { cls: "brief-label", text: "Where you are now" }));
+        c1.appendChild(el("p", { cls: "brief-value", text: b.current_cluster + " neighborhood" }));
+        const peersText = b.peers.length
+            ? "Sharing your homepage template with: " + b.peers.join(", ")
+            : "No other brand currently sits in this neighborhood.";
+        c1.appendChild(el("p", { cls: "brief-meta", text: peersText }));
+        row1.appendChild(c1);
+
+        const c2 = el("div", { cls: "brief-cell" });
+        c2.appendChild(el("p", { cls: "brief-label", text: "Where the map points next" }));
+        c2.appendChild(el("p", { cls: "brief-value", text: "Edge of " + b.target_cluster.toLowerCase() }));
+        const targetParts = [];
+        if (b.realistic.length) targetParts.push("Realistic target neighbors: " + b.realistic.join(", "));
+        if (b.aspirational.length) targetParts.push("Aspirational direction, not destination: " + b.aspirational.join(", "));
+        if (b.avoid.length) targetParts.push("Not the goal: " + b.avoid.join(", "));
+        c2.appendChild(el("p", { cls: "brief-meta", text: targetParts.join(". ") + "." }));
+        row1.appendChild(c2);
+        card.appendChild(row1);
+
+        // Drop / Adopt
+        const row2 = el("div", { cls: "brief-grid" });
+        const d1 = el("div", { cls: "brief-cell" });
+        d1.appendChild(el("p", { cls: "brief-label brief-label-warn", text: "DROP from your homepage" }));
+        d1.appendChild(tokenList(b.drop_tokens, false));
+        d1.appendChild(el("p", { cls: "brief-meta", text: "Top TF-IDF tokens of your current neighborhood. Some may be brand names — those are the cluster's signature; treat the rest as the institutional/categorical vocabulary you're carrying." }));
+        row2.appendChild(d1);
+
+        const d2 = el("div", { cls: "brief-cell" });
+        d2.appendChild(el("p", { cls: "brief-label brief-label-good", text: "ADOPT on your homepage" }));
+        d2.appendChild(tokenList(b.adopt_tokens, true));
+        d2.appendChild(el("p", { cls: "brief-meta", text: "Top TF-IDF tokens of your nearest neighboring neighborhood. The target isn't the centroid of that cluster — it's the edge near " + (b.realistic[0] || "your nearest peer") + ", which sits in the target neighborhood without becoming its loudest archetype." }));
+        row2.appendChild(d2);
+        card.appendChild(row2);
+
+        // Success metric
+        const succ = el("div", { cls: "brief-success" });
+        succ.appendChild(el("p", { cls: "brief-label", text: "Success metric" }));
+        const succBody = "Re-embed the homepage 90 days post-launch. The " + b.brand + " circle must move off the " + b.current_cluster + " centroid and toward the boundary — the target is the edge between " + b.current_cluster + " and " + b.target_cluster + ", where " + (b.realistic.join(" and ") || "the nearest edge brands") + " sits. Meaningful drift, not full migration. If the circle hasn't moved at all, the brand didn't move — the campaign moved.";
+        succ.appendChild(el("p", { cls: "brief-success-body", text: succBody }));
+        card.appendChild(succ);
+
+        const foot = el("footer", { cls: "brief-foot" });
+        foot.appendChild(el("p", { text: "Generated from the strategic topography map. Token lists come from cluster TF-IDF; trajectory targets come from each brand's nearest non-current cluster and the brands in it ranked by 2D distance. Read alongside the Limits block in the appendix." }));
+        card.appendChild(foot);
+
+        out.appendChild(card);
+    }
+
+    picker.addEventListener("change", e => {
+        if (e.target.value) renderBrief(e.target.value);
+        else clear(out);
+    });
+})();
+</script>
 
 <script id="cluster-panel-data" type="application/json">[{"id": 0, "name": "Telecom", "color": "oklch(0.55 0.14 50)", "brands": ["T-Mobile ČR", "O2 ČR", "Vodafone ČR"], "top_tokens": ["volání", "internet", "esim", "mobilní", "vodafone"]}, {"id": 1, "name": "Beverage", "color": "oklch(0.45 0.13 250)", "brands": ["Mattoni", "Pilsner Urquell", "Staropramen"], "top_tokens": ["vody", "let", "našem", "pivovar", "život"]}, {"id": 2, "name": "Banking + heavy industry", "color": "oklch(0.48 0.12 145)", "brands": ["ČSOB", "Česká spořitelna", "Fio banka", "Air Bank", "Komerční banka", "Škoda Auto", "ČEZ", "Generali ČP"], "top_tokens": ["banka", "škoda", "čez", "fio", "česká"]}, {"id": 3, "name": "Mass-market consumer", "color": "oklch(0.50 0.15 25)", "brands": ["Lidl", "Albert", "Rohlík", "McDonald's ČR", "KFC ČR", "Kofola", "Pilulka", "Seznam.cz", "Avast"], "top_tokens": ["online", "nulka", "kfc", "skvělé", "supermarket"]}]</script>
 <script>

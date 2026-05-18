@@ -163,7 +163,23 @@
 </section>
 
 <section>
-    <div class="section-label"><span class="num">03</span><h2>Appendix</h2></div>
+    <div class="section-label"><span class="num">03</span><h2>Generate the same brief for any brand</h2></div>
+    <p class="section-intro">The Air Bank brief above is one application of the diagnostic; this generator runs the same algorithm for any brand in the dataset. Token lists come from the TF&#8209;IDF signature of each cluster; trajectory candidates come from each brand&apos;s nearest non-current cluster centroid and the brands in it ranked by 2D distance.</p>
+
+    <p class="generator-caveat"><strong>The generator is mechanical.</strong> Geometrically nearest does not mean strategically right. Pilsner Urquell&apos;s nearest neighborhood is mass-market consumer, but recommending a premium beer drift toward Lidl is obviously wrong. Use the output as a structured starting point for a strategist&apos;s judgment, not as a directive. The Air Bank brief above shows what the human edit looks like.</p>
+
+    <div class="generator-controls">
+        <label for="brief-brand-picker" class="generator-label">Brand</label>
+        <select id="brief-brand-picker" class="generator-select">
+            <option value="">&mdash; pick a brand &mdash;</option>
+        </select>
+    </div>
+
+    <div id="generated-brief" class="generated-brief"></div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">04</span><h2>Appendix</h2></div>
     <p class="section-intro">The reference material behind the diagnostic. Open whichever you need; the report above stands without them.</p>
 
     <details class="appendix">
@@ -287,6 +303,109 @@
 </footer>
 
 </main>
+
+<script id="brief-data" type="application/json">{{ brief_data_json | safe }}</script>
+<script>
+(function() {
+    const dataEl = document.getElementById("brief-data");
+    const picker = document.getElementById("brief-brand-picker");
+    const out = document.getElementById("generated-brief");
+    if (!dataEl || !picker || !out) return;
+    const briefs = JSON.parse(dataEl.textContent);
+    const brandNames = Object.keys(briefs).sort();
+    brandNames.forEach(b => {
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = b;
+        picker.appendChild(opt);
+    });
+
+    function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+    function el(tag, opts) {
+        const node = document.createElement(tag);
+        if (opts && opts.cls) node.className = opts.cls;
+        if (opts && opts.text != null) node.textContent = opts.text;
+        return node;
+    }
+    function tokenList(tokens, goodClass) {
+        const ul = el("ul", { cls: goodClass ? "brief-tokens brief-tokens-good" : "brief-tokens" });
+        tokens.forEach(t => {
+            const li = el("li");
+            li.textContent = t;
+            ul.appendChild(li);
+        });
+        return ul;
+    }
+
+    function renderBrief(brand) {
+        clear(out);
+        const b = briefs[brand];
+        if (!b) return;
+        const card = el("aside", { cls: "brief-artifact" });
+        card.setAttribute("aria-label", brand + " homepage repositioning brief");
+
+        const head = el("header", { cls: "brief-head" });
+        head.appendChild(el("p", { cls: "brief-eyebrow", text: "HOMEPAGE REPOSITIONING BRIEF · 1 PAGE" }));
+        head.appendChild(el("p", { cls: "brief-title", text: b.brand }));
+        card.appendChild(head);
+
+        // Where you are / Where you need to go
+        const row1 = el("div", { cls: "brief-grid" });
+        const c1 = el("div", { cls: "brief-cell" });
+        c1.appendChild(el("p", { cls: "brief-label", text: "Where you are now" }));
+        c1.appendChild(el("p", { cls: "brief-value", text: b.current_cluster + " neighborhood" }));
+        const peersText = b.peers.length
+            ? "Sharing your homepage template with: " + b.peers.join(", ")
+            : "No other brand currently sits in this neighborhood.";
+        c1.appendChild(el("p", { cls: "brief-meta", text: peersText }));
+        row1.appendChild(c1);
+
+        const c2 = el("div", { cls: "brief-cell" });
+        c2.appendChild(el("p", { cls: "brief-label", text: "Where the map points next" }));
+        c2.appendChild(el("p", { cls: "brief-value", text: "Edge of " + b.target_cluster.toLowerCase() }));
+        const targetParts = [];
+        if (b.realistic.length) targetParts.push("Realistic target neighbors: " + b.realistic.join(", "));
+        if (b.aspirational.length) targetParts.push("Aspirational direction, not destination: " + b.aspirational.join(", "));
+        if (b.avoid.length) targetParts.push("Not the goal: " + b.avoid.join(", "));
+        c2.appendChild(el("p", { cls: "brief-meta", text: targetParts.join(". ") + "." }));
+        row1.appendChild(c2);
+        card.appendChild(row1);
+
+        // Drop / Adopt
+        const row2 = el("div", { cls: "brief-grid" });
+        const d1 = el("div", { cls: "brief-cell" });
+        d1.appendChild(el("p", { cls: "brief-label brief-label-warn", text: "DROP from your homepage" }));
+        d1.appendChild(tokenList(b.drop_tokens, false));
+        d1.appendChild(el("p", { cls: "brief-meta", text: "Top TF-IDF tokens of your current neighborhood. Some may be brand names — those are the cluster's signature; treat the rest as the institutional/categorical vocabulary you're carrying." }));
+        row2.appendChild(d1);
+
+        const d2 = el("div", { cls: "brief-cell" });
+        d2.appendChild(el("p", { cls: "brief-label brief-label-good", text: "ADOPT on your homepage" }));
+        d2.appendChild(tokenList(b.adopt_tokens, true));
+        d2.appendChild(el("p", { cls: "brief-meta", text: "Top TF-IDF tokens of your nearest neighboring neighborhood. The target isn't the centroid of that cluster — it's the edge near " + (b.realistic[0] || "your nearest peer") + ", which sits in the target neighborhood without becoming its loudest archetype." }));
+        row2.appendChild(d2);
+        card.appendChild(row2);
+
+        // Success metric
+        const succ = el("div", { cls: "brief-success" });
+        succ.appendChild(el("p", { cls: "brief-label", text: "Success metric" }));
+        const succBody = "Re-embed the homepage 90 days post-launch. The " + b.brand + " circle must move off the " + b.current_cluster + " centroid and toward the boundary — the target is the edge between " + b.current_cluster + " and " + b.target_cluster + ", where " + (b.realistic.join(" and ") || "the nearest edge brands") + " sits. Meaningful drift, not full migration. If the circle hasn't moved at all, the brand didn't move — the campaign moved.";
+        succ.appendChild(el("p", { cls: "brief-success-body", text: succBody }));
+        card.appendChild(succ);
+
+        const foot = el("footer", { cls: "brief-foot" });
+        foot.appendChild(el("p", { text: "Generated from the strategic topography map. Token lists come from cluster TF-IDF; trajectory targets come from each brand's nearest non-current cluster and the brands in it ranked by 2D distance. Read alongside the Limits block in the appendix." }));
+        card.appendChild(foot);
+
+        out.appendChild(card);
+    }
+
+    picker.addEventListener("change", e => {
+        if (e.target.value) renderBrief(e.target.value);
+        else clear(out);
+    });
+})();
+</script>
 
 <script id="cluster-panel-data" type="application/json">{{ cluster_panel_json | safe }}</script>
 <script>
