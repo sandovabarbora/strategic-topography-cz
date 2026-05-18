@@ -63,7 +63,7 @@ patterns:
       neighborhood but barely — its language tilts toward consumer.
       Pilsner Urquell holds the food &amp; beverage neighborhood but
       tilts toward heritage / luxury. Strong brands are edge brands;
-      safe brands are centroid brands.
+      safe brands sit at the center of their neighborhood.
     takeaway: >-
       "Which competitor do we want to look like" is the wrong
       question. The right question is "which homepage neighborhood
@@ -85,10 +85,10 @@ playbook:
   - title: >-
       Identify your homepage's defining vocabulary, then refuse to use it.
     body: >-
-      Each homepage neighborhood has a TF-IDF token signature
-      ("akce / novinky / magazín / leták" for mass-market;
-      "bankou / silnější / partnerem" for institutional). A brief
-      that wants to escape its neighborhood lists those tokens
+      Each homepage neighborhood has a vocabulary that distinguishes
+      it from the others ("akce / novinky / magazín / leták" for
+      mass-market; "bankou / silnější / partnerem" for institutional).
+      A brief that wants to escape its neighborhood lists those words
       explicitly and rules them out. Escape is a word-level
       constraint, not just a creative ambition.
 

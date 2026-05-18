@@ -18,7 +18,7 @@
         <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/" style="color:inherit;">Sound fingerprint</a>
     </p>
     <h1>Three templates, one institution.</h1>
-    <p class="lede">{{ counts.n_brands_used }} Czech brand homepages embedded in a multilingual semantic space cluster into four neighborhoods — and one of those neighborhoods contains <em>all five banks, plus Generali, plus &#268;EZ, plus &#352;koda Auto</em>. Sector identity we treat as obvious at the campaign level dissolves at the homepage layer. This is the map, and the moves it suggests.</p>
+    <p class="lede">What happens when an AI reads brand homepages instead of brand briefs? For {{ counts.n_brands_used }} Czech brands, it draws a map where the boundaries don&apos;t match the sectors. This report shows that map, walks one brand (Air Bank) through what it means for their strategy, and gives you a tool to generate the same brief for any brand on it.</p>
     <p class="bio">Data &amp; cloud engineer at Alma Career. Built across a few weekends to test what brand competitive analysis looks like when it starts from public data instead of from pitch decks. Part of a five-piece <a href="https://sandovabarbora.github.io/brand-reflection-cz/">Brand Reflection Series</a>.</p>
     <p class="byline">By {{ author }}. <a href="{{ repo_url }}">Source on GitHub</a>.</p>
 </header>
@@ -30,16 +30,16 @@
 
 <section class="method">
     <p class="method-label">How it works</p>
-    <p class="method-body">A multilingual AI language model reads each brand&apos;s homepage and places it in a 768-dimensional &quot;meaning space.&quot; Brands whose homepages read alike land near each other; brands whose homepages read differently land apart. The same AI reads top rising Czech queries from Google Trends and places them on the same map, so you can see which empty zones a rising query lands in. Full technical breakdown in the appendix.</p>
+    <p class="method-body">An AI language model reads each Czech brand&apos;s homepage and plots the brand on a 2D map. Brands whose homepages read alike land near each other; brands that read differently land apart. The same model reads top rising Czech queries from Google Trends and drops them onto the same map, so you can see which empty zones a rising query lands in. Full technical breakdown in the appendix.</p>
 </section>
 
 <section>
     <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
-    <p class="section-intro">Brands are filled circles colored by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric. The four cluster names are derived from sector composition, not chosen by the analyst.</p>
+    <p class="section-intro">Brands are filled circles, colored by neighborhood. Rising queries are outlined diamonds, sized by how fast each query is rising. Distance on the map approximates how differently the brand homepages read to the AI &mdash; brands close together share homepage language; brands far apart don&apos;t. Neighborhood names come from the dominant sector in each group, not from me.</p>
     <div class="map-wrap">
         <figure class="map-frame">
             {{ map_svg | safe }}
-            <figcaption class="scatter-cap">UMAP layout. Click any neighborhood to inspect the brands and vocabulary that define it. The dashed red arrow shows Air Bank&apos;s recommended trajectory &mdash; from the Banking + heavy industry centroid toward the edge of mass-market consumer (the position held by Pilulka and Avast).</figcaption>
+            <figcaption class="scatter-cap">Click any neighborhood to inspect the brands and vocabulary that define it. The dashed red arrow shows Air Bank&apos;s recommended trajectory &mdash; from inside the Banking + heavy industry neighborhood toward the edge of mass-market consumer (the position held by Pilulka and Avast).</figcaption>
         </figure>
         <aside id="cluster-panel" class="cluster-panel" aria-live="polite">
             <p class="cluster-panel-hint">Click a neighborhood on the map to see which brands share it and which words define it.</p>
@@ -81,7 +81,7 @@
             <p class="worked-num">02</p>
             <div>
                 <h3>The vocabulary it shares with seven other brands</h3>
-                <p>The defining tokens for the institutional neighborhood, derived directly from homepage TF&#8209;IDF, are: <code>banka</code>, <code>&scaron;koda</code>, <code>&#269;ez</code>, <code>fio</code>, <code>&#269;esk&aacute;</code>. These are the words that distinguish this neighborhood from the other three on the map.</p>
+                <p>The words that distinguish the institutional neighborhood from the other three on the map, taken directly from how those homepages read, are: <code>banka</code>, <code>&scaron;koda</code>, <code>&#269;ez</code>, <code>fio</code>, <code>&#269;esk&aacute;</code>.</p>
                 <p>If Air Bank&apos;s homepage shares those tokens with &#268;EZ&apos;s homepage, then to a buyer&apos;s first read, Air Bank <em>is</em> &#268;EZ. The challenger positioning &mdash; &quot;the bank that&apos;s different from Komer&#269;n&iacute;&quot; &mdash; is decided in the campaign layer and quietly undone in the homepage layer.</p>
             </div>
         </article>
@@ -133,7 +133,7 @@
                                 <li>partnerem</li>
                                 <li>silnej&scaron;&iacute;</li>
                             </ul>
-                            <p class="brief-meta">The top five are the TF&#8209;IDF signature of the institutional neighborhood. The last two are vocabulary the playbook flags as institutional&#8209;reinforcing.</p>
+                            <p class="brief-meta">The top five are the words that distinguish the institutional neighborhood from the others. The last two are vocabulary the playbook flags as institutional&#8209;reinforcing.</p>
                         </div>
                         <div class="brief-cell">
                             <p class="brief-label brief-label-good">ADOPT on your homepage</p>
@@ -154,7 +154,7 @@
                     </div>
 
                     <footer class="brief-foot">
-                        <p>Generated from the strategic topography map. Same template for any brand in the dataset; swap the brand name and the token lists update from the TF&#8209;IDF signature of each neighborhood.</p>
+                        <p>Generated from the strategic topography map. Same template for any brand in the set; swap the brand name and the word lists update from the words that distinguish each neighborhood from the others.</p>
                     </footer>
                 </aside>
             </div>
@@ -164,7 +164,7 @@
 
 <section>
     <div class="section-label"><span class="num">03</span><h2>Generate the same brief for any brand</h2></div>
-    <p class="section-intro">The Air Bank brief above is one application of the diagnostic; this generator runs the same algorithm for any brand in the dataset. Token lists come from the TF&#8209;IDF signature of each cluster; trajectory candidates come from each brand&apos;s nearest non-current cluster centroid and the brands in it ranked by 2D distance.</p>
+    <p class="section-intro">The Air Bank brief above is one application of the diagnostic. This generator runs the same logic for any brand in the set. The &quot;drop&quot; and &quot;adopt&quot; word lists come from the words that distinguish each neighborhood from the others; the &quot;where the map points next&quot; targets come from the brand&apos;s nearest neighboring neighborhood and the brands in it ranked by distance.</p>
 
     <p class="generator-caveat"><strong>The generator is mechanical.</strong> Geometrically nearest does not mean strategically right. Pilsner Urquell&apos;s nearest neighborhood is mass-market consumer, but recommending a premium beer drift toward Lidl is obviously wrong. Use the output as a structured starting point for a strategist&apos;s judgment, not as a directive. The Air Bank brief above shows what the human edit looks like.</p>
 
@@ -256,7 +256,7 @@
     <details class="appendix">
         <summary>Rising trends and where they fall on the map</summary>
         <div class="appendix-body">
-            <p class="appendix-lede">For each rising Czech query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> mean the top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary, which is itself a finding (a sector gap in the corpus).</p>
+            <p class="appendix-lede">For each rising Czech query, the three brands whose homepage reads most similarly. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> mean the top three brand matches are essentially tied &mdash; the &quot;winner&quot; is arbitrary, which is itself a finding (a sector gap in the brand set).</p>
             <table class="opp-table">
                 <thead>
                     <tr>
@@ -382,25 +382,25 @@
         const d1 = el("div", { cls: "brief-cell" });
         d1.appendChild(el("p", { cls: "brief-label brief-label-warn", text: "DROP from your homepage" }));
         d1.appendChild(tokenList(b.drop_tokens, false));
-        d1.appendChild(el("p", { cls: "brief-meta", text: "Top TF-IDF tokens of your current neighborhood. Some may be brand names — those are the cluster's signature; treat the rest as the institutional/categorical vocabulary you're carrying." }));
+        d1.appendChild(el("p", { cls: "brief-meta", text: "Words that distinguish your current neighborhood from the others on the map. Some are inevitably brand names — that's expected (a neighborhood of banks will have 'banka' in it). Treat the rest as the institutional or categorical vocabulary you're carrying." }));
         row2.appendChild(d1);
 
         const d2 = el("div", { cls: "brief-cell" });
         d2.appendChild(el("p", { cls: "brief-label brief-label-good", text: "ADOPT on your homepage" }));
         d2.appendChild(tokenList(b.adopt_tokens, true));
-        d2.appendChild(el("p", { cls: "brief-meta", text: "Top TF-IDF tokens of your nearest neighboring neighborhood. The target isn't the centroid of that cluster — it's the edge near " + (b.realistic[0] || "your nearest peer") + ", which sits in the target neighborhood without becoming its loudest archetype." }));
+        d2.appendChild(el("p", { cls: "brief-meta", text: "Words that distinguish your nearest neighboring neighborhood from yours. The target isn't the center of that neighborhood — it's the edge near " + (b.realistic[0] || "your nearest peer") + ", which sits in the target neighborhood without becoming its loudest archetype." }));
         row2.appendChild(d2);
         card.appendChild(row2);
 
         // Success metric
         const succ = el("div", { cls: "brief-success" });
         succ.appendChild(el("p", { cls: "brief-label", text: "Success metric" }));
-        const succBody = "Re-embed the homepage 90 days post-launch. The " + b.brand + " circle must move off the " + b.current_cluster + " centroid and toward the boundary — the target is the edge between " + b.current_cluster + " and " + b.target_cluster + ", where " + (b.realistic.join(" and ") || "the nearest edge brands") + " sits. Meaningful drift, not full migration. If the circle hasn't moved at all, the brand didn't move — the campaign moved.";
+        const succBody = "Re-read the homepage with the AI 90 days post-launch. The " + b.brand + " circle must move off its current position inside " + b.current_cluster + " and toward the boundary — the target is the edge between " + b.current_cluster + " and " + b.target_cluster + ", where " + (b.realistic.join(" and ") || "the nearest edge brands") + " sits. Meaningful drift, not full migration. If the circle hasn't moved at all, the brand didn't move — the campaign moved.";
         succ.appendChild(el("p", { cls: "brief-success-body", text: succBody }));
         card.appendChild(succ);
 
         const foot = el("footer", { cls: "brief-foot" });
-        foot.appendChild(el("p", { text: "Generated from the strategic topography map. Token lists come from cluster TF-IDF; trajectory targets come from each brand's nearest non-current cluster and the brands in it ranked by 2D distance. Read alongside the Limits block in the appendix." }));
+        foot.appendChild(el("p", { text: "Generated from the strategic topography map. Word lists come from the words that distinguish each neighborhood from the others; trajectory targets come from each brand's nearest neighboring neighborhood and the brands in it ranked by distance. Read alongside the 'What this is and isn't' block in the appendix." }));
         card.appendChild(foot);
 
         out.appendChild(card);
@@ -450,7 +450,7 @@
         const brandList = el("p", { cls: "cluster-panel-brands", text: c.brands.join(", ") });
         panel.appendChild(brandList);
 
-        const tokensLabel = el("p", { cls: "cluster-panel-label", text: "Top TF-IDF tokens" });
+        const tokensLabel = el("p", { cls: "cluster-panel-label", text: "Words that define this neighborhood" });
         panel.appendChild(tokensLabel);
         const tokens = el("ul", { cls: "cluster-panel-tokens" });
         c.top_tokens.forEach(tok => {
