@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.pytest_cache/
+.ruff_cache/
+
+# Virtual env
+.venv/
+
+# Scraped raw HTML — cached but not redistributed
+data/raw_html/
+data/trends_cache/
+
+# HuggingFace model cache (gitignored even if it lands inside the repo)
+.hf_cache/
+
+# Logs
+pipeline.log
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Local sanity figures
+outputs/figures/
+
+# Per-recipient cover letter drafts (private)
+COVER_LETTER*.md

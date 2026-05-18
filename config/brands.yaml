@@ -1,0 +1,112 @@
+# Curated 30-brand corpus for the strategic topography map.
+#
+# Mix of sectors (≤5 per sector). All Czech-language homepages.
+# If a URL changes or 404s at scrape time, the pipeline logs WARNING
+# and skips — the brand drops out of the map without crashing.
+
+brands:
+  # --- Retail / grocery ---
+  - brand: Lidl
+    sector: retail
+    url: https://www.lidl.cz
+  - brand: Albert
+    sector: retail
+    url: https://www.albert.cz
+  - brand: Kaufland
+    sector: retail
+    url: https://www.kaufland.cz
+  - brand: Rohlík
+    sector: retail
+    url: https://www.rohlik.cz
+
+  # --- E-commerce ---
+  - brand: Alza
+    sector: ecommerce
+    url: https://www.alza.cz
+  - brand: Mall.cz
+    sector: ecommerce
+    url: https://www.mall.cz
+  - brand: Notino
+    sector: ecommerce
+    url: https://www.notino.cz
+
+  # --- QSR ---
+  - brand: McDonald's ČR
+    sector: qsr
+    url: https://www.mcdonalds.cz
+  - brand: KFC ČR
+    sector: qsr
+    url: https://www.kfc.cz
+
+  # --- Beverage ---
+  - brand: Kofola
+    sector: beverage
+    url: https://www.kofola.cz
+  - brand: Mattoni
+    sector: beverage
+    url: https://www.mattoni.cz
+  - brand: Pilsner Urquell
+    sector: beverage
+    url: https://www.pilsnerurquell.cz
+  - brand: Staropramen
+    sector: beverage
+    url: https://www.staropramen.cz
+
+  # --- Banking ---
+  - brand: ČSOB
+    sector: banking
+    url: https://www.csob.cz
+  - brand: Česká spořitelna
+    sector: banking
+    url: https://www.csas.cz
+  - brand: Fio banka
+    sector: banking
+    url: https://www.fio.cz
+  - brand: Air Bank
+    sector: banking
+    url: https://www.airbank.cz
+  - brand: Komerční banka
+    sector: banking
+    url: https://www.kb.cz
+
+  # --- Telecom ---
+  - brand: T-Mobile ČR
+    sector: telecom
+    url: https://www.t-mobile.cz
+  - brand: O2 ČR
+    sector: telecom
+    url: https://www.o2.cz
+  - brand: Vodafone ČR
+    sector: telecom
+    url: https://www.vodafone.cz
+
+  # --- Automotive ---
+  - brand: Škoda Auto
+    sector: automotive
+    url: https://www.skoda-auto.cz
+  - brand: AAA Auto
+    sector: automotive
+    url: https://www.aaaauto.cz
+
+  # --- Energy / insurance / pharma / travel / tech ---
+  - brand: ČEZ
+    sector: energy
+    url: https://www.cez.cz
+  - brand: Generali ČP
+    sector: insurance
+    url: https://www.generaliceska.cz
+  - brand: Dr. Max
+    sector: pharma
+    url: https://www.drmax.cz
+  - brand: Pilulka
+    sector: pharma
+    url: https://www.pilulka.cz
+  - brand: RegioJet
+    sector: travel
+    url: https://www.regiojet.cz
+  - brand: Seznam.cz
+    sector: media
+    url: https://www.seznam.cz
+  - brand: Avast
+    sector: tech
+    url: https://www.avast.com/cs-cz

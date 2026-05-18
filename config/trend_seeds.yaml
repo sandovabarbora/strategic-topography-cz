@@ -1,0 +1,11 @@
+# Seed terms for pytrends related_queries (rising) calls.
+# Each seed unlocks a different slice of "what people are searching for
+# alongside this category-defining term". Combined, they produce a
+# reasonable cross-section of rising Czech queries.
+
+seeds:
+  - akce
+  - novinka
+  - trend
+  - nákup
+  - letošní

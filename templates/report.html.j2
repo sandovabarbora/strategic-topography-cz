@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategic Topography of Czech Brands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>{{ inline_css }}</style>
+</head>
+<body>
+<main>
+
+<header class="masthead">
+    <p class="eyebrow">Brand Reflection Series &middot; Episode 2 &middot; companion to
+        <a href="https://sandovabarbora.github.io/color-fingerprint-cz/" style="color:inherit;">Color fingerprint</a>
+        &amp;
+        <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/" style="color:inherit;">Sound fingerprint</a>
+    </p>
+    <h1>Where Czech brands stand, and what's moving around them.</h1>
+    <p class="lede">Homepage messaging from {{ counts.n_brands_used }} major Czech brands embedded into a multilingual semantic space alongside {{ counts.n_trends }} top rising Czech queries, projected to 2D. Dense clusters are red oceans. Isolated points are voices. Trends near empty zones are openings.</p>
+    <p class="byline">By {{ author }}. <a href="{{ repo_url }}">Source on GitHub</a>.</p>
+</header>
+
+<section class="method">
+    <p class="method-label">Method</p>
+    <p class="method-body">Brand homepage text (title, meta, headings, first paragraphs) extracted via trafilatura. Top rising Czech queries via pytrends with a hand-curated fallback when the unofficial API rate-limits. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalised). Layout via UMAP (n_neighbors=10, min_dist=0.3, cosine metric). Cluster labels are sector-rolled. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
+    <p class="section-intro">Brands are filled circles coloured by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric.</p>
+    <figure class="map-frame">
+        {{ map_svg | safe }}
+        <figcaption class="scatter-cap">UMAP layout. Cluster names appear at each cluster's centroid.</figcaption>
+    </figure>
+    <div class="legend-strip">
+{% for chip in legend %}
+        <div class="legend-chip">
+            <span class="legend-dot" style="background: {{ chip.color }};"></span>
+            <div class="legend-meta">
+                <p class="legend-name">{{ chip.name }}</p>
+                <p class="legend-brands">{{ chip.n_brands }} brands &mdash; {{ chip.brand_examples }}</p>
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">02</span><h2>Opportunity table</h2></div>
+    <p class="section-intro">The top {{ opportunities | length }} rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. A high saturation score (0.85+) means at least one brand already lives semantically close to the trend.</p>
+    <table class="opp-table">
+        <thead>
+            <tr>
+                <th>Trend</th>
+                <th class="num-col">Velocity</th>
+                <th>Nearest brands</th>
+                <th class="num-col">Saturation</th>
+            </tr>
+        </thead>
+        <tbody>
+{% for o in opportunities %}
+            <tr>
+                <td class="opp-trend">{{ o.trend }}</td>
+                <td class="num-col">{{ "%.0f" | format(o.velocity) }}</td>
+                <td class="opp-nearby">
+                    {{ o.near_brand_1 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_1_sim) }})</span>
+                    {% if o.near_brand_2 %} &middot; {{ o.near_brand_2 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_2_sim) }})</span>{% endif %}
+                    {% if o.near_brand_3 %} &middot; {{ o.near_brand_3 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_3_sim) }})</span>{% endif %}
+                </td>
+                <td class="num-col">{{ "%.2f" | format(o.saturation_score) }}</td>
+            </tr>
+{% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% if insights %}
+<section>
+    <div class="section-label"><span class="num">03</span><h2>Observations</h2></div>
+    <div class="patterns">
+{% for ins in insights %}
+        <article class="pattern">
+            <p class="num">{{ "%02d" | format(loop.index) }}</p>
+            <div>
+                <h3>{{ ins.title }}</h3>
+                <p class="evidence">{{ ins.body }}</p>
+            </div>
+        </article>
+{% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<footer>
+    <div>
+        <h4>Brand Reflection Series</h4>
+        <p>Episode 1 &mdash; <a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Color fingerprint</a> (visual analysis of TV spots)</p>
+        <p>Episode 1.5 &mdash; <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Sound fingerprint</a> (audio analysis)</p>
+        <p>Episode 2 (this) &mdash; Strategic topography (semantic analysis of homepage messaging)</p>
+    </div>
+    <div>
+        <h4>Code</h4>
+        <p><a href="{{ repo_url }}">strategic-topography-cz</a></p>
+        <p>MIT for code, CC&#8209;BY&#8209;4.0 for derived data.</p>
+    </div>
+    <div>
+        <h4>Disclaimer</h4>
+        <p>Analysis of publicly available brand communication. Brands are referenced for analytical purposes only. Positioning reflects current homepage messaging at time of scrape. No agency attribution is implied.</p>
+    </div>
+</footer>
+
+</main>
+</body>
+</html>

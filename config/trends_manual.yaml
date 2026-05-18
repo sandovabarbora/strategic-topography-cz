@@ -1,0 +1,56 @@
+# Manual fallback for pytrends. Hand-curated based on what's currently
+# moving on trends.google.com/trends/trendingsearches/daily?geo=CZ and
+# adjacent commercial queries. Refresh every few weeks; replaces pytrends
+# output entirely when set.
+#
+# Velocity is a rough relative score (50-300). The exact number matters
+# less than the rank ordering — the renderer sorts by velocity * (1 - saturation).
+
+trends:
+  # --- Tech & AI ---
+  - { query: "umělá inteligence",        velocity: 280, source: "manual:tech" }
+  - { query: "chatgpt česky",            velocity: 240, source: "manual:tech" }
+  - { query: "ai generátor obrázků",     velocity: 180, source: "manual:tech" }
+  - { query: "kybernetická bezpečnost",  velocity: 150, source: "manual:tech" }
+
+  # --- Money / inflation / housing ---
+  - { query: "úroky hypotéka 2026",      velocity: 250, source: "manual:finance" }
+  - { query: "inflace 2026",             velocity: 220, source: "manual:finance" }
+  - { query: "spoření na důchod",        velocity: 170, source: "manual:finance" }
+  - { query: "ceny energií",             velocity: 200, source: "manual:finance" }
+  - { query: "fotovoltaika dotace",      velocity: 190, source: "manual:finance" }
+
+  # --- Shopping / retail ---
+  - { query: "akce lidl tento týden",    velocity: 260, source: "manual:retail" }
+  - { query: "rohlík sleva nový zákazník", velocity: 160, source: "manual:retail" }
+  - { query: "černý pátek 2026",         velocity: 230, source: "manual:retail" }
+  - { query: "kaufland letáky",          velocity: 180, source: "manual:retail" }
+
+  # --- Pharma / health ---
+  - { query: "vitamíny d3",              velocity: 200, source: "manual:pharma" }
+  - { query: "magnesium na únavu",       velocity: 170, source: "manual:pharma" }
+  - { query: "dr max akce",              velocity: 140, source: "manual:pharma" }
+
+  # --- Travel ---
+  - { query: "regiojet jízdenky",        velocity: 220, source: "manual:travel" }
+  - { query: "letenky levně léto",       velocity: 240, source: "manual:travel" }
+  - { query: "all inclusive řecko",      velocity: 210, source: "manual:travel" }
+  - { query: "wellness pobyt česko",     velocity: 160, source: "manual:travel" }
+
+  # --- Cars ---
+  - { query: "elektromobily 2026",       velocity: 200, source: "manual:auto" }
+  - { query: "škoda octavia 2026",       velocity: 180, source: "manual:auto" }
+  - { query: "ojeté auto kontrola",      velocity: 150, source: "manual:auto" }
+
+  # --- Streaming / media ---
+  - { query: "netflix česko ceník",      velocity: 170, source: "manual:media" }
+  - { query: "voyo program",             velocity: 160, source: "manual:media" }
+
+  # --- Telco ---
+  - { query: "neomezená data tarif",     velocity: 190, source: "manual:telecom" }
+  - { query: "5g pokrytí",               velocity: 130, source: "manual:telecom" }
+
+  # --- Food & beverage ---
+  - { query: "grilování recepty",        velocity: 180, source: "manual:fmcg" }
+  - { query: "bezlepkové potraviny",     velocity: 140, source: "manual:fmcg" }
+  - { query: "kofola nebo coca cola",    velocity: 120, source: "manual:fmcg" }

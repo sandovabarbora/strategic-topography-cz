@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategic Topography of Czech Brands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>/*
+ * Editorial film-still register. Bodoni Moda for display + numerals,
+ * Manrope for body. OKLCH neutrals with a single saturated accent.
+ * Asymmetric grid; varied rhythm; numbered sections as the visual motif.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,11..96,400..900;1,11..96,400..900&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+    --paper:     oklch(0.985 0.005 80);
+    --ink:       oklch(0.18  0.01  80);
+    --ink-soft:  oklch(0.36  0.01  80);
+    --ink-faint: oklch(0.55  0.008 80);
+    --rule:      oklch(0.85  0.008 80);
+    --rule-soft: oklch(0.92  0.005 80);
+    --accent:    oklch(0.46  0.16  25);
+    --serif: "Bodoni Moda", "Times New Roman", serif;
+    --sans:  "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 88px) clamp(20px, 4vw, 56px) 96px;
+}
+
+/* ============ Header ============ */
+
+.masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: clamp(32px, 4vw, 48px);
+    margin-bottom: clamp(56px, 6vw, 88px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+}
+
+.masthead h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-optical-sizing: auto;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--ink);
+}
+
+.masthead .lede {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(18px, 1.8vw, 21px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 56ch;
+    margin: 0;
+}
+
+.masthead .byline {
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    margin: 0;
+}
+
+.masthead .byline a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+}
+
+.masthead .byline a:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ============ Section labels ============ */
+
+.section-label {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: clamp(64px, 7vw, 96px) 0 clamp(28px, 3vw, 40px);
+}
+
+.section-label .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 24px);
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.section-label h2 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--ink);
+}
+
+.section-intro {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 62ch;
+    margin: -4px 0 36px;
+    line-height: 1.65;
+}
+
+/* ============ Method block ============ */
+
+.method {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: start;
+    margin-bottom: clamp(56px, 7vw, 88px);
+}
+
+.method-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 6px;
+}
+
+.method-body {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0;
+    max-width: 62ch;
+}
+
+/* ============ Per-brand strips ============ */
+
+.strips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.brand-row {
+    display: grid;
+    grid-template-columns: minmax(160px, 220px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: center;
+}
+
+.brand-meta .name {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(16px, 1.4vw, 19px);
+    margin: 0 0 4px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.brand-meta .sector {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+.brand-meta .swatch {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 8px;
+    transform: translateY(-1px);
+}
+
+.strip {
+    display: block;
+    width: 100%;
+    height: 68px;
+}
+
+.brand-spark {
+    margin-top: 10px;
+    max-width: 160px;
+}
+
+.brand-spark .spark {
+    width: 100%;
+    height: 28px;
+    display: block;
+}
+
+/* ============ Sector CI block under scatter ============ */
+
+.sector-ci-block {
+    margin-top: clamp(28px, 4vw, 44px);
+    padding-top: clamp(20px, 3vw, 28px);
+    border-top: 1px solid var(--rule-soft);
+}
+
+.ci-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+}
+
+.ci-note {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 10px 0 0;
+    max-width: 60ch;
+}
+
+.sector-ci {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+}
+
+/* ============ Polar radial grid ============ */
+
+.radial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: clamp(20px, 2vw, 28px) clamp(16px, 2vw, 24px);
+    margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.radial-cell {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.radial-cell .radial {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+    display: block;
+}
+
+.radial-cell figcaption {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.radial-cell .rc-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+.radial-cell .rc-sector {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+/* ============ Dendrogram ============ */
+
+.dendrogram-frame {
+    margin: 0;
+}
+
+.dendrogram {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ============ Pull-quote ============ */
+
+.pull {
+    margin: clamp(40px, 5vw, 64px) 0;
+    padding: clamp(28px, 4vw, 48px) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.pull-q {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 3.2vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 24ch;
+}
+
+.pull-q .num {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.pull-cap {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 48ch;
+}
+
+/* ============ Scatter ============ */
+
+.scatter-frame {
+    margin: 0 auto clamp(8px, 1vw, 12px);
+    max-width: 620px;
+}
+
+.scatter {
+    display: block;
+    width: 100%;
+}
+
+.scatter-cap {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    margin: 8px 0 0;
+    font-family: var(--sans);
+}
+
+/* ============ Gap chart ============ */
+
+.gap-frame {
+    margin: 0 0 clamp(40px, 5vw, 64px);
+}
+
+.gap-chart {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+}
+
+/* ============ Patterns ============ */
+
+.patterns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 5vw, 72px);
+    margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.pattern {
+    display: grid;
+    grid-template-columns: clamp(72px, 8vw, 108px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: start;
+}
+
+.pattern .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(52px, 6vw, 80px);
+    line-height: 0.85;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+}
+
+.pattern h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(19px, 1.8vw, 23px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    color: var(--ink);
+    max-width: 32ch;
+}
+
+.pattern .evidence {
+    margin: 0 0 18px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 62ch;
+}
+
+.pattern .takeaway {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 62ch;
+}
+
+.pattern .takeaway strong {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* ============ Playbook ============ */
+
+.playbook {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 3vw, 40px);
+    margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.play {
+    display: grid;
+    grid-template-columns: clamp(64px, 7vw, 88px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: baseline;
+    padding-bottom: clamp(24px, 3vw, 32px);
+    border-bottom: 1px solid var(--rule-soft);
+}
+
+.play:last-child {
+    border-bottom: none;
+}
+
+.play .play-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 56px);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin: 0;
+}
+
+.play h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+    color: var(--ink);
+    max-width: 36ch;
+}
+
+.play .play-body {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 62ch;
+}
+
+/* ============ Colophon ============ */
+
+footer {
+    margin-top: clamp(64px, 8vw, 96px);
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+footer h4 {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    color: var(--ink);
+}
+
+footer p { margin: 0 0 6px; }
+footer a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 2px; }
+footer a:hover { color: var(--accent); }
+
+/* ============ Responsive ============ */
+
+@media (max-width: 640px) {
+    .method,
+    .brand-row,
+    .pattern,
+    .play {
+        grid-template-columns: 1fr;
+    }
+    .method-label {
+        padding-top: 0;
+    }
+    .pattern .num,
+    .play .play-num {
+        font-size: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============ Audio-specific charts ============ */
+
+.split-frame {
+    margin: 0 0 8px;
+}
+
+.split-chart {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+}
+
+.brand-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2vw, 28px);
+    margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.brand-card-row {
+    display: grid;
+    grid-template-columns: minmax(160px, 220px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule-soft);
+}
+
+.brand-card-row:last-child {
+    border-bottom: none;
+}
+
+.audio-card {
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    height: 36px;
+}
+
+.tempo-frame {
+    margin: 0 0 clamp(28px, 4vw, 40px);
+}
+
+.tempo-hist {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+}
+
+.mode-block {
+    margin-top: clamp(28px, 3vw, 36px);
+    padding-top: clamp(20px, 3vw, 28px);
+    border-top: 1px solid var(--rule-soft);
+}
+
+.mode-panel {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+}
+
+@media (max-width: 640px) {
+    .brand-card-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============ Strategic topography map ============ */
+
+.map-frame {
+    margin: 0 auto;
+    max-width: 760px;
+    text-align: center;
+}
+
+.topo-map {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 720px;
+    margin: 0 auto;
+    border: 1px solid var(--rule-soft);
+    border-radius: 6px;
+    background: var(--paper);
+}
+
+.legend-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px 20px;
+    margin: clamp(20px, 3vw, 28px) 0 clamp(28px, 4vw, 40px);
+}
+
+.legend-chip {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    border: 1px solid #181818;
+}
+
+.legend-meta { display: flex; flex-direction: column; gap: 2px; }
+
+.legend-name {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.legend-brands {
+    margin: 0;
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+}
+
+/* ============ Opportunity table ============ */
+
+.opp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 clamp(40px, 5vw, 64px);
+    font-family: var(--sans);
+}
+
+.opp-table thead th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--ink);
+}
+
+.opp-table .num-col {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.opp-table tbody td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 14px;
+    color: var(--ink);
+    vertical-align: top;
+}
+
+.opp-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.opp-trend {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    max-width: 28ch;
+}
+
+.opp-nearby {
+    color: var(--ink-soft);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.opp-sim {
+    color: var(--ink-faint);
+    font-size: 11px;
+    margin-left: 3px;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+    .opp-table tbody td { padding: 10px 4px; font-size: 12px; }
+    .opp-trend { font-size: 13px; }
+    .legend-strip { grid-template-columns: 1fr; }
+}</style>
+</head>
+<body>
+<main>
+
+<header class="masthead">
+    <p class="eyebrow">Brand Reflection Series &middot; Episode 2 &middot; companion to
+        <a href="https://sandovabarbora.github.io/color-fingerprint-cz/" style="color:inherit;">Color fingerprint</a>
+        &amp;
+        <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/" style="color:inherit;">Sound fingerprint</a>
+    </p>
+    <h1>Where Czech brands stand, and what's moving around them.</h1>
+    <p class="lede">Homepage messaging from 23 major Czech brands embedded into a multilingual semantic space alongside 30 top rising Czech queries, projected to 2D. Dense clusters are red oceans. Isolated points are voices. Trends near empty zones are openings.</p>
+    <p class="byline">By Barbora Šandová. <a href="https://github.com/sandovabarbora/strategic-topography-cz">Source on GitHub</a>.</p>
+</header>
+
+<section class="method">
+    <p class="method-label">Method</p>
+    <p class="method-body">Brand homepage text (title, meta, headings, first paragraphs) extracted via trafilatura. Top rising Czech queries via pytrends with a hand-curated fallback when the unofficial API rate-limits. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalised). Layout via UMAP (n_neighbors=10, min_dist=0.3, cosine metric). Cluster labels are sector-rolled. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
+    <p class="section-intro">Brands are filled circles coloured by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric.</p>
+    <figure class="map-frame">
+        <svg class="topo-map" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" aria-label="Strategic topography map"><rect x="36" y="36" width="648" height="648" fill="none" stroke="#EFEAE0" stroke-width="0.7"/><polygon points="344.4656193119754,133.67922567025352 355.4656193119754,144.67922567025352 344.4656193119754,155.67922567025352 333.4656193119754,144.67922567025352" fill="none" stroke="#181818" stroke-width="1.1"/><text x="358.5" y="147.7" font-size="9" fill="#888" font-style="italic">umělá inteligence</text><polygon points="204.8637130057898,327.41827047976886 215.1137130057898,337.66827047976886 204.8637130057898,347.91827047976886 194.6137130057898,337.66827047976886" fill="none" stroke="#181818" stroke-width="1.1"/><text x="218.1" y="340.7" font-size="9" fill="#888" font-style="italic">akce lidl tento týden</text><polygon points="177.38194453078125,118.768357629734 187.25694453078125,128.643357629734 177.38194453078125,138.518357629734 167.50694453078125,128.643357629734" fill="none" stroke="#181818" stroke-width="1.1"/><text x="190.3" y="131.6" font-size="9" fill="#888" font-style="italic">úroky hypotéka 2026</text><polygon points="126.22716999258083,250.28626228829364 135.72716999258083,259.78626228829364 126.22716999258083,269.28626228829364 116.72716999258083,259.78626228829364" fill="none" stroke="#181818" stroke-width="1.1"/><text x="138.7" y="262.8" font-size="9" fill="#888" font-style="italic">letenky levně léto</text><polygon points="295.8379412499178,152.64947756343417 305.3379412499178,162.14947756343417 295.8379412499178,171.64947756343417 286.3379412499178,162.14947756343417" fill="none" stroke="#181818" stroke-width="1.1"/><text x="308.3" y="165.1" font-size="9" fill="#888" font-style="italic">chatgpt česky</text><polygon points="257.0396143190491,118.15723394507062 266.1646143190491,127.28223394507062 257.0396143190491,136.40723394507063 247.91461431904912,127.28223394507062" fill="none" stroke="#181818" stroke-width="1.1"/><text x="269.2" y="130.3" font-size="9" fill="#888" font-style="italic">černý pátek 2026</text><polygon points="192.46467213636427,89.38869500141013 201.21467213636427,98.13869500141013 192.46467213636427,106.88869500141013 183.71467213636427,98.13869500141013" fill="none" stroke="#181818" stroke-width="1.1"/><text x="204.2" y="101.1" font-size="9" fill="#888" font-style="italic">inflace 2026</text><polygon points="183.003677139253,280.98336034577574 191.753677139253,289.73336034577574 183.003677139253,298.48336034577574 174.253677139253,289.73336034577574" fill="none" stroke="#181818" stroke-width="1.1"/><text x="194.8" y="292.7" font-size="9" fill="#888" font-style="italic">regiojet jízdenky</text><polygon points="102.25436605225124,302.11563463580063 110.62936605225124,310.49063463580063 102.25436605225124,318.86563463580063 93.87936605225124,310.49063463580063" fill="none" stroke="#181818" stroke-width="1.1"/><text x="113.6" y="313.5" font-size="9" fill="#888" font-style="italic">all inclusive řecko</text><polygon points="225.35196128502022,88.41159357609041 233.35196128502022,96.41159357609041 225.35196128502022,104.41159357609041 217.35196128502022,96.41159357609041" fill="none" stroke="#181818" stroke-width="1.1"/><text x="236.4" y="99.4" font-size="9" fill="#888" font-style="italic">elektromobily 2026</text><polygon points="359.9094559725951,294.8001826341173 367.9094559725951,302.8001826341173 359.9094559725951,310.8001826341173 351.9094559725951,302.8001826341173" fill="none" stroke="#181818" stroke-width="1.1"/><text x="370.9" y="305.8" font-size="9" fill="#888" font-style="italic">vitamíny d3</text><polygon points="128.08944700307921,175.23170900709064 136.08944700307921,183.23170900709064 128.08944700307921,191.23170900709064 120.08944700307921,183.23170900709064" fill="none" stroke="#181818" stroke-width="1.1"/><text x="139.1" y="186.2" font-size="9" fill="#888" font-style="italic">ceny energií</text><polygon points="273.856883609457,237.98216468523523 281.481883609457,245.60716468523523 273.856883609457,253.23216468523523 266.231883609457,245.60716468523523" fill="none" stroke="#181818" stroke-width="1.1"/><text x="284.5" y="248.6" font-size="9" fill="#888" font-style="italic">fotovoltaika dotace</text><polygon points="161.4913676848612,210.0772022790199 169.1163676848612,217.7022022790199 161.4913676848612,225.3272022790199 153.8663676848612,217.7022022790199" fill="none" stroke="#181818" stroke-width="1.1"/><text x="172.1" y="220.7" font-size="9" fill="#888" font-style="italic">neomezená data tarif</text><polygon points="143.73646864049257,282.3706820592166 150.98646864049257,289.6206820592166 143.73646864049257,296.8706820592166 136.48646864049257,289.6206820592166" fill="none" stroke="#181818" stroke-width="1.1"/><text x="154.0" y="292.6" font-size="9" fill="#888" font-style="italic">kaufland letáky</text><polygon points="276.85659634453117,323.96600286674413 284.10659634453117,331.21600286674413 276.85659634453117,338.46600286674413 269.60659634453117,331.21600286674413" fill="none" stroke="#181818" stroke-width="1.1"/><text x="287.1" y="334.2" font-size="9" fill="#888" font-style="italic">grilování recepty</text><polygon points="364.17825229138856,166.63519574299448 371.42825229138856,173.88519574299448 364.17825229138856,181.13519574299448 356.92825229138856,173.88519574299448" fill="none" stroke="#181818" stroke-width="1.1"/><text x="374.4" y="176.9" font-size="9" fill="#888" font-style="italic">ai generátor obrázků</text><polygon points="245.21482665755937,82.74999999999999 252.46482665755937,89.99999999999999 245.21482665755937,97.24999999999999 237.96482665755937,89.99999999999999" fill="none" stroke="#181818" stroke-width="1.1"/><text x="255.5" y="93.0" font-size="9" fill="#888" font-style="italic">škoda octavia 2026</text><polygon points="335.8066492156037,265.5517380707828 342.6816492156037,272.4267380707828 335.8066492156037,279.3017380707828 328.9316492156037,272.4267380707828" fill="none" stroke="#181818" stroke-width="1.1"/><text x="345.7" y="275.4" font-size="9" fill="#888" font-style="italic">magnesium na únavu</text><polygon points="184.2778736928478,179.64357245990843 191.1528736928478,186.51857245990843 184.2778736928478,193.39357245990843 177.4028736928478,186.51857245990843" fill="none" stroke="#181818" stroke-width="1.1"/><text x="194.2" y="189.5" font-size="9" fill="#888" font-style="italic">spoření na důchod</text><polygon points="90.21941309857252,206.80329713604286 97.09441309857252,213.67829713604286 90.21941309857252,220.55329713604286 83.34441309857252,213.67829713604286" fill="none" stroke="#181818" stroke-width="1.1"/><text x="100.1" y="216.7" font-size="9" fill="#888" font-style="italic">netflix česko ceník</text><polygon points="158.21622148562153,352.31131755584346 164.71622148562153,358.81131755584346 158.21622148562153,365.31131755584346 151.71622148562153,358.81131755584346" fill="none" stroke="#181818" stroke-width="1.1"/><text x="167.7" y="361.8" font-size="9" fill="#888" font-style="italic">rohlík sleva nový zákazník</text><polygon points="89.99999999999999,250.61487440179332 96.49999999999999,257.1148744017933 89.99999999999999,263.6148744017933 83.49999999999999,257.1148744017933" fill="none" stroke="#181818" stroke-width="1.1"/><text x="99.5" y="260.1" font-size="9" fill="#888" font-style="italic">wellness pobyt česko</text><polygon points="189.79476818856696,245.3579381742286 196.29476818856696,251.8579381742286 189.79476818856696,258.3579381742286 183.29476818856696,251.8579381742286" fill="none" stroke="#181818" stroke-width="1.1"/><text x="199.3" y="254.9" font-size="9" fill="#888" font-style="italic">voyo program</text><polygon points="320.63157692800746,195.69567149382988 326.75657692800746,201.82067149382988 320.63157692800746,207.94567149382988 314.50657692800746,201.82067149382988" fill="none" stroke="#181818" stroke-width="1.1"/><text x="329.8" y="204.8" font-size="9" fill="#888" font-style="italic">kybernetická bezpečnost</text><polygon points="240.361328888041,208.89647838519505 246.486328888041,215.02147838519505 240.361328888041,221.14647838519505 234.236328888041,215.02147838519505" fill="none" stroke="#181818" stroke-width="1.1"/><text x="249.5" y="218.0" font-size="9" fill="#888" font-style="italic">ojeté auto kontrola</text><polygon points="338.8584253221932,324.52214633612687 344.6084253221932,330.27214633612687 338.8584253221932,336.02214633612687 333.1084253221932,330.27214633612687" fill="none" stroke="#181818" stroke-width="1.1"/><text x="347.6" y="333.3" font-size="9" fill="#888" font-style="italic">bezlepkové potraviny</text><polygon points="249.24442490739224,302.0866758737752 254.99442490739224,307.8366758737752 249.24442490739224,313.5866758737752 243.49442490739224,307.8366758737752" fill="none" stroke="#181818" stroke-width="1.1"/><text x="258.0" y="310.8" font-size="9" fill="#888" font-style="italic">dr max akce</text><polygon points="314.1533551744696,219.8286906783642 319.5283551744696,225.2036906783642 314.1533551744696,230.5786906783642 308.7783551744696,225.2036906783642" fill="none" stroke="#181818" stroke-width="1.1"/><text x="322.5" y="228.2" font-size="9" fill="#888" font-style="italic">5g pokrytí</text><polygon points="383.95210752748545,319.5217963890542 388.95210752748545,324.5217963890542 383.95210752748545,329.5217963890542 378.95210752748545,324.5217963890542" fill="none" stroke="#181818" stroke-width="1.1"/><text x="392.0" y="327.5" font-size="9" fill="#888" font-style="italic">kofola nebo coca cola</text><circle cx="466.7" cy="551.9" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="477.7" y="554.9" font-size="11" fill="#181818" font-weight="600">Lidl</text><circle cx="395.7" cy="565.4" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="406.7" y="568.4" font-size="11" fill="#181818" font-weight="600">Albert</text><circle cx="411.1" cy="527.4" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="422.1" y="530.4" font-size="11" fill="#181818" font-weight="600">Rohlík</text><circle cx="390.4" cy="491.1" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="401.4" y="494.1" font-size="11" fill="#181818" font-weight="600">McDonald's ČR</text><circle cx="408.5" cy="459.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="419.5" y="462.9" font-size="11" fill="#181818" font-weight="600">KFC ČR</text><circle cx="439.3" cy="405.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="450.3" y="408.9" font-size="11" fill="#181818" font-weight="600">Kofola</text><circle cx="403.3" cy="370.3" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="414.3" y="373.3" font-size="11" fill="#181818" font-weight="600">Mattoni</text><circle cx="488.3" cy="480.5" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="499.3" y="483.5" font-size="11" fill="#181818" font-weight="600">Pilsner Urquell</text><circle cx="463.6" cy="497.2" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="474.6" y="500.2" font-size="11" fill="#181818" font-weight="600">Staropramen</text><circle cx="587.9" cy="581.1" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="598.9" y="584.1" font-size="11" fill="#181818" font-weight="600">ČSOB</text><circle cx="535.7" cy="592.3" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="546.7" y="595.3" font-size="11" fill="#181818" font-weight="600">Česká spořitelna</text><circle cx="599.7" cy="628.0" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="610.7" y="631.0" font-size="11" fill="#181818" font-weight="600">Fio banka</text><circle cx="551.6" cy="630.0" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="562.6" y="633.0" font-size="11" fill="#181818" font-weight="600">Air Bank</text><circle cx="573.3" cy="629.4" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="584.3" y="632.4" font-size="11" fill="#181818" font-weight="600">Komerční banka</text><circle cx="607.6" cy="485.3" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="618.6" y="488.3" font-size="11" fill="#181818" font-weight="600">T-Mobile ČR</text><circle cx="603.1" cy="497.4" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="614.1" y="500.4" font-size="11" fill="#181818" font-weight="600">O2 ČR</text><circle cx="552.3" cy="502.1" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="563.3" y="505.1" font-size="11" fill="#181818" font-weight="600">Vodafone ČR</text><circle cx="526.1" cy="551.8" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="537.1" y="554.8" font-size="11" fill="#181818" font-weight="600">Škoda Auto</text><circle cx="574.5" cy="540.5" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="585.5" y="543.5" font-size="11" fill="#181818" font-weight="600">ČEZ</text><circle cx="630.0" cy="555.5" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="641.0" y="558.5" font-size="11" fill="#181818" font-weight="600">Generali ČP</text><circle cx="454.1" cy="574.9" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="465.1" y="577.9" font-size="11" fill="#181818" font-weight="600">Pilulka</text><circle cx="437.6" cy="603.6" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="448.6" y="606.6" font-size="11" fill="#181818" font-weight="600">Seznam.cz</text><circle cx="539.2" cy="460.8" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="550.2" y="463.8" font-size="11" fill="#181818" font-weight="600">Avast</text><text x="450.7" y="535.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.55 0.14 50)" opacity="0.85">Mass-market consumer</text><text x="579.7" y="584.7" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.45 0.13 250)" opacity="0.85">Financial services</text><text x="575.3" y="479.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.48 0.12 145)" opacity="0.85">Connectivity & infrastructure</text><text x="426.0" y="423.5" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.50 0.15 25)" opacity="0.85">Food & beverage</text></svg>
+        <figcaption class="scatter-cap">UMAP layout. Cluster names appear at each cluster's centroid.</figcaption>
+    </figure>
+    <div class="legend-strip">
+        <div class="legend-chip">
+            <span class="legend-dot" style="background: oklch(0.55 0.14 50);"></span>
+            <div class="legend-meta">
+                <p class="legend-name">Mass-market consumer</p>
+                <p class="legend-brands">7 brands &mdash; Lidl, Albert, Rohlík, Staropramen…</p>
+            </div>
+        </div>
+        <div class="legend-chip">
+            <span class="legend-dot" style="background: oklch(0.45 0.13 250);"></span>
+            <div class="legend-meta">
+                <p class="legend-name">Financial services</p>
+                <p class="legend-brands">6 brands &mdash; ČSOB, Česká spořitelna, Fio banka, Air Bank…</p>
+            </div>
+        </div>
+        <div class="legend-chip">
+            <span class="legend-dot" style="background: oklch(0.48 0.12 145);"></span>
+            <div class="legend-meta">
+                <p class="legend-name">Connectivity & infrastructure</p>
+                <p class="legend-brands">5 brands &mdash; T-Mobile ČR, O2 ČR, Vodafone ČR, ČEZ…</p>
+            </div>
+        </div>
+        <div class="legend-chip">
+            <span class="legend-dot" style="background: oklch(0.50 0.15 25);"></span>
+            <div class="legend-meta">
+                <p class="legend-name">Food & beverage</p>
+                <p class="legend-brands">5 brands &mdash; McDonald's ČR, KFC ČR, Kofola, Mattoni…</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">02</span><h2>Opportunity table</h2></div>
+    <p class="section-intro">The top 10 rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. A high saturation score (0.85+) means at least one brand already lives semantically close to the trend.</p>
+    <table class="opp-table">
+        <thead>
+            <tr>
+                <th>Trend</th>
+                <th class="num-col">Velocity</th>
+                <th>Nearest brands</th>
+                <th class="num-col">Saturation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="opp-trend">umělá inteligence</td>
+                <td class="num-col">280</td>
+                <td class="opp-nearby">
+                    Vodafone ČR<span class="opp-sim">(0.82)</span>
+ &middot; Avast<span class="opp-sim">(0.81)</span> &middot; Kofola<span class="opp-sim">(0.80)</span>                </td>
+                <td class="num-col">0.81</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">inflace 2026</td>
+                <td class="num-col">220</td>
+                <td class="opp-nearby">
+                    Albert<span class="opp-sim">(0.79)</span>
+ &middot; Vodafone ČR<span class="opp-sim">(0.78)</span> &middot; Pilsner Urquell<span class="opp-sim">(0.78)</span>                </td>
+                <td class="num-col">0.79</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">chatgpt česky</td>
+                <td class="num-col">240</td>
+                <td class="opp-nearby">
+                    Česká spořitelna<span class="opp-sim">(0.81)</span>
+ &middot; Vodafone ČR<span class="opp-sim">(0.80)</span> &middot; Generali ČP<span class="opp-sim">(0.80)</span>                </td>
+                <td class="num-col">0.81</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">úroky hypotéka 2026</td>
+                <td class="num-col">250</td>
+                <td class="opp-nearby">
+                    Vodafone ČR<span class="opp-sim">(0.82)</span>
+ &middot; O2 ČR<span class="opp-sim">(0.82)</span> &middot; Komerční banka<span class="opp-sim">(0.81)</span>                </td>
+                <td class="num-col">0.82</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">all inclusive řecko</td>
+                <td class="num-col">210</td>
+                <td class="opp-nearby">
+                    Lidl<span class="opp-sim">(0.80)</span>
+ &middot; Rohlík<span class="opp-sim">(0.79)</span> &middot; T-Mobile ČR<span class="opp-sim">(0.79)</span>                </td>
+                <td class="num-col">0.79</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">letenky levně léto</td>
+                <td class="num-col">240</td>
+                <td class="opp-nearby">
+                    Lidl<span class="opp-sim">(0.83)</span>
+ &middot; Air Bank<span class="opp-sim">(0.82)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                </td>
+                <td class="num-col">0.82</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">akce lidl tento týden</td>
+                <td class="num-col">260</td>
+                <td class="opp-nearby">
+                    Lidl<span class="opp-sim">(0.86)</span>
+ &middot; Seznam.cz<span class="opp-sim">(0.84)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                </td>
+                <td class="num-col">0.84</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">regiojet jízdenky</td>
+                <td class="num-col">220</td>
+                <td class="opp-nearby">
+                    Lidl<span class="opp-sim">(0.82)</span>
+ &middot; Škoda Auto<span class="opp-sim">(0.81)</span> &middot; ČEZ<span class="opp-sim">(0.81)</span>                </td>
+                <td class="num-col">0.81</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">černý pátek 2026</td>
+                <td class="num-col">230</td>
+                <td class="opp-nearby">
+                    Vodafone ČR<span class="opp-sim">(0.83)</span>
+ &middot; Albert<span class="opp-sim">(0.82)</span> &middot; Avast<span class="opp-sim">(0.81)</span>                </td>
+                <td class="num-col">0.82</td>
+            </tr>
+            <tr>
+                <td class="opp-trend">voyo program</td>
+                <td class="num-col">160</td>
+                <td class="opp-nearby">
+                    Vodafone ČR<span class="opp-sim">(0.76)</span>
+ &middot; ČSOB<span class="opp-sim">(0.76)</span> &middot; Pilsner Urquell<span class="opp-sim">(0.75)</span>                </td>
+                <td class="num-col">0.75</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">03</span><h2>Observations</h2></div>
+    <div class="patterns">
+        <article class="pattern">
+            <p class="num">01</p>
+            <div>
+                <h3>Czech financial services has one voice.</h3>
+                <p class="evidence">All five banks in the corpus (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční banka) plus Generali cluster as one. Incumbents and challengers are indistinguishable at the homepage layer. Air Bank's "different bank" positioning vanishes the moment the homepage opens. A new financial entrant doesn't need a better product to look distinctive; it needs a different homepage.</p>
+            </div>
+        </article>
+        <article class="pattern">
+            <p class="num">02</p>
+            <div>
+                <h3>The mass-market consumer cluster is a templating problem.</h3>
+                <p class="evidence">Lidl, Albert, Rohlík, Staropramen, Škoda Auto, Pilulka and Seznam.cz sit in one cluster across five sectors. The shared shape is the homepage template: carousel of week's promos, "akce" headlines, product grid. The semantic distance between a discount grocer and an online pharmacy dissolves at the layer buyers actually see first.</p>
+            </div>
+        </article>
+        <article class="pattern">
+            <p class="num">03</p>
+            <div>
+                <h3>Telecom's real competitive set is broader than telecom.</h3>
+                <p class="evidence">T-Mobile, O2 and Vodafone cluster with ČEZ (energy) and Avast (security). All five sell "always-on service" — uptime, reliability, bundled tariff language. To escape the cluster a telco has to break the always-on grammar, not out-feature the other two operators.</p>
+            </div>
+        </article>
+        <article class="pattern">
+            <p class="num">04</p>
+            <div>
+                <h3>There is no clean strategic white space, only degrees of crowding.</h3>
+                <p class="evidence">Every trend in the corpus has a top-3-brand saturation above 0.74 — most sit at 0.80+. The least-crowded queries (voyo program, fotovoltaika dotace, vitamíny d3) are also the lowest-velocity. The classic "high momentum + low saturation" jackpot quadrant is empty here, which is itself a finding: Czech brand homepages have already absorbed the language of every trending topic.</p>
+            </div>
+        </article>
+    </div>
+</section>
+
+<footer>
+    <div>
+        <h4>Brand Reflection Series</h4>
+        <p>Episode 1 &mdash; <a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Color fingerprint</a> (visual analysis of TV spots)</p>
+        <p>Episode 1.5 &mdash; <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Sound fingerprint</a> (audio analysis)</p>
+        <p>Episode 2 (this) &mdash; Strategic topography (semantic analysis of homepage messaging)</p>
+    </div>
+    <div>
+        <h4>Code</h4>
+        <p><a href="https://github.com/sandovabarbora/strategic-topography-cz">strategic-topography-cz</a></p>
+        <p>MIT for code, CC&#8209;BY&#8209;4.0 for derived data.</p>
+    </div>
+    <div>
+        <h4>Disclaimer</h4>
+        <p>Analysis of publicly available brand communication. Brands are referenced for analytical purposes only. Positioning reflects current homepage messaging at time of scrape. No agency attribution is implied.</p>
+    </div>
+</footer>
+
+</main>
+</body>
+</html>
