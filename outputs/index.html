@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Strategic Topography of Czech Brands</title>
+<title>How many Czech brand templates are there? Three.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>/*
@@ -118,7 +118,7 @@ main {
 
 .section-label .num {
     font-family: var(--serif);
-    font-style: italic;
+    font-style: normal;
     font-weight: 400;
     font-size: clamp(20px, 2vw, 24px);
     color: var(--accent);
@@ -414,8 +414,8 @@ main {
 
 .pattern .num {
     font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
+    font-style: normal;
+    font-weight: 700;
     font-size: clamp(52px, 6vw, 80px);
     line-height: 0.85;
     color: var(--accent);
@@ -484,8 +484,8 @@ main {
 
 .play .play-num {
     font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
+    font-style: normal;
+    font-weight: 700;
     font-size: clamp(36px, 4.5vw, 56px);
     color: var(--accent);
     font-variant-numeric: tabular-nums;
@@ -754,7 +754,7 @@ footer a:hover { color: var(--accent); }
 
 .opp-low-conf .opp-trend {
     color: var(--ink-soft);
-    font-style: italic;
+    font-style: normal;
 }
 
 .low-conf-badge,
@@ -782,7 +782,9 @@ footer a:hover { color: var(--accent); }
     .opp-table tbody td { padding: 10px 4px; font-size: 12px; }
     .opp-trend { font-size: 13px; }
     .legend-strip { grid-template-columns: 1fr; }
-}</style>
+}
+
+em, i { font-style: normal; font-weight: 600; }</style>
 </head>
 <body>
 <main>
@@ -793,19 +795,19 @@ footer a:hover { color: var(--accent); }
         &amp;
         <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/" style="color:inherit;">Sound fingerprint</a>
     </p>
-    <h1>Where Czech brands stand, and what's moving around them.</h1>
-    <p class="lede">Homepage messaging from 23 major Czech brands embedded into a multilingual semantic space alongside 26 top rising Czech queries, projected to 2D. Dense clusters are red oceans. Isolated points are voices. Trends near empty zones are openings.</p>
+    <h1>Three templates, one institution.</h1>
+    <p class="lede">23 Czech brand homepages embedded in a multilingual semantic space cluster into four neighborhoods — and one of those neighborhoods contains <em>all five banks, plus Generali, plus &#268;EZ, plus &#352;koda Auto</em>. Sector identity we treat as obvious at the campaign level dissolves at the homepage layer. This is the map, and the moves it suggests.</p>
     <p class="byline">By Barbora Šandová. <a href="https://github.com/sandovabarbora/strategic-topography-cz">Source on GitHub</a>.</p>
 </header>
 
 <section class="method">
     <p class="method-label">Method</p>
-    <p class="method-body">Brand homepage text (title, meta, headings, first paragraphs) extracted via trafilatura. Top rising Czech queries via pytrends with a hand-curated fallback when the unofficial API rate-limits. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalised). Layout via UMAP (n_neighbors=10, min_dist=0.3, cosine metric). Cluster labels are sector-rolled. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
+    <p class="method-body">Homepage text per brand (title, meta, first headings, first non-promo paragraphs, capped at 600 chars). Top rising Czech queries via pytrends with a hand-curated fallback. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalized). Layout via UMAP. Cluster labels rolled from sector composition. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
 </section>
 
 <section>
     <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
-    <p class="section-intro">Brands are filled circles coloured by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric.</p>
+    <p class="section-intro">Brands are filled circles colored by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric. The four cluster names are derived from sector composition, not chosen by the analyst.</p>
     <figure class="map-frame">
         <svg class="topo-map" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" aria-label="Strategic topography map"><rect x="36" y="36" width="648" height="648" fill="none" stroke="#EFEAE0" stroke-width="0.7"/><polygon points="526.5911652442435,498.7178241726651 537.5911652442435,509.7178241726651 526.5911652442435,520.7178241726651 515.5911652442435,509.7178241726651" fill="none" stroke="#181818" stroke-width="1.1"/><text x="540.6" y="512.7" font-size="9" fill="#888" font-style="italic">umělá inteligence</text><polygon points="362.6459772497283,484.21089513326183 372.8959772497283,494.46089513326183 362.6459772497283,504.71089513326183 352.3959772497283,494.46089513326183" fill="none" stroke="#181818" stroke-width="1.1"/><text x="375.9" y="497.5" font-size="9" fill="#888" font-style="italic">akce lidl tento týden</text><polygon points="575.2864712287967,576.860808576158 585.1614712287967,586.735808576158 575.2864712287967,596.610808576158 565.4114712287967,586.735808576158" fill="none" stroke="#181818" stroke-width="1.1"/><text x="588.2" y="589.7" font-size="9" fill="#888" font-style="italic">úroky hypotéka 2026</text><polygon points="515.7565102163153,486.56993323825907 525.2565102163153,496.06993323825907 515.7565102163153,505.56993323825907 506.2565102163153,496.06993323825907" fill="none" stroke="#181818" stroke-width="1.1"/><text x="528.3" y="499.1" font-size="9" fill="#888" font-style="italic">chatgpt česky</text><polygon points="480.1587081192167,579.1165544311209 489.2837081192167,588.2415544311209 480.1587081192167,597.3665544311209 471.0337081192167,588.2415544311209" fill="none" stroke="#181818" stroke-width="1.1"/><text x="492.3" y="591.2" font-size="9" fill="#888" font-style="italic">černý pátek 2026</text><polygon points="541.7113143831466,611.2521130067821 550.4613143831466,620.0021130067821 541.7113143831466,628.7521130067821 532.9613143831466,620.0021130067821" fill="none" stroke="#181818" stroke-width="1.1"/><text x="553.5" y="623.0" font-size="9" fill="#888" font-style="italic">inflace 2026</text><polygon points="530.5153087893017,573.4611475017834 538.5153087893017,581.4611475017834 530.5153087893017,589.4611475017834 522.5153087893017,581.4611475017834" fill="none" stroke="#181818" stroke-width="1.1"/><text x="541.5" y="584.5" font-size="9" fill="#888" font-style="italic">elektromobily 2026</text><polygon points="475.902523756106,312.43877016381435 483.902523756106,320.43877016381435 475.902523756106,328.43877016381435 467.902523756106,320.43877016381435" fill="none" stroke="#181818" stroke-width="1.1"/><text x="486.9" y="323.4" font-size="9" fill="#888" font-style="italic">vitamíny d3</text><polygon points="629.852724197166,458.7775388041441 637.852724197166,466.7775388041441 629.852724197166,474.7775388041441 621.852724197166,466.7775388041441" fill="none" stroke="#181818" stroke-width="1.1"/><text x="640.9" y="469.8" font-size="9" fill="#888" font-style="italic">ceny energií</text><polygon points="510.8455142768893,428.87395972503094 518.4705142768893,436.49895972503094 510.8455142768893,444.12395972503094 503.2205142768893,436.49895972503094" fill="none" stroke="#181818" stroke-width="1.1"/><text x="521.5" y="439.5" font-size="9" fill="#888" font-style="italic">fotovoltaika dotace</text><polygon points="605.6115178473265,428.9369922408271 613.2365178473265,436.5619922408271 605.6115178473265,444.1869922408271 597.9865178473265,436.5619922408271" fill="none" stroke="#181818" stroke-width="1.1"/><text x="616.2" y="439.6" font-size="9" fill="#888" font-style="italic">neomezená data tarif</text><polygon points="552.2118382854227,458.94943604577605 559.4618382854227,466.19943604577605 552.2118382854227,473.44943604577605 544.9618382854227,466.19943604577605" fill="none" stroke="#181818" stroke-width="1.1"/><text x="562.5" y="469.2" font-size="9" fill="#888" font-style="italic">ai generátor obrázků</text><polygon points="396.7383034604058,350.2746224904733 403.9883034604058,357.5246224904733 396.7383034604058,364.7746224904733 389.4883034604058,357.5246224904733" fill="none" stroke="#181818" stroke-width="1.1"/><text x="407.0" y="360.5" font-size="9" fill="#888" font-style="italic">grilování recepty</text><polygon points="491.7329685056535,622.75 498.9829685056535,630.0 491.7329685056535,637.25 484.4829685056535,630.0" fill="none" stroke="#181818" stroke-width="1.1"/><text x="502.0" y="633.0" font-size="9" fill="#888" font-style="italic">škoda octavia 2026</text><polygon points="399.200140515122,529.9354550946316 406.450140515122,537.1854550946316 399.200140515122,544.4354550946316 391.950140515122,537.1854550946316" fill="none" stroke="#181818" stroke-width="1.1"/><text x="409.5" y="540.2" font-size="9" fill="#888" font-style="italic">kaufland letáky</text><polygon points="477.06846098199776,403.9482645358638 483.94346098199776,410.8232645358638 477.06846098199776,417.6982645358638 470.19346098199776,410.8232645358638" fill="none" stroke="#181818" stroke-width="1.1"/><text x="486.9" y="413.8" font-size="9" fill="#888" font-style="italic">magnesium na únavu</text><polygon points="630.0,481.1034817748197 636.875,487.9784817748197 630.0,494.8534817748197 623.125,487.9784817748197" fill="none" stroke="#181818" stroke-width="1.1"/><text x="639.9" y="491.0" font-size="9" fill="#888" font-style="italic">netflix česko ceník</text><polygon points="358.6202265787408,423.4881059742451 365.4952265787408,430.3631059742451 358.6202265787408,437.2381059742451 351.7452265787408,430.3631059742451" fill="none" stroke="#181818" stroke-width="1.1"/><text x="368.5" y="433.4" font-size="9" fill="#888" font-style="italic">spoření na důchod</text><polygon points="465.47656930537283,536.5193012240204 471.97656930537283,543.0193012240204 465.47656930537283,549.5193012240204 458.97656930537283,543.0193012240204" fill="none" stroke="#181818" stroke-width="1.1"/><text x="475.0" y="546.0" font-size="9" fill="#888" font-style="italic">voyo program</text><polygon points="417.7766587114642,387.0037096847911 424.2766587114642,393.5037096847911 417.7766587114642,400.0037096847911 411.2766587114642,393.5037096847911" fill="none" stroke="#181818" stroke-width="1.1"/><text x="427.3" y="396.5" font-size="9" fill="#888" font-style="italic">rohlík sleva nový zákazník</text><polygon points="469.59983737002955,476.6756745724473 475.72483737002955,482.8006745724473 469.59983737002955,488.9256745724473 463.47483737002955,482.8006745724473" fill="none" stroke="#181818" stroke-width="1.1"/><text x="478.7" y="485.8" font-size="9" fill="#888" font-style="italic">kybernetická bezpečnost</text><polygon points="431.76636041219956,531.1694306042868 437.89136041219956,537.2944306042868 431.76636041219956,543.4194306042868 425.64136041219956,537.2944306042868" fill="none" stroke="#181818" stroke-width="1.1"/><text x="440.9" y="540.3" font-size="9" fill="#888" font-style="italic">ojeté auto kontrola</text><polygon points="413.20438348611555,456.9827271631328 418.95438348611555,462.7327271631328 413.20438348611555,468.4827271631328 407.45438348611555,462.7327271631328" fill="none" stroke="#181818" stroke-width="1.1"/><text x="422.0" y="465.7" font-size="9" fill="#888" font-style="italic">dr max akce</text><polygon points="486.99683134108255,323.0506335046039 492.74683134108255,328.8006335046039 486.99683134108255,334.5506335046039 481.24683134108255,328.8006335046039" fill="none" stroke="#181818" stroke-width="1.1"/><text x="495.7" y="331.8" font-size="9" fill="#888" font-style="italic">bezlepkové potraviny</text><polygon points="454.1414219317447,454.74287133444653 459.5164219317447,460.11787133444653 454.1414219317447,465.49287133444653 448.7664219317447,460.11787133444653" fill="none" stroke="#181818" stroke-width="1.1"/><text x="462.5" y="463.1" font-size="9" fill="#888" font-style="italic">5g pokrytí</text><polygon points="503.9572236726326,362.7067186329443 508.9572236726326,367.7067186329443 503.9572236726326,372.7067186329443 498.9572236726326,367.7067186329443" fill="none" stroke="#181818" stroke-width="1.1"/><text x="512.0" y="370.7" font-size="9" fill="#888" font-style="italic">kofola nebo coca cola</text><circle cx="244.9" cy="254.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="255.9" y="257.9" font-size="11" fill="#181818" font-weight="600">Lidl</text><circle cx="296.6" cy="199.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="307.6" y="202.9" font-size="11" fill="#181818" font-weight="600">Albert</text><circle cx="306.8" cy="277.8" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="317.8" y="280.8" font-size="11" fill="#181818" font-weight="600">Rohlík</text><circle cx="340.6" cy="144.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="351.6" y="147.9" font-size="11" fill="#181818" font-weight="600">McDonald's ČR</text><circle cx="348.1" cy="178.1" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="359.1" y="181.1" font-size="11" fill="#181818" font-weight="600">KFC ČR</text><circle cx="402.4" cy="198.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="413.4" y="201.9" font-size="11" fill="#181818" font-weight="600">Kofola</text><circle cx="419.1" cy="272.8" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="430.1" y="275.8" font-size="11" fill="#181818" font-weight="600">Mattoni</text><circle cx="286.2" cy="260.1" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="297.2" y="263.1" font-size="11" fill="#181818" font-weight="600">Pilsner Urquell</text><circle cx="266.8" cy="223.3" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="277.8" y="226.3" font-size="11" fill="#181818" font-weight="600">Staropramen</text><circle cx="157.5" cy="230.3" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="168.5" y="233.3" font-size="11" fill="#181818" font-weight="600">ČSOB</text><circle cx="127.5" cy="159.2" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="138.5" y="162.2" font-size="11" fill="#181818" font-weight="600">Česká spořitelna</text><circle cx="90.0" cy="183.4" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="101.0" y="186.4" font-size="11" fill="#181818" font-weight="600">Fio banka</text><circle cx="128.4" cy="214.9" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="139.4" y="217.9" font-size="11" fill="#181818" font-weight="600">Air Bank</text><circle cx="97.4" cy="231.0" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="108.4" y="234.0" font-size="11" fill="#181818" font-weight="600">Komerční banka</text><circle cx="201.1" cy="138.2" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="212.1" y="141.2" font-size="11" fill="#181818" font-weight="600">T-Mobile ČR</text><circle cx="170.7" cy="125.5" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="181.7" y="128.5" font-size="11" fill="#181818" font-weight="600">O2 ČR</text><circle cx="247.8" cy="131.3" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="258.8" y="134.3" font-size="11" fill="#181818" font-weight="600">Vodafone ČR</text><circle cx="268.2" cy="101.6" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="279.2" y="104.6" font-size="11" fill="#181818" font-weight="600">Škoda Auto</text><circle cx="193.0" cy="90.0" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="204.0" y="93.0" font-size="11" fill="#181818" font-weight="600">ČEZ</text><circle cx="191.9" cy="191.2" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="202.9" y="194.2" font-size="11" fill="#181818" font-weight="600">Generali ČP</text><circle cx="310.3" cy="226.7" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="321.3" y="229.7" font-size="11" fill="#181818" font-weight="600">Pilulka</text><circle cx="231.6" cy="297.5" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="242.6" y="300.5" font-size="11" fill="#181818" font-weight="600">Seznam.cz</text><circle cx="251.0" cy="185.4" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="262.0" y="188.4" font-size="11" fill="#181818" font-weight="600">Avast</text><text x="206.5" y="113.7" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.55 0.14 50)" opacity="0.85">Telecom</text><text x="324.0" y="234.0" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.45 0.13 250)" opacity="0.85">Beverage</text><text x="156.7" y="157.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.48 0.12 145)" opacity="0.85">Banking + heavy industry</text><text x="303.6" y="200.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.50 0.15 25)" opacity="0.85">Mass-market consumer</text></svg>
         <figcaption class="scatter-cap">UMAP layout. Cluster names appear at each cluster's centroid.</figcaption>
@@ -842,9 +844,14 @@ footer a:hover { color: var(--accent); }
     </div>
 </section>
 
+<aside class="pull">
+    <p class="pull-q">Czech banks, &#268;EZ and &#352;koda Auto cluster as <span class="num">one</span> institutional brand. Your brand is not where you think it is.</p>
+    <p class="pull-cap">The boundary between &#268;SOB and &#268;EZ is invisible at the homepage layer. The boundary between Lidl and Avast is invisible at the homepage layer. The boundaries we name in pitch decks are campaign-level fictions that the homepage doesn't honor.</p>
+</aside>
+
 <section>
-    <div class="section-label"><span class="num">02</span><h2>Opportunity table</h2></div>
-    <p class="section-intro">The top 10 rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches sit within 0.025 of each other — the "winner" is essentially arbitrary and indicates the trend has no sector match in this corpus (typically travel, streaming, niche topics). Treat those rows as evidence of a corpus gap, not as a recommended brand activation.</p>
+    <div class="section-label"><span class="num">02</span><h2>Where the rising trends fall</h2></div>
+    <p class="section-intro">For each rising query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary and signals a sector gap in the corpus. Treat those as evidence of a corpus gap, not a recommended brand activation.</p>
     <table class="opp-table">
         <thead>
             <tr>
@@ -960,34 +967,80 @@ footer a:hover { color: var(--accent); }
 </section>
 
 <section>
-    <div class="section-label"><span class="num">03</span><h2>Observations</h2></div>
+    <div class="section-label"><span class="num">03</span><h2>Patterns</h2></div>
     <div class="patterns">
         <article class="pattern">
             <p class="num">01</p>
             <div>
-                <h3>Czech corporate-legacy brands share one homepage register.</h3>
-                <p class="evidence">All five banks (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční) plus Generali, ČEZ and Škoda Auto cluster as one. The boundary isn't sector. It's "established Czech institution" — formal, trust-anchored, heritage-leaning. A bank's homepage and an energy utility's homepage are closer to each other than a bank's is to a fintech challenger that hasn't shipped yet.</p>
+                <h3>One institutional brand wearing eight logos.</h3>
+                <p class="evidence">All five Czech banks (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční), plus Generali, plus ČEZ, plus Škoda Auto cluster as one semantic neighborhood. Eight brands, four sectors (banking, insurance, energy, automotive), one homepage register. The boundary lines we draw between these brands at the campaign level do not survive the homepage layer.</p>
+                <p class="takeaway"><strong>Why it matters</strong>"Established Czech institution" is a brand template, not a sector. A challenger that wants to feel distinct from Czech spořitelna has to break out of the institutional template, not out of the banking sector. A bank that wants to feel different from ČEZ has the same problem.</p>
             </div>
         </article>
         <article class="pattern">
             <p class="num">02</p>
             <div>
-                <h3>The mass-market consumer cluster is a templating problem.</h3>
-                <p class="evidence">Nine brands across six sectors — Lidl, Albert, Rohlík (retail), McDonald's, KFC (QSR), Kofola (beverage), Pilulka (pharma), Seznam.cz (media), Avast (tech) — cluster together. They share one homepage TEMPLATE: short positioning line on top, product grid below, "akce / novinky / aktuální nabídka". The buyer who lands on any of these reads the same shape first.</p>
+                <h3>The mass-market cluster is a homepage-shape problem.</h3>
+                <p class="evidence">Nine brands across six sectors — Lidl, Albert, Rohlík (retail), McDonald's, KFC (QSR), Kofola (beverage), Pilulka (pharma), Seznam.cz (media), Avast (tech) — cluster together. They share one homepage TEMPLATE: short positioning line on top, product grid below, "akce / novinky / aktuální nabídka" everywhere. Avast (security software) lands in this cluster because their homepage looks like a supermarket aisle.</p>
+                <p class="takeaway"><strong>Why it matters</strong>The buyer who lands on any of these reads the same shape first. The campaign creative might be distinctive; the homepage is not. A brand that runs distinctive campaigns onto a generic homepage trains buyers to forget the distinctive part on contact.</p>
             </div>
         </article>
         <article class="pattern">
             <p class="num">03</p>
             <div>
                 <h3>Telecoms own a tight, isolated cluster of three.</h3>
-                <p class="evidence">T-Mobile, O2 and Vodafone embed close to each other and far from every other brand. The "always-on connectivity / esim / mobilní tarif" language is differentiated enough to be its own neighborhood but homogeneous enough that the three competitors are essentially interchangeable. A new entrant could occupy any direction outside this cluster.</p>
+                <p class="evidence">T-Mobile, O2 and Vodafone embed close to each other and far from every other brand. The "always-on connectivity / esim / mobilní tarif" language is differentiated enough to be its own neighborhood but homogeneous enough that the three competitors are essentially interchangeable inside it.</p>
+                <p class="takeaway"><strong>Why it matters</strong>No fourth brand can join the telecom cluster without becoming the fourth-best telecom. A new entrant could occupy any direction outside this cluster (a telecom that reads as a lifestyle brand, a productivity brand, a cultural brand). The cluster boundary itself is the strategic opportunity.</p>
             </div>
         </article>
         <article class="pattern">
             <p class="num">04</p>
             <div>
-                <h3>Most rising trends sit in semantic territory at least one brand already occupies.</h3>
-                <p class="evidence">Of 26 trending queries, none find genuinely empty quadrants. The opportunity table flags about a quarter of rows as "low signal" — queries whose top three brand matches are within 0.025 cosine of each other. That's not white space; that's the embedding model telling you no brand has staked any chromatic ground in that conceptual neighborhood yet.</p>
+                <h3>The cluster boundary IS the strategic decision boundary.</h3>
+                <p class="evidence">The most distinctive Czech brands sit close to a cluster boundary, not at a cluster centroid. Air Bank holds the institutional cluster but barely — its language tilts toward consumer. Pilsner Urquell holds the food &amp; beverage cluster but tilts toward heritage / luxury. Strong brands are cluster-edge brands; safe brands are cluster-center brands.</p>
+                <p class="takeaway"><strong>Why it matters</strong>"Which competitor do we want to look like" is the wrong question. The right question is "which cluster do we want to leave." Most brand strategies adjust within-cluster (Air Bank vs Komerční); the bigger move is between-cluster (Air Bank vs Avast vs Albert).</p>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section>
+    <div class="section-label"><span class="num">04</span><h2>Playbook</h2></div>
+    <p class="section-intro">Five moves a strategist or creative director can run on next week's pitch using this map.</p>
+    <div class="playbook">
+        <article class="play">
+            <p class="play-num">01</p>
+            <div>
+                <h3>Score the client's homepage before writing the brief.</h3>
+                <p class="play-body">Run the client URL through the same pipeline as Episode 2. If they're in the mass-market cluster, every campaign starts with the same handicap: the homepage trains buyers to expect a promo template. If they're in the institutional cluster, campaign creative has to actively pull buyers out of "Czech legacy institution" framing.</p>
+            </div>
+        </article>
+        <article class="play">
+            <p class="play-num">02</p>
+            <div>
+                <h3>Identify your cluster's defining vocabulary, then refuse to use it.</h3>
+                <p class="play-body">Each cluster has a TF-IDF token signature ("akce / novinky / magazín / leták" for mass-market; "bankou / silnější / partnerem" for institutional). A brief that wants to escape its cluster lists those tokens explicitly and rules them out. Cluster escape is a word-level constraint, not just a creative ambition.</p>
+            </div>
+        </article>
+        <article class="play">
+            <p class="play-num">03</p>
+            <div>
+                <h3>Position against cluster boundaries, not against named competitors.</h3>
+                <p class="play-body">A pitch slide showing "we differ from Komerční banka because X" is intra-cluster wallpaper change. A pitch slide showing "we will move from the institutional cluster toward the consumer cluster, here's the homepage shape we'll adopt" is a real positioning move. Re-score after the rebrand. If the homepage didn't move clusters, neither did the brand.</p>
+            </div>
+        </article>
+        <article class="play">
+            <p class="play-num">04</p>
+            <div>
+                <h3>Use Brief Generator for category-specific numerical targets.</h3>
+                <p class="play-body">The map tells you where the cluster sits. The <a href="https://sandovabarbora.github.io/spot-scorer/">Spot Scorer's Brief Generator</a> tells you the numerical targets a distinctive spot in that sector needs to hit. Topography identifies the trap; the brief generator gives the spec for breaking out of it.</p>
+            </div>
+        </article>
+        <article class="play">
+            <p class="play-num">05</p>
+            <div>
+                <h3>Read trends through the cluster lens, not the brand lens.</h3>
+                <p class="play-body">A rising query that lands inside an empty zone of the map is a real opening for the brand whose cluster boundary touches that zone. A rising query that lands inside a dense cluster is an opportunity only for the brand willing to break the cluster's vocabulary. Saturation score in the opportunity table is the diagnostic.</p>
             </div>
         </article>
     </div>
@@ -996,9 +1049,11 @@ footer a:hover { color: var(--accent); }
 <footer>
     <div>
         <h4>Brand Reflection Series</h4>
-        <p>Episode 1 &mdash; <a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Color fingerprint</a> (visual analysis of TV spots)</p>
-        <p>Episode 1.5 &mdash; <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Sound fingerprint</a> (audio analysis)</p>
-        <p>Episode 2 (this) &mdash; Strategic topography (semantic analysis of homepage messaging)</p>
+        <p><a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Episode 1 &mdash; Color fingerprint</a></p>
+        <p><a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Episode 1.5 &mdash; Sound fingerprint</a></p>
+        <p>Episode 2 (this) &mdash; Strategic topography</p>
+        <p><a href="https://sandovabarbora.github.io/brand-reflection-cz/">Series hub + case studies</a></p>
+        <p><a href="https://sandovabarbora.github.io/spot-scorer/">Spot Scorer &mdash; instant brief generator</a></p>
     </div>
     <div>
         <h4>Code</h4>

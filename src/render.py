@@ -172,6 +172,19 @@ def build_legend_html(clusters: pd.DataFrame) -> list[dict[str, object]]:
 # --- Insights -------------------------------------------------------------
 
 
+def load_patterns_and_playbook() -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    """Load patterns + playbook from config/insights.yaml.
+
+    Returns:
+        (patterns, playbook) — both lists of {title, evidence/body, takeaway?}
+        dicts. Empty lists if the file is absent.
+    """
+    if not config.INSIGHTS_YAML.exists():
+        return ([], [])
+    raw = yaml.safe_load(config.INSIGHTS_YAML.read_text(encoding="utf-8"))
+    return list(raw.get("patterns", [])), list(raw.get("playbook", []))
+
+
 def load_insights() -> list[dict[str, str]]:
     if not config.INSIGHTS_YAML.exists():
         return []
@@ -212,6 +225,7 @@ def render_report(
     }
 
     top_opps = opportunities.head(config.OPPORTUNITY_TABLE_ROWS).to_dict(orient="records")
+    patterns, playbook = load_patterns_and_playbook()
 
     html = env.get_template("report.html.j2").render(
         inline_css=css,
@@ -221,7 +235,8 @@ def render_report(
         map_svg=build_map_svg(coords, clusters, trends),
         legend=build_legend_html(clusters),
         opportunities=top_opps,
-        insights=load_insights(),
+        patterns=patterns,
+        playbook=playbook,
     )
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding="utf-8")

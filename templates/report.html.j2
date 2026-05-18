@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Strategic Topography of Czech Brands</title>
+<title>How many Czech brand templates are there? Three.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>{{ inline_css }}</style>
@@ -17,19 +17,19 @@
         &amp;
         <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/" style="color:inherit;">Sound fingerprint</a>
     </p>
-    <h1>Where Czech brands stand, and what's moving around them.</h1>
-    <p class="lede">Homepage messaging from {{ counts.n_brands_used }} major Czech brands embedded into a multilingual semantic space alongside {{ counts.n_trends }} top rising Czech queries, projected to 2D. Dense clusters are red oceans. Isolated points are voices. Trends near empty zones are openings.</p>
+    <h1>Three templates, one institution.</h1>
+    <p class="lede">{{ counts.n_brands_used }} Czech brand homepages embedded in a multilingual semantic space cluster into four neighborhoods — and one of those neighborhoods contains <em>all five banks, plus Generali, plus &#268;EZ, plus &#352;koda Auto</em>. Sector identity we treat as obvious at the campaign level dissolves at the homepage layer. This is the map, and the moves it suggests.</p>
     <p class="byline">By {{ author }}. <a href="{{ repo_url }}">Source on GitHub</a>.</p>
 </header>
 
 <section class="method">
     <p class="method-label">Method</p>
-    <p class="method-body">Brand homepage text (title, meta, headings, first paragraphs) extracted via trafilatura. Top rising Czech queries via pytrends with a hand-curated fallback when the unofficial API rate-limits. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalised). Layout via UMAP (n_neighbors=10, min_dist=0.3, cosine metric). Cluster labels are sector-rolled. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
+    <p class="method-body">Homepage text per brand (title, meta, first headings, first non-promo paragraphs, capped at 600 chars). Top rising Czech queries via pytrends with a hand-curated fallback. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalized). Layout via UMAP. Cluster labels rolled from sector composition. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
 </section>
 
 <section>
     <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
-    <p class="section-intro">Brands are filled circles coloured by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric.</p>
+    <p class="section-intro">Brands are filled circles colored by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric. The four cluster names are derived from sector composition, not chosen by the analyst.</p>
     <figure class="map-frame">
         {{ map_svg | safe }}
         <figcaption class="scatter-cap">UMAP layout. Cluster names appear at each cluster's centroid.</figcaption>
@@ -47,9 +47,14 @@
     </div>
 </section>
 
+<aside class="pull">
+    <p class="pull-q">Czech banks, &#268;EZ and &#352;koda Auto cluster as <span class="num">one</span> institutional brand. Your brand is not where you think it is.</p>
+    <p class="pull-cap">The boundary between &#268;SOB and &#268;EZ is invisible at the homepage layer. The boundary between Lidl and Avast is invisible at the homepage layer. The boundaries we name in pitch decks are campaign-level fictions that the homepage doesn't honor.</p>
+</aside>
+
 <section>
-    <div class="section-label"><span class="num">02</span><h2>Opportunity table</h2></div>
-    <p class="section-intro">The top {{ opportunities | length }} rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches sit within 0.025 of each other — the "winner" is essentially arbitrary and indicates the trend has no sector match in this corpus (typically travel, streaming, niche topics). Treat those rows as evidence of a corpus gap, not as a recommended brand activation.</p>
+    <div class="section-label"><span class="num">02</span><h2>Where the rising trends fall</h2></div>
+    <p class="section-intro">For each rising query, the three brands whose homepage text sits closest in the semantic space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches are within 0.025 cosine of each other &mdash; the &quot;winner&quot; is essentially arbitrary and signals a sector gap in the corpus. Treat those as evidence of a corpus gap, not a recommended brand activation.</p>
     <table class="opp-table">
         <thead>
             <tr>
@@ -79,29 +84,46 @@
     </table>
 </section>
 
-{% if insights %}
 <section>
-    <div class="section-label"><span class="num">03</span><h2>Observations</h2></div>
+    <div class="section-label"><span class="num">03</span><h2>Patterns</h2></div>
     <div class="patterns">
-{% for ins in insights %}
+{% for p in patterns %}
         <article class="pattern">
             <p class="num">{{ "%02d" | format(loop.index) }}</p>
             <div>
-                <h3>{{ ins.title }}</h3>
-                <p class="evidence">{{ ins.body }}</p>
+                <h3>{{ p.title }}</h3>
+                <p class="evidence">{{ p.evidence }}</p>
+                <p class="takeaway"><strong>Why it matters</strong>{{ p.takeaway }}</p>
             </div>
         </article>
 {% endfor %}
     </div>
 </section>
-{% endif %}
+
+<section>
+    <div class="section-label"><span class="num">04</span><h2>Playbook</h2></div>
+    <p class="section-intro">Five moves a strategist or creative director can run on next week's pitch using this map.</p>
+    <div class="playbook">
+{% for move in playbook %}
+        <article class="play">
+            <p class="play-num">{{ "%02d" | format(loop.index) }}</p>
+            <div>
+                <h3>{{ move.title }}</h3>
+                <p class="play-body">{{ move.body }}</p>
+            </div>
+        </article>
+{% endfor %}
+    </div>
+</section>
 
 <footer>
     <div>
         <h4>Brand Reflection Series</h4>
-        <p>Episode 1 &mdash; <a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Color fingerprint</a> (visual analysis of TV spots)</p>
-        <p>Episode 1.5 &mdash; <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Sound fingerprint</a> (audio analysis)</p>
-        <p>Episode 2 (this) &mdash; Strategic topography (semantic analysis of homepage messaging)</p>
+        <p><a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Episode 1 &mdash; Color fingerprint</a></p>
+        <p><a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Episode 1.5 &mdash; Sound fingerprint</a></p>
+        <p>Episode 2 (this) &mdash; Strategic topography</p>
+        <p><a href="https://sandovabarbora.github.io/brand-reflection-cz/">Series hub + case studies</a></p>
+        <p><a href="https://sandovabarbora.github.io/spot-scorer/">Spot Scorer &mdash; instant brief generator</a></p>
     </div>
     <div>
         <h4>Code</h4>
