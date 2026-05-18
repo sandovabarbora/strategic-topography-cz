@@ -64,25 +64,36 @@ def _label_cluster(sectors: pd.Series) -> str:
     n_retail = int(counts.get("retail", 0))
     n_ecommerce = int(counts.get("ecommerce", 0))
 
-    # 1. Financial services (banks + insurance dominant)
-    if (n_banking + n_insurance) >= 0.6 * n_total and n_banking >= 2:
+    # Pure single-sector clusters get tight labels first
+    if n_telecom == n_total and n_total >= 2:
+        return "Telecom"
+    if n_beverage == n_total and n_total >= 2:
+        return "Beverage"
+    if n_banking == n_total and n_total >= 2:
+        return "Banking"
+
+    # Mixed-but-dominant: financial services (banks anchor it, others ride along)
+    if n_banking >= 4 and (n_banking + n_insurance) >= 0.5 * n_total:
+        # Pure-finance vs financial+industrial heritage
+        if (n_total - n_banking - n_insurance) >= 2:
+            return "Banking + heavy industry"
         return "Financial services"
 
-    # 2. Connectivity & infrastructure (telecom + energy + utility tech)
-    if (n_telecom + n_energy + n_tech) >= 0.6 * n_total and n_telecom >= 2:
+    # Connectivity & infrastructure (telcos + adjacent utility/tech)
+    if n_telecom >= 2 and (n_telecom + n_energy + n_tech) >= 0.6 * n_total:
         return "Connectivity & infrastructure"
 
-    # 3. Food & beverage (beverage + QSR)
-    if (n_beverage + n_qsr) >= 0.6 * n_total and (n_beverage + n_qsr) >= 3:
+    # Food & beverage (mix of beverage + QSR)
+    if (n_beverage + n_qsr) >= 0.7 * n_total and (n_beverage + n_qsr) >= 3:
         return "Food & beverage"
 
-    # 4. Mass-market consumer (retail + ecommerce + miscellaneous lifestyle)
-    if (n_retail + n_ecommerce) >= 0.4 * n_total and (n_retail + n_ecommerce) >= 2:
+    # Mass-market consumer
+    if (n_retail + n_ecommerce) >= 0.3 * n_total and (n_retail + n_ecommerce) >= 3:
         return "Mass-market consumer"
 
-    # Fallback: top single sector if it has ≥50%
+    # Single dominant sector fallback
     top_sector = counts.index[0]
-    if counts.iloc[0] / n_total >= 0.5:
+    if counts.iloc[0] / n_total >= 0.6:
         return top_sector.title()
     return "Mixed"
 
@@ -211,6 +222,14 @@ def opportunity_scan(
         top_sims = sims[ti, top_idx]
         saturation = float(top_sims.mean())
         velocity = float(velocity_map.get(trend, 100.0))
+        # Low-confidence flag fires when the top-3 brands sit within
+        # 0.025 cosine of each other AND saturation is high. That signals
+        # "no clear winner" — the embeddings can't differentiate, the #1
+        # pick is essentially arbitrary noise. Multilingual-e5 on Czech
+        # short text floors at ~0.78 cosine, so absolute thresholds don't
+        # work; relative spread does.
+        spread = float(top_sims.max() - top_sims.min())
+        low_confidence = bool(saturation > 0.82 and spread < 0.025)
         rows.append(
             {
                 "trend": trend,
@@ -222,6 +241,8 @@ def opportunity_scan(
                 "near_brand_3": brand_names[top_idx[2]] if len(top_idx) > 2 else "",
                 "near_brand_3_sim": float(top_sims[2]) if len(top_sims) > 2 else 0.0,
                 "saturation_score": saturation,
+                "top3_spread": spread,
+                "low_confidence": low_confidence,
                 "priority_score": velocity * (1.0 - saturation),
             }
         )

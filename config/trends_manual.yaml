@@ -31,11 +31,12 @@ trends:
   - { query: "magnesium na únavu",       velocity: 170, source: "manual:pharma" }
   - { query: "dr max akce",              velocity: 140, source: "manual:pharma" }
 
-  # --- Travel ---
-  - { query: "regiojet jízdenky",        velocity: 220, source: "manual:travel" }
-  - { query: "letenky levně léto",       velocity: 240, source: "manual:travel" }
-  - { query: "all inclusive řecko",      velocity: 210, source: "manual:travel" }
-  - { query: "wellness pobyt česko",     velocity: 160, source: "manual:travel" }
+  # Travel queries (regiojet, letenky, all inclusive, wellness) were
+  # removed: the brand corpus has no travel brand (RegioJet was dropped
+  # at scrape time, no airline / hotel brands in the seed list). With
+  # no sectoral match, every travel query was landing on the closest
+  # generic-commercial brand (Lidl) — analytically meaningless. Better
+  # to drop than to ship nonsense matches.
 
   # --- Cars ---
   - { query: "elektromobily 2026",       velocity: 200, source: "manual:auto" }

@@ -748,6 +748,36 @@ footer a:hover { color: var(--accent); }
     font-variant-numeric: tabular-nums;
 }
 
+.opp-low-conf td {
+    color: var(--ink-faint);
+}
+
+.opp-low-conf .opp-trend {
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+.low-conf-badge,
+.low-conf-inline {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid var(--ink-faint);
+    border-radius: 999px;
+    color: var(--ink-faint);
+    vertical-align: middle;
+    margin-left: 8px;
+    font-style: normal;
+}
+
+.low-conf-inline {
+    margin: 0 2px;
+}
+
 @media (max-width: 720px) {
     .opp-table tbody td { padding: 10px 4px; font-size: 12px; }
     .opp-trend { font-size: 13px; }
@@ -764,7 +794,7 @@ footer a:hover { color: var(--accent); }
         <a href="https://sandovabarbora.github.io/sound-fingerprint-cz/" style="color:inherit;">Sound fingerprint</a>
     </p>
     <h1>Where Czech brands stand, and what's moving around them.</h1>
-    <p class="lede">Homepage messaging from 23 major Czech brands embedded into a multilingual semantic space alongside 30 top rising Czech queries, projected to 2D. Dense clusters are red oceans. Isolated points are voices. Trends near empty zones are openings.</p>
+    <p class="lede">Homepage messaging from 23 major Czech brands embedded into a multilingual semantic space alongside 26 top rising Czech queries, projected to 2D. Dense clusters are red oceans. Isolated points are voices. Trends near empty zones are openings.</p>
     <p class="byline">By Barbora Šandová. <a href="https://github.com/sandovabarbora/strategic-topography-cz">Source on GitHub</a>.</p>
 </header>
 
@@ -777,36 +807,36 @@ footer a:hover { color: var(--accent); }
     <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
     <p class="section-intro">Brands are filled circles coloured by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric.</p>
     <figure class="map-frame">
-        <svg class="topo-map" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" aria-label="Strategic topography map"><rect x="36" y="36" width="648" height="648" fill="none" stroke="#EFEAE0" stroke-width="0.7"/><polygon points="344.4656193119754,133.67922567025352 355.4656193119754,144.67922567025352 344.4656193119754,155.67922567025352 333.4656193119754,144.67922567025352" fill="none" stroke="#181818" stroke-width="1.1"/><text x="358.5" y="147.7" font-size="9" fill="#888" font-style="italic">umělá inteligence</text><polygon points="204.8637130057898,327.41827047976886 215.1137130057898,337.66827047976886 204.8637130057898,347.91827047976886 194.6137130057898,337.66827047976886" fill="none" stroke="#181818" stroke-width="1.1"/><text x="218.1" y="340.7" font-size="9" fill="#888" font-style="italic">akce lidl tento týden</text><polygon points="177.38194453078125,118.768357629734 187.25694453078125,128.643357629734 177.38194453078125,138.518357629734 167.50694453078125,128.643357629734" fill="none" stroke="#181818" stroke-width="1.1"/><text x="190.3" y="131.6" font-size="9" fill="#888" font-style="italic">úroky hypotéka 2026</text><polygon points="126.22716999258083,250.28626228829364 135.72716999258083,259.78626228829364 126.22716999258083,269.28626228829364 116.72716999258083,259.78626228829364" fill="none" stroke="#181818" stroke-width="1.1"/><text x="138.7" y="262.8" font-size="9" fill="#888" font-style="italic">letenky levně léto</text><polygon points="295.8379412499178,152.64947756343417 305.3379412499178,162.14947756343417 295.8379412499178,171.64947756343417 286.3379412499178,162.14947756343417" fill="none" stroke="#181818" stroke-width="1.1"/><text x="308.3" y="165.1" font-size="9" fill="#888" font-style="italic">chatgpt česky</text><polygon points="257.0396143190491,118.15723394507062 266.1646143190491,127.28223394507062 257.0396143190491,136.40723394507063 247.91461431904912,127.28223394507062" fill="none" stroke="#181818" stroke-width="1.1"/><text x="269.2" y="130.3" font-size="9" fill="#888" font-style="italic">černý pátek 2026</text><polygon points="192.46467213636427,89.38869500141013 201.21467213636427,98.13869500141013 192.46467213636427,106.88869500141013 183.71467213636427,98.13869500141013" fill="none" stroke="#181818" stroke-width="1.1"/><text x="204.2" y="101.1" font-size="9" fill="#888" font-style="italic">inflace 2026</text><polygon points="183.003677139253,280.98336034577574 191.753677139253,289.73336034577574 183.003677139253,298.48336034577574 174.253677139253,289.73336034577574" fill="none" stroke="#181818" stroke-width="1.1"/><text x="194.8" y="292.7" font-size="9" fill="#888" font-style="italic">regiojet jízdenky</text><polygon points="102.25436605225124,302.11563463580063 110.62936605225124,310.49063463580063 102.25436605225124,318.86563463580063 93.87936605225124,310.49063463580063" fill="none" stroke="#181818" stroke-width="1.1"/><text x="113.6" y="313.5" font-size="9" fill="#888" font-style="italic">all inclusive řecko</text><polygon points="225.35196128502022,88.41159357609041 233.35196128502022,96.41159357609041 225.35196128502022,104.41159357609041 217.35196128502022,96.41159357609041" fill="none" stroke="#181818" stroke-width="1.1"/><text x="236.4" y="99.4" font-size="9" fill="#888" font-style="italic">elektromobily 2026</text><polygon points="359.9094559725951,294.8001826341173 367.9094559725951,302.8001826341173 359.9094559725951,310.8001826341173 351.9094559725951,302.8001826341173" fill="none" stroke="#181818" stroke-width="1.1"/><text x="370.9" y="305.8" font-size="9" fill="#888" font-style="italic">vitamíny d3</text><polygon points="128.08944700307921,175.23170900709064 136.08944700307921,183.23170900709064 128.08944700307921,191.23170900709064 120.08944700307921,183.23170900709064" fill="none" stroke="#181818" stroke-width="1.1"/><text x="139.1" y="186.2" font-size="9" fill="#888" font-style="italic">ceny energií</text><polygon points="273.856883609457,237.98216468523523 281.481883609457,245.60716468523523 273.856883609457,253.23216468523523 266.231883609457,245.60716468523523" fill="none" stroke="#181818" stroke-width="1.1"/><text x="284.5" y="248.6" font-size="9" fill="#888" font-style="italic">fotovoltaika dotace</text><polygon points="161.4913676848612,210.0772022790199 169.1163676848612,217.7022022790199 161.4913676848612,225.3272022790199 153.8663676848612,217.7022022790199" fill="none" stroke="#181818" stroke-width="1.1"/><text x="172.1" y="220.7" font-size="9" fill="#888" font-style="italic">neomezená data tarif</text><polygon points="143.73646864049257,282.3706820592166 150.98646864049257,289.6206820592166 143.73646864049257,296.8706820592166 136.48646864049257,289.6206820592166" fill="none" stroke="#181818" stroke-width="1.1"/><text x="154.0" y="292.6" font-size="9" fill="#888" font-style="italic">kaufland letáky</text><polygon points="276.85659634453117,323.96600286674413 284.10659634453117,331.21600286674413 276.85659634453117,338.46600286674413 269.60659634453117,331.21600286674413" fill="none" stroke="#181818" stroke-width="1.1"/><text x="287.1" y="334.2" font-size="9" fill="#888" font-style="italic">grilování recepty</text><polygon points="364.17825229138856,166.63519574299448 371.42825229138856,173.88519574299448 364.17825229138856,181.13519574299448 356.92825229138856,173.88519574299448" fill="none" stroke="#181818" stroke-width="1.1"/><text x="374.4" y="176.9" font-size="9" fill="#888" font-style="italic">ai generátor obrázků</text><polygon points="245.21482665755937,82.74999999999999 252.46482665755937,89.99999999999999 245.21482665755937,97.24999999999999 237.96482665755937,89.99999999999999" fill="none" stroke="#181818" stroke-width="1.1"/><text x="255.5" y="93.0" font-size="9" fill="#888" font-style="italic">škoda octavia 2026</text><polygon points="335.8066492156037,265.5517380707828 342.6816492156037,272.4267380707828 335.8066492156037,279.3017380707828 328.9316492156037,272.4267380707828" fill="none" stroke="#181818" stroke-width="1.1"/><text x="345.7" y="275.4" font-size="9" fill="#888" font-style="italic">magnesium na únavu</text><polygon points="184.2778736928478,179.64357245990843 191.1528736928478,186.51857245990843 184.2778736928478,193.39357245990843 177.4028736928478,186.51857245990843" fill="none" stroke="#181818" stroke-width="1.1"/><text x="194.2" y="189.5" font-size="9" fill="#888" font-style="italic">spoření na důchod</text><polygon points="90.21941309857252,206.80329713604286 97.09441309857252,213.67829713604286 90.21941309857252,220.55329713604286 83.34441309857252,213.67829713604286" fill="none" stroke="#181818" stroke-width="1.1"/><text x="100.1" y="216.7" font-size="9" fill="#888" font-style="italic">netflix česko ceník</text><polygon points="158.21622148562153,352.31131755584346 164.71622148562153,358.81131755584346 158.21622148562153,365.31131755584346 151.71622148562153,358.81131755584346" fill="none" stroke="#181818" stroke-width="1.1"/><text x="167.7" y="361.8" font-size="9" fill="#888" font-style="italic">rohlík sleva nový zákazník</text><polygon points="89.99999999999999,250.61487440179332 96.49999999999999,257.1148744017933 89.99999999999999,263.6148744017933 83.49999999999999,257.1148744017933" fill="none" stroke="#181818" stroke-width="1.1"/><text x="99.5" y="260.1" font-size="9" fill="#888" font-style="italic">wellness pobyt česko</text><polygon points="189.79476818856696,245.3579381742286 196.29476818856696,251.8579381742286 189.79476818856696,258.3579381742286 183.29476818856696,251.8579381742286" fill="none" stroke="#181818" stroke-width="1.1"/><text x="199.3" y="254.9" font-size="9" fill="#888" font-style="italic">voyo program</text><polygon points="320.63157692800746,195.69567149382988 326.75657692800746,201.82067149382988 320.63157692800746,207.94567149382988 314.50657692800746,201.82067149382988" fill="none" stroke="#181818" stroke-width="1.1"/><text x="329.8" y="204.8" font-size="9" fill="#888" font-style="italic">kybernetická bezpečnost</text><polygon points="240.361328888041,208.89647838519505 246.486328888041,215.02147838519505 240.361328888041,221.14647838519505 234.236328888041,215.02147838519505" fill="none" stroke="#181818" stroke-width="1.1"/><text x="249.5" y="218.0" font-size="9" fill="#888" font-style="italic">ojeté auto kontrola</text><polygon points="338.8584253221932,324.52214633612687 344.6084253221932,330.27214633612687 338.8584253221932,336.02214633612687 333.1084253221932,330.27214633612687" fill="none" stroke="#181818" stroke-width="1.1"/><text x="347.6" y="333.3" font-size="9" fill="#888" font-style="italic">bezlepkové potraviny</text><polygon points="249.24442490739224,302.0866758737752 254.99442490739224,307.8366758737752 249.24442490739224,313.5866758737752 243.49442490739224,307.8366758737752" fill="none" stroke="#181818" stroke-width="1.1"/><text x="258.0" y="310.8" font-size="9" fill="#888" font-style="italic">dr max akce</text><polygon points="314.1533551744696,219.8286906783642 319.5283551744696,225.2036906783642 314.1533551744696,230.5786906783642 308.7783551744696,225.2036906783642" fill="none" stroke="#181818" stroke-width="1.1"/><text x="322.5" y="228.2" font-size="9" fill="#888" font-style="italic">5g pokrytí</text><polygon points="383.95210752748545,319.5217963890542 388.95210752748545,324.5217963890542 383.95210752748545,329.5217963890542 378.95210752748545,324.5217963890542" fill="none" stroke="#181818" stroke-width="1.1"/><text x="392.0" y="327.5" font-size="9" fill="#888" font-style="italic">kofola nebo coca cola</text><circle cx="466.7" cy="551.9" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="477.7" y="554.9" font-size="11" fill="#181818" font-weight="600">Lidl</text><circle cx="395.7" cy="565.4" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="406.7" y="568.4" font-size="11" fill="#181818" font-weight="600">Albert</text><circle cx="411.1" cy="527.4" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="422.1" y="530.4" font-size="11" fill="#181818" font-weight="600">Rohlík</text><circle cx="390.4" cy="491.1" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="401.4" y="494.1" font-size="11" fill="#181818" font-weight="600">McDonald's ČR</text><circle cx="408.5" cy="459.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="419.5" y="462.9" font-size="11" fill="#181818" font-weight="600">KFC ČR</text><circle cx="439.3" cy="405.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="450.3" y="408.9" font-size="11" fill="#181818" font-weight="600">Kofola</text><circle cx="403.3" cy="370.3" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="414.3" y="373.3" font-size="11" fill="#181818" font-weight="600">Mattoni</text><circle cx="488.3" cy="480.5" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="499.3" y="483.5" font-size="11" fill="#181818" font-weight="600">Pilsner Urquell</text><circle cx="463.6" cy="497.2" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="474.6" y="500.2" font-size="11" fill="#181818" font-weight="600">Staropramen</text><circle cx="587.9" cy="581.1" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="598.9" y="584.1" font-size="11" fill="#181818" font-weight="600">ČSOB</text><circle cx="535.7" cy="592.3" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="546.7" y="595.3" font-size="11" fill="#181818" font-weight="600">Česká spořitelna</text><circle cx="599.7" cy="628.0" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="610.7" y="631.0" font-size="11" fill="#181818" font-weight="600">Fio banka</text><circle cx="551.6" cy="630.0" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="562.6" y="633.0" font-size="11" fill="#181818" font-weight="600">Air Bank</text><circle cx="573.3" cy="629.4" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="584.3" y="632.4" font-size="11" fill="#181818" font-weight="600">Komerční banka</text><circle cx="607.6" cy="485.3" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="618.6" y="488.3" font-size="11" fill="#181818" font-weight="600">T-Mobile ČR</text><circle cx="603.1" cy="497.4" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="614.1" y="500.4" font-size="11" fill="#181818" font-weight="600">O2 ČR</text><circle cx="552.3" cy="502.1" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="563.3" y="505.1" font-size="11" fill="#181818" font-weight="600">Vodafone ČR</text><circle cx="526.1" cy="551.8" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="537.1" y="554.8" font-size="11" fill="#181818" font-weight="600">Škoda Auto</text><circle cx="574.5" cy="540.5" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="585.5" y="543.5" font-size="11" fill="#181818" font-weight="600">ČEZ</text><circle cx="630.0" cy="555.5" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="641.0" y="558.5" font-size="11" fill="#181818" font-weight="600">Generali ČP</text><circle cx="454.1" cy="574.9" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="465.1" y="577.9" font-size="11" fill="#181818" font-weight="600">Pilulka</text><circle cx="437.6" cy="603.6" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="448.6" y="606.6" font-size="11" fill="#181818" font-weight="600">Seznam.cz</text><circle cx="539.2" cy="460.8" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="550.2" y="463.8" font-size="11" fill="#181818" font-weight="600">Avast</text><text x="450.7" y="535.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.55 0.14 50)" opacity="0.85">Mass-market consumer</text><text x="579.7" y="584.7" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.45 0.13 250)" opacity="0.85">Financial services</text><text x="575.3" y="479.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.48 0.12 145)" opacity="0.85">Connectivity & infrastructure</text><text x="426.0" y="423.5" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.50 0.15 25)" opacity="0.85">Food & beverage</text></svg>
+        <svg class="topo-map" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" aria-label="Strategic topography map"><rect x="36" y="36" width="648" height="648" fill="none" stroke="#EFEAE0" stroke-width="0.7"/><polygon points="526.5911652442435,498.7178241726651 537.5911652442435,509.7178241726651 526.5911652442435,520.7178241726651 515.5911652442435,509.7178241726651" fill="none" stroke="#181818" stroke-width="1.1"/><text x="540.6" y="512.7" font-size="9" fill="#888" font-style="italic">umělá inteligence</text><polygon points="362.6459772497283,484.21089513326183 372.8959772497283,494.46089513326183 362.6459772497283,504.71089513326183 352.3959772497283,494.46089513326183" fill="none" stroke="#181818" stroke-width="1.1"/><text x="375.9" y="497.5" font-size="9" fill="#888" font-style="italic">akce lidl tento týden</text><polygon points="575.2864712287967,576.860808576158 585.1614712287967,586.735808576158 575.2864712287967,596.610808576158 565.4114712287967,586.735808576158" fill="none" stroke="#181818" stroke-width="1.1"/><text x="588.2" y="589.7" font-size="9" fill="#888" font-style="italic">úroky hypotéka 2026</text><polygon points="515.7565102163153,486.56993323825907 525.2565102163153,496.06993323825907 515.7565102163153,505.56993323825907 506.2565102163153,496.06993323825907" fill="none" stroke="#181818" stroke-width="1.1"/><text x="528.3" y="499.1" font-size="9" fill="#888" font-style="italic">chatgpt česky</text><polygon points="480.1587081192167,579.1165544311209 489.2837081192167,588.2415544311209 480.1587081192167,597.3665544311209 471.0337081192167,588.2415544311209" fill="none" stroke="#181818" stroke-width="1.1"/><text x="492.3" y="591.2" font-size="9" fill="#888" font-style="italic">černý pátek 2026</text><polygon points="541.7113143831466,611.2521130067821 550.4613143831466,620.0021130067821 541.7113143831466,628.7521130067821 532.9613143831466,620.0021130067821" fill="none" stroke="#181818" stroke-width="1.1"/><text x="553.5" y="623.0" font-size="9" fill="#888" font-style="italic">inflace 2026</text><polygon points="530.5153087893017,573.4611475017834 538.5153087893017,581.4611475017834 530.5153087893017,589.4611475017834 522.5153087893017,581.4611475017834" fill="none" stroke="#181818" stroke-width="1.1"/><text x="541.5" y="584.5" font-size="9" fill="#888" font-style="italic">elektromobily 2026</text><polygon points="475.902523756106,312.43877016381435 483.902523756106,320.43877016381435 475.902523756106,328.43877016381435 467.902523756106,320.43877016381435" fill="none" stroke="#181818" stroke-width="1.1"/><text x="486.9" y="323.4" font-size="9" fill="#888" font-style="italic">vitamíny d3</text><polygon points="629.852724197166,458.7775388041441 637.852724197166,466.7775388041441 629.852724197166,474.7775388041441 621.852724197166,466.7775388041441" fill="none" stroke="#181818" stroke-width="1.1"/><text x="640.9" y="469.8" font-size="9" fill="#888" font-style="italic">ceny energií</text><polygon points="510.8455142768893,428.87395972503094 518.4705142768893,436.49895972503094 510.8455142768893,444.12395972503094 503.2205142768893,436.49895972503094" fill="none" stroke="#181818" stroke-width="1.1"/><text x="521.5" y="439.5" font-size="9" fill="#888" font-style="italic">fotovoltaika dotace</text><polygon points="605.6115178473265,428.9369922408271 613.2365178473265,436.5619922408271 605.6115178473265,444.1869922408271 597.9865178473265,436.5619922408271" fill="none" stroke="#181818" stroke-width="1.1"/><text x="616.2" y="439.6" font-size="9" fill="#888" font-style="italic">neomezená data tarif</text><polygon points="552.2118382854227,458.94943604577605 559.4618382854227,466.19943604577605 552.2118382854227,473.44943604577605 544.9618382854227,466.19943604577605" fill="none" stroke="#181818" stroke-width="1.1"/><text x="562.5" y="469.2" font-size="9" fill="#888" font-style="italic">ai generátor obrázků</text><polygon points="396.7383034604058,350.2746224904733 403.9883034604058,357.5246224904733 396.7383034604058,364.7746224904733 389.4883034604058,357.5246224904733" fill="none" stroke="#181818" stroke-width="1.1"/><text x="407.0" y="360.5" font-size="9" fill="#888" font-style="italic">grilování recepty</text><polygon points="491.7329685056535,622.75 498.9829685056535,630.0 491.7329685056535,637.25 484.4829685056535,630.0" fill="none" stroke="#181818" stroke-width="1.1"/><text x="502.0" y="633.0" font-size="9" fill="#888" font-style="italic">škoda octavia 2026</text><polygon points="399.200140515122,529.9354550946316 406.450140515122,537.1854550946316 399.200140515122,544.4354550946316 391.950140515122,537.1854550946316" fill="none" stroke="#181818" stroke-width="1.1"/><text x="409.5" y="540.2" font-size="9" fill="#888" font-style="italic">kaufland letáky</text><polygon points="477.06846098199776,403.9482645358638 483.94346098199776,410.8232645358638 477.06846098199776,417.6982645358638 470.19346098199776,410.8232645358638" fill="none" stroke="#181818" stroke-width="1.1"/><text x="486.9" y="413.8" font-size="9" fill="#888" font-style="italic">magnesium na únavu</text><polygon points="630.0,481.1034817748197 636.875,487.9784817748197 630.0,494.8534817748197 623.125,487.9784817748197" fill="none" stroke="#181818" stroke-width="1.1"/><text x="639.9" y="491.0" font-size="9" fill="#888" font-style="italic">netflix česko ceník</text><polygon points="358.6202265787408,423.4881059742451 365.4952265787408,430.3631059742451 358.6202265787408,437.2381059742451 351.7452265787408,430.3631059742451" fill="none" stroke="#181818" stroke-width="1.1"/><text x="368.5" y="433.4" font-size="9" fill="#888" font-style="italic">spoření na důchod</text><polygon points="465.47656930537283,536.5193012240204 471.97656930537283,543.0193012240204 465.47656930537283,549.5193012240204 458.97656930537283,543.0193012240204" fill="none" stroke="#181818" stroke-width="1.1"/><text x="475.0" y="546.0" font-size="9" fill="#888" font-style="italic">voyo program</text><polygon points="417.7766587114642,387.0037096847911 424.2766587114642,393.5037096847911 417.7766587114642,400.0037096847911 411.2766587114642,393.5037096847911" fill="none" stroke="#181818" stroke-width="1.1"/><text x="427.3" y="396.5" font-size="9" fill="#888" font-style="italic">rohlík sleva nový zákazník</text><polygon points="469.59983737002955,476.6756745724473 475.72483737002955,482.8006745724473 469.59983737002955,488.9256745724473 463.47483737002955,482.8006745724473" fill="none" stroke="#181818" stroke-width="1.1"/><text x="478.7" y="485.8" font-size="9" fill="#888" font-style="italic">kybernetická bezpečnost</text><polygon points="431.76636041219956,531.1694306042868 437.89136041219956,537.2944306042868 431.76636041219956,543.4194306042868 425.64136041219956,537.2944306042868" fill="none" stroke="#181818" stroke-width="1.1"/><text x="440.9" y="540.3" font-size="9" fill="#888" font-style="italic">ojeté auto kontrola</text><polygon points="413.20438348611555,456.9827271631328 418.95438348611555,462.7327271631328 413.20438348611555,468.4827271631328 407.45438348611555,462.7327271631328" fill="none" stroke="#181818" stroke-width="1.1"/><text x="422.0" y="465.7" font-size="9" fill="#888" font-style="italic">dr max akce</text><polygon points="486.99683134108255,323.0506335046039 492.74683134108255,328.8006335046039 486.99683134108255,334.5506335046039 481.24683134108255,328.8006335046039" fill="none" stroke="#181818" stroke-width="1.1"/><text x="495.7" y="331.8" font-size="9" fill="#888" font-style="italic">bezlepkové potraviny</text><polygon points="454.1414219317447,454.74287133444653 459.5164219317447,460.11787133444653 454.1414219317447,465.49287133444653 448.7664219317447,460.11787133444653" fill="none" stroke="#181818" stroke-width="1.1"/><text x="462.5" y="463.1" font-size="9" fill="#888" font-style="italic">5g pokrytí</text><polygon points="503.9572236726326,362.7067186329443 508.9572236726326,367.7067186329443 503.9572236726326,372.7067186329443 498.9572236726326,367.7067186329443" fill="none" stroke="#181818" stroke-width="1.1"/><text x="512.0" y="370.7" font-size="9" fill="#888" font-style="italic">kofola nebo coca cola</text><circle cx="244.9" cy="254.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="255.9" y="257.9" font-size="11" fill="#181818" font-weight="600">Lidl</text><circle cx="296.6" cy="199.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="307.6" y="202.9" font-size="11" fill="#181818" font-weight="600">Albert</text><circle cx="306.8" cy="277.8" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="317.8" y="280.8" font-size="11" fill="#181818" font-weight="600">Rohlík</text><circle cx="340.6" cy="144.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="351.6" y="147.9" font-size="11" fill="#181818" font-weight="600">McDonald's ČR</text><circle cx="348.1" cy="178.1" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="359.1" y="181.1" font-size="11" fill="#181818" font-weight="600">KFC ČR</text><circle cx="402.4" cy="198.9" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="413.4" y="201.9" font-size="11" fill="#181818" font-weight="600">Kofola</text><circle cx="419.1" cy="272.8" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="430.1" y="275.8" font-size="11" fill="#181818" font-weight="600">Mattoni</text><circle cx="286.2" cy="260.1" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="297.2" y="263.1" font-size="11" fill="#181818" font-weight="600">Pilsner Urquell</text><circle cx="266.8" cy="223.3" r="8" fill="oklch(0.45 0.13 250)" stroke="#181818" stroke-width="0.8"/><text x="277.8" y="226.3" font-size="11" fill="#181818" font-weight="600">Staropramen</text><circle cx="157.5" cy="230.3" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="168.5" y="233.3" font-size="11" fill="#181818" font-weight="600">ČSOB</text><circle cx="127.5" cy="159.2" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="138.5" y="162.2" font-size="11" fill="#181818" font-weight="600">Česká spořitelna</text><circle cx="90.0" cy="183.4" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="101.0" y="186.4" font-size="11" fill="#181818" font-weight="600">Fio banka</text><circle cx="128.4" cy="214.9" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="139.4" y="217.9" font-size="11" fill="#181818" font-weight="600">Air Bank</text><circle cx="97.4" cy="231.0" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="108.4" y="234.0" font-size="11" fill="#181818" font-weight="600">Komerční banka</text><circle cx="201.1" cy="138.2" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="212.1" y="141.2" font-size="11" fill="#181818" font-weight="600">T-Mobile ČR</text><circle cx="170.7" cy="125.5" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="181.7" y="128.5" font-size="11" fill="#181818" font-weight="600">O2 ČR</text><circle cx="247.8" cy="131.3" r="8" fill="oklch(0.55 0.14 50)" stroke="#181818" stroke-width="0.8"/><text x="258.8" y="134.3" font-size="11" fill="#181818" font-weight="600">Vodafone ČR</text><circle cx="268.2" cy="101.6" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="279.2" y="104.6" font-size="11" fill="#181818" font-weight="600">Škoda Auto</text><circle cx="193.0" cy="90.0" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="204.0" y="93.0" font-size="11" fill="#181818" font-weight="600">ČEZ</text><circle cx="191.9" cy="191.2" r="8" fill="oklch(0.48 0.12 145)" stroke="#181818" stroke-width="0.8"/><text x="202.9" y="194.2" font-size="11" fill="#181818" font-weight="600">Generali ČP</text><circle cx="310.3" cy="226.7" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="321.3" y="229.7" font-size="11" fill="#181818" font-weight="600">Pilulka</text><circle cx="231.6" cy="297.5" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="242.6" y="300.5" font-size="11" fill="#181818" font-weight="600">Seznam.cz</text><circle cx="251.0" cy="185.4" r="8" fill="oklch(0.50 0.15 25)" stroke="#181818" stroke-width="0.8"/><text x="262.0" y="188.4" font-size="11" fill="#181818" font-weight="600">Avast</text><text x="206.5" y="113.7" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.55 0.14 50)" opacity="0.85">Telecom</text><text x="324.0" y="234.0" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.45 0.13 250)" opacity="0.85">Beverage</text><text x="156.7" y="157.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.48 0.12 145)" opacity="0.85">Banking + heavy industry</text><text x="303.6" y="200.2" text-anchor="middle" font-family="Bodoni Moda, serif" font-style="italic" font-size="14" fill="oklch(0.50 0.15 25)" opacity="0.85">Mass-market consumer</text></svg>
         <figcaption class="scatter-cap">UMAP layout. Cluster names appear at each cluster's centroid.</figcaption>
     </figure>
     <div class="legend-strip">
         <div class="legend-chip">
             <span class="legend-dot" style="background: oklch(0.55 0.14 50);"></span>
             <div class="legend-meta">
-                <p class="legend-name">Mass-market consumer</p>
-                <p class="legend-brands">7 brands &mdash; Lidl, Albert, Rohlík, Staropramen…</p>
+                <p class="legend-name">Telecom</p>
+                <p class="legend-brands">3 brands &mdash; T-Mobile ČR, O2 ČR, Vodafone ČR</p>
             </div>
         </div>
         <div class="legend-chip">
             <span class="legend-dot" style="background: oklch(0.45 0.13 250);"></span>
             <div class="legend-meta">
-                <p class="legend-name">Financial services</p>
-                <p class="legend-brands">6 brands &mdash; ČSOB, Česká spořitelna, Fio banka, Air Bank…</p>
+                <p class="legend-name">Beverage</p>
+                <p class="legend-brands">3 brands &mdash; Mattoni, Pilsner Urquell, Staropramen</p>
             </div>
         </div>
         <div class="legend-chip">
             <span class="legend-dot" style="background: oklch(0.48 0.12 145);"></span>
             <div class="legend-meta">
-                <p class="legend-name">Connectivity & infrastructure</p>
-                <p class="legend-brands">5 brands &mdash; T-Mobile ČR, O2 ČR, Vodafone ČR, ČEZ…</p>
+                <p class="legend-name">Banking + heavy industry</p>
+                <p class="legend-brands">8 brands &mdash; ČSOB, Česká spořitelna, Fio banka, Air Bank…</p>
             </div>
         </div>
         <div class="legend-chip">
             <span class="legend-dot" style="background: oklch(0.50 0.15 25);"></span>
             <div class="legend-meta">
-                <p class="legend-name">Food & beverage</p>
-                <p class="legend-brands">5 brands &mdash; McDonald's ČR, KFC ČR, Kofola, Mattoni…</p>
+                <p class="legend-name">Mass-market consumer</p>
+                <p class="legend-brands">9 brands &mdash; Lidl, Albert, Rohlík, McDonald's ČR…</p>
             </div>
         </div>
     </div>
@@ -814,7 +844,7 @@ footer a:hover { color: var(--accent); }
 
 <section>
     <div class="section-label"><span class="num">02</span><h2>Opportunity table</h2></div>
-    <p class="section-intro">The top 10 rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. A high saturation score (0.85+) means at least one brand already lives semantically close to the trend.</p>
+    <p class="section-intro">The top 10 rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches sit within 0.025 of each other — the "winner" is essentially arbitrary and indicates the trend has no sector match in this corpus (typically travel, streaming, niche topics). Treat those rows as evidence of a corpus gap, not as a recommended brand activation.</p>
     <table class="opp-table">
         <thead>
             <tr>
@@ -825,85 +855,105 @@ footer a:hover { color: var(--accent); }
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="opp-trend">umělá inteligence</td>
+            <tr class="">
+                <td class="opp-trend">
+                    umělá inteligence
+                </td>
                 <td class="num-col">280</td>
                 <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.82)</span>
- &middot; Avast<span class="opp-sim">(0.81)</span> &middot; Kofola<span class="opp-sim">(0.80)</span>                </td>
+                    Vodafone ČR<span class="opp-sim">(0.83)</span>
+ &middot; Avast<span class="opp-sim">(0.82)</span> &middot; Lidl<span class="opp-sim">(0.80)</span>                </td>
                 <td class="num-col">0.81</td>
             </tr>
-            <tr>
-                <td class="opp-trend">inflace 2026</td>
+            <tr class="">
+                <td class="opp-trend">
+                    inflace 2026
+                </td>
                 <td class="num-col">220</td>
                 <td class="opp-nearby">
-                    Albert<span class="opp-sim">(0.79)</span>
- &middot; Vodafone ČR<span class="opp-sim">(0.78)</span> &middot; Pilsner Urquell<span class="opp-sim">(0.78)</span>                </td>
-                <td class="num-col">0.79</td>
+                    Vodafone ČR<span class="opp-sim">(0.79)</span>
+ &middot; ČSOB<span class="opp-sim">(0.78)</span> &middot; Generali ČP<span class="opp-sim">(0.78)</span>                </td>
+                <td class="num-col">0.78</td>
             </tr>
-            <tr>
-                <td class="opp-trend">chatgpt česky</td>
+            <tr class="">
+                <td class="opp-trend">
+                    chatgpt česky
+                </td>
                 <td class="num-col">240</td>
                 <td class="opp-nearby">
                     Česká spořitelna<span class="opp-sim">(0.81)</span>
- &middot; Vodafone ČR<span class="opp-sim">(0.80)</span> &middot; Generali ČP<span class="opp-sim">(0.80)</span>                </td>
+ &middot; Generali ČP<span class="opp-sim">(0.81)</span> &middot; Avast<span class="opp-sim">(0.81)</span>                </td>
                 <td class="num-col">0.81</td>
             </tr>
-            <tr>
-                <td class="opp-trend">úroky hypotéka 2026</td>
+            <tr class="opp-low-conf">
+                <td class="opp-trend">
+                    úroky hypotéka 2026
+<span class="low-conf-badge">low signal</span>                </td>
                 <td class="num-col">250</td>
                 <td class="opp-nearby">
+                    ČSOB<span class="opp-sim">(0.83)</span>
+ &middot; Generali ČP<span class="opp-sim">(0.82)</span> &middot; Vodafone ČR<span class="opp-sim">(0.82)</span>                </td>
+                <td class="num-col">0.82</td>
+            </tr>
+            <tr class="">
+                <td class="opp-trend">
+                    černý pátek 2026
+                </td>
+                <td class="num-col">230</td>
+                <td class="opp-nearby">
                     Vodafone ČR<span class="opp-sim">(0.82)</span>
- &middot; O2 ČR<span class="opp-sim">(0.82)</span> &middot; Komerční banka<span class="opp-sim">(0.81)</span>                </td>
-                <td class="num-col">0.82</td>
+ &middot; Seznam.cz<span class="opp-sim">(0.81)</span> &middot; Albert<span class="opp-sim">(0.81)</span>                </td>
+                <td class="num-col">0.81</td>
             </tr>
-            <tr>
-                <td class="opp-trend">all inclusive řecko</td>
-                <td class="num-col">210</td>
-                <td class="opp-nearby">
-                    Lidl<span class="opp-sim">(0.80)</span>
- &middot; Rohlík<span class="opp-sim">(0.79)</span> &middot; T-Mobile ČR<span class="opp-sim">(0.79)</span>                </td>
-                <td class="num-col">0.79</td>
-            </tr>
-            <tr>
-                <td class="opp-trend">letenky levně léto</td>
-                <td class="num-col">240</td>
-                <td class="opp-nearby">
-                    Lidl<span class="opp-sim">(0.83)</span>
- &middot; Air Bank<span class="opp-sim">(0.82)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                </td>
-                <td class="num-col">0.82</td>
-            </tr>
-            <tr>
-                <td class="opp-trend">akce lidl tento týden</td>
+            <tr class="">
+                <td class="opp-trend">
+                    akce lidl tento týden
+                </td>
                 <td class="num-col">260</td>
                 <td class="opp-nearby">
                     Lidl<span class="opp-sim">(0.86)</span>
- &middot; Seznam.cz<span class="opp-sim">(0.84)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                </td>
+ &middot; Seznam.cz<span class="opp-sim">(0.83)</span> &middot; Albert<span class="opp-sim">(0.82)</span>                </td>
                 <td class="num-col">0.84</td>
             </tr>
-            <tr>
-                <td class="opp-trend">regiojet jízdenky</td>
-                <td class="num-col">220</td>
+            <tr class="">
+                <td class="opp-trend">
+                    fotovoltaika dotace
+                </td>
+                <td class="num-col">190</td>
                 <td class="opp-nearby">
-                    Lidl<span class="opp-sim">(0.82)</span>
- &middot; Škoda Auto<span class="opp-sim">(0.81)</span> &middot; ČEZ<span class="opp-sim">(0.81)</span>                </td>
+                    Vodafone ČR<span class="opp-sim">(0.80)</span>
+ &middot; Pilulka<span class="opp-sim">(0.80)</span> &middot; ČEZ<span class="opp-sim">(0.79)</span>                </td>
+                <td class="num-col">0.80</td>
+            </tr>
+            <tr class="">
+                <td class="opp-trend">
+                    elektromobily 2026
+                </td>
+                <td class="num-col">200</td>
+                <td class="opp-nearby">
+                    Škoda Auto<span class="opp-sim">(0.82)</span>
+ &middot; Vodafone ČR<span class="opp-sim">(0.81)</span> &middot; O2 ČR<span class="opp-sim">(0.80)</span>                </td>
                 <td class="num-col">0.81</td>
             </tr>
-            <tr>
-                <td class="opp-trend">černý pátek 2026</td>
-                <td class="num-col">230</td>
-                <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.83)</span>
- &middot; Albert<span class="opp-sim">(0.82)</span> &middot; Avast<span class="opp-sim">(0.81)</span>                </td>
-                <td class="num-col">0.82</td>
-            </tr>
-            <tr>
-                <td class="opp-trend">voyo program</td>
+            <tr class="">
+                <td class="opp-trend">
+                    voyo program
+                </td>
                 <td class="num-col">160</td>
                 <td class="opp-nearby">
-                    Vodafone ČR<span class="opp-sim">(0.76)</span>
- &middot; ČSOB<span class="opp-sim">(0.76)</span> &middot; Pilsner Urquell<span class="opp-sim">(0.75)</span>                </td>
-                <td class="num-col">0.75</td>
+                    ČSOB<span class="opp-sim">(0.77)</span>
+ &middot; Vodafone ČR<span class="opp-sim">(0.76)</span> &middot; Avast<span class="opp-sim">(0.76)</span>                </td>
+                <td class="num-col">0.76</td>
+            </tr>
+            <tr class="">
+                <td class="opp-trend">
+                    vitamíny d3
+                </td>
+                <td class="num-col">200</td>
+                <td class="opp-nearby">
+                    Pilulka<span class="opp-sim">(0.82)</span>
+ &middot; Albert<span class="opp-sim">(0.82)</span> &middot; Lidl<span class="opp-sim">(0.81)</span>                </td>
+                <td class="num-col">0.81</td>
             </tr>
         </tbody>
     </table>
@@ -915,29 +965,29 @@ footer a:hover { color: var(--accent); }
         <article class="pattern">
             <p class="num">01</p>
             <div>
-                <h3>Czech financial services has one voice.</h3>
-                <p class="evidence">All five banks in the corpus (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční banka) plus Generali cluster as one. Incumbents and challengers are indistinguishable at the homepage layer. Air Bank's "different bank" positioning vanishes the moment the homepage opens. A new financial entrant doesn't need a better product to look distinctive; it needs a different homepage.</p>
+                <h3>Czech corporate-legacy brands share one homepage register.</h3>
+                <p class="evidence">All five banks (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční) plus Generali, ČEZ and Škoda Auto cluster as one. The boundary isn't sector. It's "established Czech institution" — formal, trust-anchored, heritage-leaning. A bank's homepage and an energy utility's homepage are closer to each other than a bank's is to a fintech challenger that hasn't shipped yet.</p>
             </div>
         </article>
         <article class="pattern">
             <p class="num">02</p>
             <div>
                 <h3>The mass-market consumer cluster is a templating problem.</h3>
-                <p class="evidence">Lidl, Albert, Rohlík, Staropramen, Škoda Auto, Pilulka and Seznam.cz sit in one cluster across five sectors. The shared shape is the homepage template: carousel of week's promos, "akce" headlines, product grid. The semantic distance between a discount grocer and an online pharmacy dissolves at the layer buyers actually see first.</p>
+                <p class="evidence">Nine brands across six sectors — Lidl, Albert, Rohlík (retail), McDonald's, KFC (QSR), Kofola (beverage), Pilulka (pharma), Seznam.cz (media), Avast (tech) — cluster together. They share one homepage TEMPLATE: short positioning line on top, product grid below, "akce / novinky / aktuální nabídka". The buyer who lands on any of these reads the same shape first.</p>
             </div>
         </article>
         <article class="pattern">
             <p class="num">03</p>
             <div>
-                <h3>Telecom's real competitive set is broader than telecom.</h3>
-                <p class="evidence">T-Mobile, O2 and Vodafone cluster with ČEZ (energy) and Avast (security). All five sell "always-on service" — uptime, reliability, bundled tariff language. To escape the cluster a telco has to break the always-on grammar, not out-feature the other two operators.</p>
+                <h3>Telecoms own a tight, isolated cluster of three.</h3>
+                <p class="evidence">T-Mobile, O2 and Vodafone embed close to each other and far from every other brand. The "always-on connectivity / esim / mobilní tarif" language is differentiated enough to be its own neighborhood but homogeneous enough that the three competitors are essentially interchangeable. A new entrant could occupy any direction outside this cluster.</p>
             </div>
         </article>
         <article class="pattern">
             <p class="num">04</p>
             <div>
-                <h3>There is no clean strategic white space, only degrees of crowding.</h3>
-                <p class="evidence">Every trend in the corpus has a top-3-brand saturation above 0.74 — most sit at 0.80+. The least-crowded queries (voyo program, fotovoltaika dotace, vitamíny d3) are also the lowest-velocity. The classic "high momentum + low saturation" jackpot quadrant is empty here, which is itself a finding: Czech brand homepages have already absorbed the language of every trending topic.</p>
+                <h3>Most rising trends sit in semantic territory at least one brand already occupies.</h3>
+                <p class="evidence">Of 26 trending queries, none find genuinely empty quadrants. The opportunity table flags about a quarter of rows as "low signal" — queries whose top three brand matches are within 0.025 cosine of each other. That's not white space; that's the embedding model telling you no brand has staked any chromatic ground in that conceptual neighborhood yet.</p>
             </div>
         </article>
     </div>

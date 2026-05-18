@@ -33,8 +33,20 @@ def test_constants_sane() -> None:
 
 
 def test_label_cluster_financial() -> None:
-    sectors = pd.Series(["banking", "banking", "banking", "insurance"])
+    sectors = pd.Series(["banking", "banking", "banking", "banking", "insurance"])
     assert _label_cluster(sectors) == "Financial services"
+
+
+def test_label_cluster_pure_banking() -> None:
+    """When the cluster is 100% banking (no insurance / other), use 'Banking'."""
+    sectors = pd.Series(["banking"] * 3)
+    assert _label_cluster(sectors) == "Banking"
+
+
+def test_label_cluster_banking_plus_heavy_industry() -> None:
+    """Banks anchoring a cluster of established institutions (energy, auto, insurance)."""
+    sectors = pd.Series(["banking"] * 5 + ["energy", "automotive", "insurance"])
+    assert _label_cluster(sectors) == "Banking + heavy industry"
 
 
 def test_label_cluster_infrastructure() -> None:

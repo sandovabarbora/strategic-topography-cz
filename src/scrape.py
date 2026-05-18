@@ -109,7 +109,20 @@ def _is_antibot_junk(text: str) -> bool:
 
 
 def extract_brand_text(brand: str, url: str, html: str) -> str:
-    """Combine title + meta + headings + first 5 paragraphs into one blob."""
+    """Combine title + meta + first 2 brand-positioning headings.
+
+    DELIBERATELY narrow. We previously also pulled the first 5 paragraphs
+    via trafilatura, but on Czech retail/ecommerce homepages those paragraphs
+    are dominated by promo carousels ("Akce týdne", "Aktuální novinky",
+    placeholder text) that share generic commercial vocabulary across
+    brands. The shared vocabulary inflated cosine similarity and produced
+    nonsensical "nearest brand" matches in the opportunity scan (Lidl as
+    the top match for travel queries, etc.).
+
+    Title + meta + first 2 headings is the part of a homepage that
+    typically carries the brand's strategic positioning ("Lidl. To se
+    vyplatí.", "Stojí za to jíst lépe.") rather than this week's promo.
+    """
     soup = BeautifulSoup(html, "html.parser")
     parts: list[str] = []
 
@@ -122,24 +135,47 @@ def extract_brand_text(brand: str, url: str, html: str) -> str:
         parts.append(meta["content"].strip())
 
     headings: list[str] = []
-    for tag in soup.find_all(["h1", "h2"], limit=10):
+    for tag in soup.find_all(["h1", "h2"], limit=8):
         text = tag.get_text(" ", strip=True)
-        if text and len(text) <= 200:
-            headings.append(text)
-        if len(headings) >= 3:
+        if not text or len(text) > 200:
+            continue
+        # Skip generic carousel / nav labels — they're not positioning
+        lowered = text.lower()
+        if any(w in lowered for w in ("novinky", "aktuální", "magazín", "akce týdne",
+                                      "letáky", "recepty", "kategorie", "menu",
+                                      "vítejte", "nejprodávanější")):
+            continue
+        headings.append(text)
+        if len(headings) >= 2:
             break
     parts.extend(headings)
 
+    # Add the first 1-2 body paragraphs that look like positioning (not promo).
+    # Skip paragraphs that read as promo copy (akce, sleva, leták keywords)
+    # or as cookie/JS boilerplate. Cap total length so a heavy-text site
+    # like Avast doesn't outweigh a tight one like Mattoni.
     body = trafilatura.extract(
         html,
         include_comments=False,
         include_tables=False,
-        favor_recall=True,
+        favor_recall=False,
         config=_TRAFILATURA_CFG,
     )
-    parts.extend(_take_first_n_paragraphs(body or "", n=5))
+    promo_markers = ("sleva", "akce týdne", "leták", "akční nabíd", "cookies",
+                     "javascript", "přihlas se k odběru", "newsletter")
+    kept_paragraphs: list[str] = []
+    for p in _take_first_n_paragraphs(body or "", n=8):
+        if len(kept_paragraphs) >= 2:
+            break
+        lowered = p.lower()
+        if any(m in lowered for m in promo_markers):
+            continue
+        kept_paragraphs.append(p)
+    parts.extend(kept_paragraphs)
 
     combined = "\n\n".join(p for p in parts if p)
+    if len(combined) > 600:
+        combined = combined[:600].rsplit(" ", 1)[0]
     if _is_antibot_junk(combined):
         logger.warning("[%s] anti-bot interstitial detected; treating as failed scrape", brand)
         return ""

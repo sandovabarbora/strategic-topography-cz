@@ -740,6 +740,36 @@ footer a:hover { color: var(--accent); }
     font-variant-numeric: tabular-nums;
 }
 
+.opp-low-conf td {
+    color: var(--ink-faint);
+}
+
+.opp-low-conf .opp-trend {
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+.low-conf-badge,
+.low-conf-inline {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid var(--ink-faint);
+    border-radius: 999px;
+    color: var(--ink-faint);
+    vertical-align: middle;
+    margin-left: 8px;
+    font-style: normal;
+}
+
+.low-conf-inline {
+    margin: 0 2px;
+}
+
 @media (max-width: 720px) {
     .opp-table tbody td { padding: 10px 4px; font-size: 12px; }
     .opp-trend { font-size: 13px; }

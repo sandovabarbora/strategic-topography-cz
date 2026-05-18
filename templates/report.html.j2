@@ -49,7 +49,7 @@
 
 <section>
     <div class="section-label"><span class="num">02</span><h2>Opportunity table</h2></div>
-    <p class="section-intro">The top {{ opportunities | length }} rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. A high saturation score (0.85+) means at least one brand already lives semantically close to the trend.</p>
+    <p class="section-intro">The top {{ opportunities | length }} rising queries sorted by <em>velocity &times; (1 &minus; saturation)</em>. High momentum and low brand coverage points to strategic white space. Rows flagged <span class="low-conf-inline">low&#8209;signal</span> are queries whose top three brand matches sit within 0.025 of each other — the "winner" is essentially arbitrary and indicates the trend has no sector match in this corpus (typically travel, streaming, niche topics). Treat those rows as evidence of a corpus gap, not as a recommended brand activation.</p>
     <table class="opp-table">
         <thead>
             <tr>
@@ -61,8 +61,11 @@
         </thead>
         <tbody>
 {% for o in opportunities %}
-            <tr>
-                <td class="opp-trend">{{ o.trend }}</td>
+            <tr class="{% if o.low_confidence %}opp-low-conf{% endif %}">
+                <td class="opp-trend">
+                    {{ o.trend }}
+                    {% if o.low_confidence %}<span class="low-conf-badge">low signal</span>{% endif %}
+                </td>
                 <td class="num-col">{{ "%.0f" | format(o.velocity) }}</td>
                 <td class="opp-nearby">
                     {{ o.near_brand_1 }}<span class="opp-sim">({{ "%.2f" | format(o.near_brand_1_sim) }})</span>

@@ -86,6 +86,27 @@ měsíčně). Baseline brand-to-brand cosine sits around 0.85; trend-to-
 brand around 0.80. Absolute similarity numbers are not comparable to
 English-text benchmarks; RELATIVE rankings within this corpus are.
 
+**Corpus gaps produce nonsense nearest-brand matches.** Early runs
+returned matches like "regiojet jízdenky → Lidl" — meaningless,
+because the only travel brand in the seed list (RegioJet) was dropped
+at scrape time and no airline is included. Travel queries had no
+sectoral match, so the nearest-brand fell to whichever brand had the
+most generic commercial language. Two mitigations now ship: (a)
+travel queries removed from the manual trend list (analytically
+meaningless without a travel brand in the corpus); (b) opportunity
+rows where the top three brand similarities sit within 0.025 of each
+other are flagged "low signal" in the UI — the model is telling you
+the trend has no sector match, not that any of the listed brands is
+a recommended activation.
+
+**Body text was deliberately narrowed.** Earlier versions used the
+first five paragraphs from each homepage. That captured promo
+carousel boilerplate ("akce týdne", "aktuální novinky", placeholder
+text) that shared generic commercial vocabulary across brands and
+collapsed cluster structure. Current extraction uses title + meta
+description + first two non-promo headings + at most two body
+paragraphs that don't contain promo markers, capped at 600 chars.
+
 **No causal claim.** The "opportunity" column identifies semantic
 adjacency, not commercial fit. A trend being near a brand does NOT
 mean the brand should activate it. It means a strategist should look

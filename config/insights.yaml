@@ -3,40 +3,42 @@
 
 insights:
   - title: >-
-      Czech financial services has one voice.
+      Czech corporate-legacy brands share one homepage register.
     body: >-
-      All five banks in the corpus (ČSOB, Česká spořitelna, Fio, Air Bank,
-      Komerční banka) plus Generali cluster as one. Incumbents and
-      challengers are indistinguishable at the homepage layer. Air Bank's
-      "different bank" positioning vanishes the moment the homepage opens.
-      A new financial entrant doesn't need a better product to look
-      distinctive; it needs a different homepage.
+      All five banks (ČSOB, Česká spořitelna, Fio, Air Bank, Komerční)
+      plus Generali, ČEZ and Škoda Auto cluster as one. The boundary
+      isn't sector. It's "established Czech institution" — formal,
+      trust-anchored, heritage-leaning. A bank's homepage and an energy
+      utility's homepage are closer to each other than a bank's is to
+      a fintech challenger that hasn't shipped yet.
 
   - title: >-
       The mass-market consumer cluster is a templating problem.
     body: >-
-      Lidl, Albert, Rohlík, Staropramen, Škoda Auto, Pilulka and
-      Seznam.cz sit in one cluster across five sectors. The shared
-      shape is the homepage template: carousel of week's promos,
-      "akce" headlines, product grid. The semantic distance between
-      a discount grocer and an online pharmacy dissolves at the layer
-      buyers actually see first.
+      Nine brands across six sectors — Lidl, Albert, Rohlík (retail),
+      McDonald's, KFC (QSR), Kofola (beverage), Pilulka (pharma),
+      Seznam.cz (media), Avast (tech) — cluster together. They share
+      one homepage TEMPLATE: short positioning line on top, product
+      grid below, "akce / novinky / aktuální nabídka". The buyer who
+      lands on any of these reads the same shape first.
 
   - title: >-
-      Telecom's real competitive set is broader than telecom.
+      Telecoms own a tight, isolated cluster of three.
     body: >-
-      T-Mobile, O2 and Vodafone cluster with ČEZ (energy) and Avast
-      (security). All five sell "always-on service" — uptime, reliability,
-      bundled tariff language. To escape the cluster a telco has to
-      break the always-on grammar, not out-feature the other two
-      operators.
+      T-Mobile, O2 and Vodafone embed close to each other and far from
+      every other brand. The "always-on connectivity / esim / mobilní
+      tarif" language is differentiated enough to be its own neighborhood
+      but homogeneous enough that the three competitors are essentially
+      interchangeable. A new entrant could occupy any direction outside
+      this cluster.
 
   - title: >-
-      There is no clean strategic white space, only degrees of crowding.
+      Most rising trends sit in semantic territory at least one brand
+      already occupies.
     body: >-
-      Every trend in the corpus has a top-3-brand saturation above 0.74
-      — most sit at 0.80+. The least-crowded queries (voyo program,
-      fotovoltaika dotace, vitamíny d3) are also the lowest-velocity.
-      The classic "high momentum + low saturation" jackpot quadrant is
-      empty here, which is itself a finding: Czech brand homepages
-      have already absorbed the language of every trending topic.
+      Of 26 trending queries, none find genuinely empty quadrants.
+      The opportunity table flags about a quarter of rows as
+      "low signal" — queries whose top three brand matches are within
+      0.025 cosine of each other. That's not white space; that's the
+      embedding model telling you no brand has staked any chromatic
+      ground in that conceptual neighborhood yet.
