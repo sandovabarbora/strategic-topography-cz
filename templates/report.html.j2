@@ -30,7 +30,7 @@
 
 <section class="method">
     <p class="method-label">How it works</p>
-    <p class="method-body">An AI language model reads each Czech brand&apos;s homepage and plots the brand on a 2D map. Brands whose homepages read alike land near each other; brands that read differently land apart. The same model reads top rising Czech queries from Google Trends and drops them onto the same map, so you can see which empty zones a rising query lands in. Full technical breakdown in the appendix.</p>
+    <p class="method-body">An AI language model reads each Czech brand&apos;s homepage and plots the brand on a 2D map (filled circles, coloured by neighborhood). Brands whose homepages read alike land near each other; brands that read differently land apart. The same model reads top rising Czech queries from Google Trends and drops them onto the same map (outlined diamonds, sized by how fast each query is rising), so you can see which empty zones a rising query lands in. Full technical breakdown in the appendix.</p>
 </section>
 
 <section>
@@ -55,6 +55,15 @@
             </div>
         </div>
 {% endfor %}
+        <div class="legend-chip">
+            <svg class="legend-diamond" viewBox="0 0 14 14" aria-hidden="true">
+                <polygon points="7,1 13,7 7,13 1,7" fill="none" stroke="#181818" stroke-width="1.4"/>
+            </svg>
+            <div class="legend-meta">
+                <p class="legend-name">Rising Czech query</p>
+                <p class="legend-brands">{{ counts.n_trends }} trends &mdash; sized by how fast each is rising</p>
+            </div>
+        </div>
     </div>
 </section>
 
