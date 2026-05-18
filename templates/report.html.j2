@@ -19,6 +19,7 @@
     </p>
     <h1>Three templates, one institution.</h1>
     <p class="lede">{{ counts.n_brands_used }} Czech brand homepages embedded in a multilingual semantic space cluster into four neighborhoods — and one of those neighborhoods contains <em>all five banks, plus Generali, plus &#268;EZ, plus &#352;koda Auto</em>. Sector identity we treat as obvious at the campaign level dissolves at the homepage layer. This is the map, and the moves it suggests.</p>
+    <p class="bio">Data &amp; cloud engineer at Alma Career. Built across a few weekends to test what brand competitive analysis looks like when it starts from public data instead of from pitch decks. Part of a five-piece <a href="https://sandovabarbora.github.io/brand-reflection-cz/">Brand Reflection Series</a>.</p>
     <p class="byline">By {{ author }}. <a href="{{ repo_url }}">Source on GitHub</a>.</p>
 </header>
 
@@ -98,8 +99,65 @@
         <article class="worked-step">
             <p class="worked-num">04</p>
             <div>
-                <h3>What this would look like in a deck</h3>
-                <p>One map slide showing Air Bank&apos;s current position, one arrow showing the intended trajectory toward the consumer neighborhood, one slide listing the vocabulary to drop and the vocabulary to adopt. The arrow is the strategic ask; the vocabulary lists are the executional spec. A brief that doesn&apos;t end with both lists isn&apos;t finished.</p>
+                <h3>The brief this produces</h3>
+                <p>Below is the literal one-page brief the diagnostic outputs. Not a description of what the brief would say &mdash; the brief itself, ready to hand to a copywriter on Monday. Substitute any brand on the map and the layout stays the same; only the token lists and the trajectory change.</p>
+
+                <aside class="brief-artifact" aria-label="Air Bank homepage repositioning brief">
+                    <header class="brief-head">
+                        <p class="brief-eyebrow">HOMEPAGE REPOSITIONING BRIEF &middot; 1 PAGE</p>
+                        <p class="brief-title">Air Bank</p>
+                    </header>
+
+                    <div class="brief-grid">
+                        <div class="brief-cell">
+                            <p class="brief-label">Where you are now</p>
+                            <p class="brief-value">Banking + heavy industry neighborhood</p>
+                            <p class="brief-meta">Sharing your homepage template with: &#268;SOB, &#268;esk&aacute; spo&#345;itelna, Fio banka, Komer&#269;n&iacute; banka, Generali, &#268;EZ, &#352;koda Auto</p>
+                        </div>
+                        <div class="brief-cell">
+                            <p class="brief-label">Where you need to go</p>
+                            <p class="brief-value">Mass-market consumer neighborhood</p>
+                            <p class="brief-meta">Closer to: Lidl, Albert, Rohl&iacute;k, McDonald&apos;s, KFC, Kofola, Pilulka, Seznam.cz, Avast</p>
+                        </div>
+                    </div>
+
+                    <div class="brief-grid">
+                        <div class="brief-cell">
+                            <p class="brief-label brief-label-warn">DROP from your homepage</p>
+                            <ul class="brief-tokens">
+                                <li>banka</li>
+                                <li>&scaron;koda</li>
+                                <li>&#269;ez</li>
+                                <li>fio</li>
+                                <li>&#269;esk&aacute;</li>
+                                <li>partnerem</li>
+                                <li>silnej&scaron;&iacute;</li>
+                            </ul>
+                            <p class="brief-meta">The top five are the TF&#8209;IDF signature of the institutional neighborhood. The last two are vocabulary the playbook flags as institutional&#8209;reinforcing.</p>
+                        </div>
+                        <div class="brief-cell">
+                            <p class="brief-label brief-label-good">ADOPT on your homepage</p>
+                            <ul class="brief-tokens brief-tokens-good">
+                                <li>akce</li>
+                                <li>novinky</li>
+                                <li>aktu&aacute;ln&iacute; nab&iacute;dka</li>
+                                <li>online</li>
+                                <li>skv&#283;l&eacute;</li>
+                                <li>supermarket-style grid</li>
+                            </ul>
+                            <p class="brief-meta">Word-level constraints first, layout second: short positioning line on top, then product/offer grid. The mass-market neighborhood is a homepage <em>shape</em> as much as a vocabulary.</p>
+                        </div>
+                    </div>
+
+                    <div class="brief-success">
+                        <p class="brief-label">Success metric</p>
+                        <p class="brief-success-body">Re-embed the homepage 90 days post-launch. The Air Bank circle must move out of the Banking + heavy industry neighborhood and into the mass-market consumer one. If it doesn&apos;t, the brand didn&apos;t move &mdash; the campaign moved.</p>
+                    </div>
+
+                    <footer class="brief-foot">
+                        <p>Generated from the strategic topography map. Same template for any brand in the dataset; swap the brand name and the token lists update from the TF&#8209;IDF signature of each neighborhood.</p>
+                    </footer>
+                </aside>
             </div>
         </article>
     </div>

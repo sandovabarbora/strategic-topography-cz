@@ -88,6 +88,29 @@ main {
     margin: 0;
 }
 
+.masthead .bio {
+    margin: clamp(20px, 2.5vw, 28px) 0 14px;
+    padding-top: clamp(20px, 2.5vw, 28px);
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 58ch;
+}
+
+.masthead .bio a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+}
+
+.masthead .bio a:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+
 .masthead .byline {
     font-size: 13px;
     color: var(--ink-soft);
@@ -615,6 +638,137 @@ main {
     color: var(--ink);
 }
 
+/* ============ Brief artifact (the literal output) ============ */
+
+.brief-artifact {
+    margin: clamp(24px, 3vw, 32px) 0 0;
+    padding: clamp(28px, 3.5vw, 44px);
+    background: oklch(0.98 0.012 80);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    font-family: var(--sans);
+}
+
+.brief-head {
+    margin-bottom: clamp(24px, 3vw, 32px);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.brief-eyebrow {
+    margin: 0 0 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+}
+
+.brief-title {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(20px, 2.5vw, 32px);
+    margin-bottom: clamp(20px, 2.5vw, 28px);
+}
+
+.brief-cell {
+    min-width: 0;
+}
+
+.brief-label {
+    margin: 0 0 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.brief-label-warn { color: var(--accent); }
+.brief-label-good { color: oklch(0.40 0.10 145); }
+
+.brief-value {
+    margin: 0 0 8px;
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+.brief-meta {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+}
+
+.brief-tokens {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.brief-tokens li {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 12px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 4px 10px;
+    border-radius: 2px;
+    color: var(--ink);
+}
+
+.brief-tokens-good li {
+    border-color: oklch(0.80 0.05 145);
+    background: oklch(0.97 0.02 145);
+}
+
+.brief-success {
+    margin-top: clamp(20px, 2.5vw, 28px);
+    padding-top: clamp(20px, 2.5vw, 24px);
+    border-top: 1px solid var(--rule);
+}
+
+.brief-success-body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 64ch;
+}
+
+.brief-foot {
+    margin-top: clamp(24px, 3vw, 32px);
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+}
+
+.brief-foot p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+    .brief-grid { grid-template-columns: 1fr; }
+}
+
 /* ============ Appendix (collapsed details) ============ */
 
 .appendix {
@@ -1099,6 +1253,7 @@ em, i { font-style: normal; font-weight: 600; }</style>
     </p>
     <h1>Three templates, one institution.</h1>
     <p class="lede">23 Czech brand homepages embedded in a multilingual semantic space cluster into four neighborhoods — and one of those neighborhoods contains <em>all five banks, plus Generali, plus &#268;EZ, plus &#352;koda Auto</em>. Sector identity we treat as obvious at the campaign level dissolves at the homepage layer. This is the map, and the moves it suggests.</p>
+    <p class="bio">Data &amp; cloud engineer at Alma Career. Built across a few weekends to test what brand competitive analysis looks like when it starts from public data instead of from pitch decks. Part of a five-piece <a href="https://sandovabarbora.github.io/brand-reflection-cz/">Brand Reflection Series</a>.</p>
     <p class="byline">By Barbora Šandová. <a href="https://github.com/sandovabarbora/strategic-topography-cz">Source on GitHub</a>.</p>
 </header>
 
@@ -1197,8 +1352,65 @@ em, i { font-style: normal; font-weight: 600; }</style>
         <article class="worked-step">
             <p class="worked-num">04</p>
             <div>
-                <h3>What this would look like in a deck</h3>
-                <p>One map slide showing Air Bank&apos;s current position, one arrow showing the intended trajectory toward the consumer neighborhood, one slide listing the vocabulary to drop and the vocabulary to adopt. The arrow is the strategic ask; the vocabulary lists are the executional spec. A brief that doesn&apos;t end with both lists isn&apos;t finished.</p>
+                <h3>The brief this produces</h3>
+                <p>Below is the literal one-page brief the diagnostic outputs. Not a description of what the brief would say &mdash; the brief itself, ready to hand to a copywriter on Monday. Substitute any brand on the map and the layout stays the same; only the token lists and the trajectory change.</p>
+
+                <aside class="brief-artifact" aria-label="Air Bank homepage repositioning brief">
+                    <header class="brief-head">
+                        <p class="brief-eyebrow">HOMEPAGE REPOSITIONING BRIEF &middot; 1 PAGE</p>
+                        <p class="brief-title">Air Bank</p>
+                    </header>
+
+                    <div class="brief-grid">
+                        <div class="brief-cell">
+                            <p class="brief-label">Where you are now</p>
+                            <p class="brief-value">Banking + heavy industry neighborhood</p>
+                            <p class="brief-meta">Sharing your homepage template with: &#268;SOB, &#268;esk&aacute; spo&#345;itelna, Fio banka, Komer&#269;n&iacute; banka, Generali, &#268;EZ, &#352;koda Auto</p>
+                        </div>
+                        <div class="brief-cell">
+                            <p class="brief-label">Where you need to go</p>
+                            <p class="brief-value">Mass-market consumer neighborhood</p>
+                            <p class="brief-meta">Closer to: Lidl, Albert, Rohl&iacute;k, McDonald&apos;s, KFC, Kofola, Pilulka, Seznam.cz, Avast</p>
+                        </div>
+                    </div>
+
+                    <div class="brief-grid">
+                        <div class="brief-cell">
+                            <p class="brief-label brief-label-warn">DROP from your homepage</p>
+                            <ul class="brief-tokens">
+                                <li>banka</li>
+                                <li>&scaron;koda</li>
+                                <li>&#269;ez</li>
+                                <li>fio</li>
+                                <li>&#269;esk&aacute;</li>
+                                <li>partnerem</li>
+                                <li>silnej&scaron;&iacute;</li>
+                            </ul>
+                            <p class="brief-meta">The top five are the TF&#8209;IDF signature of the institutional neighborhood. The last two are vocabulary the playbook flags as institutional&#8209;reinforcing.</p>
+                        </div>
+                        <div class="brief-cell">
+                            <p class="brief-label brief-label-good">ADOPT on your homepage</p>
+                            <ul class="brief-tokens brief-tokens-good">
+                                <li>akce</li>
+                                <li>novinky</li>
+                                <li>aktu&aacute;ln&iacute; nab&iacute;dka</li>
+                                <li>online</li>
+                                <li>skv&#283;l&eacute;</li>
+                                <li>supermarket-style grid</li>
+                            </ul>
+                            <p class="brief-meta">Word-level constraints first, layout second: short positioning line on top, then product/offer grid. The mass-market neighborhood is a homepage <em>shape</em> as much as a vocabulary.</p>
+                        </div>
+                    </div>
+
+                    <div class="brief-success">
+                        <p class="brief-label">Success metric</p>
+                        <p class="brief-success-body">Re-embed the homepage 90 days post-launch. The Air Bank circle must move out of the Banking + heavy industry neighborhood and into the mass-market consumer one. If it doesn&apos;t, the brand didn&apos;t move &mdash; the campaign moved.</p>
+                    </div>
+
+                    <footer class="brief-foot">
+                        <p>Generated from the strategic topography map. Same template for any brand in the dataset; swap the brand name and the token lists update from the TF&#8209;IDF signature of each neighborhood.</p>
+                    </footer>
+                </aside>
             </div>
         </article>
     </div>
