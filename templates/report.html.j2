@@ -22,6 +22,11 @@
     <p class="byline">By {{ author }}. <a href="{{ repo_url }}">Source on GitHub</a>.</p>
 </header>
 
+<section class="hero-stat">
+    <p class="hero-stat-line">Eight brands. Four sectors. One homepage template.</p>
+    <p class="hero-stat-cap">&#268;SOB, &#268;esk&aacute; spo&#345;itelna, Fio banka, Air Bank, Komer&#269;n&iacute; banka, Generali, &#268;EZ, &#352;koda Auto. The boundary between them, on the homepage layer, is zero.</p>
+</section>
+
 <section class="method">
     <p class="method-label">Method</p>
     <p class="method-body">Homepage text per brand (title, meta, first headings, first non-promo paragraphs, capped at 600 chars). Top rising Czech queries via pytrends with a hand-curated fallback. Both corpora embedded with <code>intfloat/multilingual-e5-base</code> (passage / query prefixes per model docs, L2-normalized). Layout via UMAP. Cluster labels rolled from sector composition. Opportunity score = velocity &times; (1 &minus; mean cosine-similarity to the 3 nearest brands), computed in the 768-dim embedding space, not on the 2D map.</p>
@@ -30,10 +35,15 @@
 <section>
     <div class="section-label"><span class="num">01</span><h2>The map</h2></div>
     <p class="section-intro">Brands are filled circles colored by cluster. Rising queries are outlined diamonds sized by velocity. Distance on this map is an approximation of semantic distance in 768 dimensions; treat it as topology, not as a metric. The four cluster names are derived from sector composition, not chosen by the analyst.</p>
-    <figure class="map-frame">
-        {{ map_svg | safe }}
-        <figcaption class="scatter-cap">UMAP layout. Cluster names appear at each cluster's centroid.</figcaption>
-    </figure>
+    <div class="map-wrap">
+        <figure class="map-frame">
+            {{ map_svg | safe }}
+            <figcaption class="scatter-cap">UMAP layout. Click any neighborhood to inspect the brands and vocabulary that define it.</figcaption>
+        </figure>
+        <aside id="cluster-panel" class="cluster-panel" aria-live="polite">
+            <p class="cluster-panel-hint">Click a neighborhood on the map to see which brands share it and which words define it.</p>
+        </aside>
+    </div>
     <div class="legend-strip">
 {% for chip in legend %}
         <div class="legend-chip">
@@ -116,6 +126,49 @@
     </div>
 </section>
 
+<section>
+    <div class="section-label"><span class="num">05</span><h2>What this looks like for one brand</h2></div>
+    <p class="section-intro">A walk-through of the same diagnostic applied to Air Bank. The point isn&apos;t Air Bank specifically &mdash; it&apos;s the shape of the strategist&apos;s decision once the map exists. Substitute any brand on the map and the steps stay the same.</p>
+
+    <div class="worked">
+        <article class="worked-step">
+            <p class="worked-num">01</p>
+            <div>
+                <h3>Where Air Bank sits on the map</h3>
+                <p>Air Bank embeds inside the <strong>Banking + heavy industry</strong> neighborhood, next to &#268;SOB, &#268;esk&aacute; spo&#345;itelna, Fio banka, Komer&#269;n&iacute; banka, Generali, &#268;EZ, and &#352;koda Auto. Three banks plus an insurer plus an energy company plus a carmaker all read as one brand to the homepage layer.</p>
+                <p class="worked-note">On the map, Air Bank tilts slightly toward the consumer side of the institutional neighborhood &mdash; closer to the boundary than its peers. That tilt is the only visible difference between Air Bank and Komer&#269;n&iacute;, and it&apos;s small.</p>
+            </div>
+        </article>
+
+        <article class="worked-step">
+            <p class="worked-num">02</p>
+            <div>
+                <h3>The vocabulary it shares with seven other brands</h3>
+                <p>The defining tokens for the institutional neighborhood, derived directly from homepage TF&#8209;IDF, are: <code>banka</code>, <code>&scaron;koda</code>, <code>&#269;ez</code>, <code>fio</code>, <code>&#269;esk&aacute;</code>. These are the words that distinguish this neighborhood from the other three on the map.</p>
+                <p>If Air Bank&apos;s homepage shares those tokens with &#268;EZ&apos;s homepage, then to a buyer&apos;s first read, Air Bank <em>is</em> &#268;EZ. The challenger positioning &mdash; &quot;the bank that&apos;s different from Komer&#269;n&iacute;&quot; &mdash; is decided in the campaign layer and quietly undone in the homepage layer.</p>
+            </div>
+        </article>
+
+        <article class="worked-step">
+            <p class="worked-num">03</p>
+            <div>
+                <h3>Which playbook moves apply, in order</h3>
+                <p><strong>Move 02</strong> &mdash; list the institutional vocabulary explicitly in the brief and rule it out. Not as creative aspiration; as a word-level constraint. The first draft that lands with <code>banka</code>, <code>partnerem</code> or <code>silnej&scaron;&iacute;</code> on the homepage goes back.</p>
+                <p><strong>Move 03</strong> &mdash; stop pitching against named banks. The boundary that matters is the one between the institutional neighborhood and the mass-market consumer neighborhood (Lidl, Albert, McDonald&apos;s, Kofola). The brand argument becomes &quot;we sit closer to those brands than to &#268;EZ.&quot; That&apos;s a positioning move with a measurable test.</p>
+                <p><strong>Move 01</strong> &mdash; after the rebrand, re-score. If the homepage didn&apos;t move neighborhoods, neither did the brand. Soft success at the campaign layer with no movement at the homepage layer is the failure mode this episode is built to catch.</p>
+            </div>
+        </article>
+
+        <article class="worked-step">
+            <p class="worked-num">04</p>
+            <div>
+                <h3>What this would look like in a deck</h3>
+                <p>One map slide showing Air Bank&apos;s current position, one arrow showing the intended trajectory toward the consumer neighborhood, one slide listing the vocabulary to drop and the vocabulary to adopt. The arrow is the strategic ask; the vocabulary lists are the executional spec. A brief that doesn&apos;t end with both lists isn&apos;t finished.</p>
+            </div>
+        </article>
+    </div>
+</section>
+
 <footer>
     <div>
         <h4>Brand Reflection Series</h4>
@@ -137,5 +190,91 @@
 </footer>
 
 </main>
+
+<script id="cluster-panel-data" type="application/json">{{ cluster_panel_json | safe }}</script>
+<script>
+(function() {
+    const dataEl = document.getElementById("cluster-panel-data");
+    if (!dataEl) return;
+    const clusters = JSON.parse(dataEl.textContent);
+    const byId = new Map(clusters.map(c => [String(c.id), c]));
+    const panel = document.getElementById("cluster-panel");
+    const map = document.querySelector(".topo-map");
+    if (!panel || !map) return;
+
+    const groups = Array.from(map.querySelectorAll(".cluster-group"));
+
+    function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+    function el(tag, opts) {
+        const node = document.createElement(tag);
+        if (opts && opts.cls) node.className = opts.cls;
+        if (opts && opts.text != null) node.textContent = opts.text;
+        return node;
+    }
+
+    function renderPanel(c) {
+        clear(panel);
+        const header = el("div", { cls: "cluster-panel-head" });
+        const dot = el("span", { cls: "cluster-panel-dot" });
+        dot.style.background = c.color;
+        header.appendChild(dot);
+        header.appendChild(el("p", { cls: "cluster-panel-name", text: c.name }));
+        panel.appendChild(header);
+
+        panel.appendChild(el("p", { cls: "cluster-panel-meta", text: c.brands.length + " brands in this neighborhood" }));
+
+        const brandsLabel = el("p", { cls: "cluster-panel-label", text: "Brands" });
+        panel.appendChild(brandsLabel);
+        const brandList = el("p", { cls: "cluster-panel-brands", text: c.brands.join(", ") });
+        panel.appendChild(brandList);
+
+        const tokensLabel = el("p", { cls: "cluster-panel-label", text: "Top TF-IDF tokens" });
+        panel.appendChild(tokensLabel);
+        const tokens = el("ul", { cls: "cluster-panel-tokens" });
+        c.top_tokens.forEach(tok => {
+            const li = el("li", { cls: "cluster-panel-token", text: tok });
+            tokens.appendChild(li);
+        });
+        panel.appendChild(tokens);
+
+        const closeBtn = el("button", { cls: "cluster-panel-close", text: "Clear selection" });
+        closeBtn.type = "button";
+        closeBtn.addEventListener("click", clearSelection);
+        panel.appendChild(closeBtn);
+    }
+
+    function selectCluster(cid) {
+        const c = byId.get(String(cid));
+        if (!c) return;
+        groups.forEach(g => {
+            const active = g.getAttribute("data-cluster-id") === String(cid);
+            g.classList.toggle("is-active", active);
+            g.classList.toggle("is-dimmed", !active);
+        });
+        renderPanel(c);
+    }
+
+    function clearSelection() {
+        groups.forEach(g => {
+            g.classList.remove("is-active");
+            g.classList.remove("is-dimmed");
+        });
+        clear(panel);
+        panel.appendChild(el("p", { cls: "cluster-panel-hint", text: "Click a neighborhood on the map to see which brands share it and which words define it." }));
+    }
+
+    groups.forEach(g => {
+        const cid = g.getAttribute("data-cluster-id");
+        g.addEventListener("click", () => selectCluster(cid));
+        g.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                selectCluster(cid);
+            }
+        });
+    });
+})();
+</script>
+
 </body>
 </html>

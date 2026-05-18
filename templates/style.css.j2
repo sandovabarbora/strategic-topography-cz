@@ -99,6 +99,37 @@ main {
     color: var(--accent);
 }
 
+/* ============ Hero stat ============ */
+
+.hero-stat {
+    margin: clamp(40px, 5vw, 64px) 0 clamp(48px, 6vw, 72px);
+    padding: clamp(32px, 4vw, 48px) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+}
+
+.hero-stat-line {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(28px, 4.6vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+    color: var(--ink);
+    max-width: 22ch;
+}
+
+.hero-stat-cap {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+}
+
 /* ============ Section labels ============ */
 
 .section-label {
@@ -504,6 +535,79 @@ main {
     max-width: 62ch;
 }
 
+/* ============ Worked example (Air Bank) ============ */
+
+.worked {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 3.5vw, 48px);
+    margin-bottom: clamp(48px, 6vw, 72px);
+}
+
+.worked-step {
+    display: grid;
+    grid-template-columns: clamp(64px, 7vw, 88px) 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: baseline;
+    padding-bottom: clamp(28px, 3vw, 36px);
+    border-bottom: 1px solid var(--rule-soft);
+}
+
+.worked-step:last-child {
+    border-bottom: none;
+}
+
+.worked-num {
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(36px, 4.5vw, 56px);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin: 0;
+}
+
+.worked-step h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    color: var(--ink);
+    max-width: 40ch;
+}
+
+.worked-step p {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 62ch;
+}
+
+.worked-step p:last-child {
+    margin-bottom: 0;
+}
+
+.worked-step .worked-note {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-top: 6px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule-soft);
+}
+
+.worked-step code {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.88em;
+    background: var(--rule-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--ink);
+}
+
 /* ============ Colophon ============ */
 
 footer {
@@ -626,10 +730,147 @@ footer a:hover { color: var(--accent); }
 
 /* ============ Strategic topography map ============ */
 
-.map-frame {
+.map-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    gap: clamp(20px, 3vw, 36px);
+    align-items: start;
     margin: 0 auto;
+    max-width: 1100px;
+}
+
+.map-frame {
+    margin: 0;
     max-width: 760px;
     text-align: center;
+}
+
+.cluster-group {
+    cursor: pointer;
+    transition: opacity 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cluster-group:focus {
+    outline: none;
+}
+
+.cluster-group.is-dimmed {
+    opacity: 0.18;
+}
+
+.cluster-group.is-active .cluster-label {
+    font-size: 16px;
+    opacity: 1;
+}
+
+.cluster-panel {
+    position: sticky;
+    top: 24px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 22px 18px;
+    font-family: var(--sans);
+    min-height: 140px;
+}
+
+.cluster-panel-hint {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+.cluster-panel-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.cluster-panel-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--ink);
+    flex-shrink: 0;
+}
+
+.cluster-panel-name {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.15;
+    color: var(--ink);
+}
+
+.cluster-panel-meta {
+    margin: 0 0 18px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.cluster-panel-label {
+    margin: 14px 0 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.cluster-panel-brands {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+}
+
+.cluster-panel-tokens {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cluster-panel-token {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 12px;
+    background: var(--rule-soft);
+    color: var(--ink);
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.cluster-panel-close {
+    appearance: none;
+    background: none;
+    border: 0;
+    margin-top: 16px;
+    padding: 0;
+    font: inherit;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+}
+
+.cluster-panel-close:hover {
+    color: var(--ink);
+}
+
+@media (max-width: 880px) {
+    .map-wrap { grid-template-columns: 1fr; }
+    .cluster-panel { position: static; }
 }
 
 .topo-map {

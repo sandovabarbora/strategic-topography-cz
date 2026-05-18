@@ -57,6 +57,9 @@ def build_map_svg(
 ) -> str:
     """Brands as filled circles colored by cluster, trends as outlined
     diamonds sized by velocity.
+
+    Wraps each cluster's circles + labels in a <g data-cluster-id="N">
+    so JS can attach hover/click handlers and dim other clusters.
     """
     cluster_lookup = clusters.set_index("brand")
     velocity_lookup = dict(zip(trends["query"], trends["velocity"], strict=True))
@@ -120,33 +123,65 @@ def build_map_svg(
             f'fill="#888" font-style="italic">{row["id"]}</text>'
         )
 
-    # Brand circles
-    for _, row in brand_coords.iterrows():
-        if row["id"] not in cluster_lookup.index:
+    # Brand circles, grouped by cluster so JS can dim/highlight whole groups
+    for cid in cluster_ids:
+        cluster_brand_ids = set(clusters[clusters["cluster_id"] == cid]["brand"])
+        cluster_rows = brand_coords[brand_coords["id"].isin(cluster_brand_ids)]
+        if cluster_rows.empty:
             continue
-        cid = int(cluster_lookup.loc[row["id"], "cluster_id"])
         color = cluster_color[cid]
-        cx, cy = x_to_px(row["x"]), y_to_px(row["y"])
         parts.append(
-            f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="8" '
-            f'fill="{color}" stroke="#181818" stroke-width="0.8"/>'
+            f'<g class="cluster-group" data-cluster-id="{cid}" '
+            f'tabindex="0" role="button" '
+            f'aria-label="Show details for {cluster_names[cid]} neighborhood">'
         )
-        parts.append(
-            f'<text x="{cx + 11:.1f}" y="{cy + 3:.1f}" font-size="11" '
-            f'fill="#181818" font-weight="600">{row["id"]}</text>'
-        )
-
-    # Cluster centroid label (larger italic, behind brand labels visually OK)
-    for cid, (cx_data, cy_data) in centroids.items():
-        cx, cy = x_to_px(cx_data), y_to_px(cy_data)
-        parts.append(
-            f'<text x="{cx:.1f}" y="{cy - 18:.1f}" text-anchor="middle" '
-            f'font-family="Bodoni Moda, serif" font-style="italic" font-size="14" '
-            f'fill="{cluster_color[cid]}" opacity="0.85">{cluster_names[cid]}</text>'
-        )
+        for _, row in cluster_rows.iterrows():
+            cx, cy = x_to_px(row["x"]), y_to_px(row["y"])
+            parts.append(
+                f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="8" '
+                f'fill="{color}" stroke="#181818" stroke-width="0.8"/>'
+            )
+            parts.append(
+                f'<text x="{cx + 11:.1f}" y="{cy + 3:.1f}" font-size="11" '
+                f'fill="#181818" font-weight="600">{row["id"]}</text>'
+            )
+        # Cluster centroid label sits inside the group too
+        if cid in centroids:
+            cx_data, cy_data = centroids[cid]
+            cx, cy = x_to_px(cx_data), y_to_px(cy_data)
+            parts.append(
+                f'<text class="cluster-label" x="{cx:.1f}" y="{cy - 18:.1f}" '
+                f'text-anchor="middle" font-family="Bodoni Moda, serif" '
+                f'font-style="italic" font-size="14" '
+                f'fill="{color}" opacity="0.85">{cluster_names[cid]}</text>'
+            )
+        parts.append("</g>")
 
     parts.append("</svg>")
     return "".join(parts)
+
+
+def build_cluster_panel_data(clusters: pd.DataFrame) -> list[dict[str, object]]:
+    """One record per cluster: id, name, color, brand list, top tokens.
+
+    Used by the page-level JS to render the side panel when a cluster
+    is clicked. Tokens come pre-computed from clusters.parquet
+    (cluster_top_tokens column).
+    """
+    cluster_ids = sorted(clusters["cluster_id"].unique())
+    rows: list[dict[str, object]] = []
+    for i, cid in enumerate(cluster_ids):
+        sub = clusters[clusters["cluster_id"] == cid]
+        rows.append(
+            {
+                "id": int(cid),
+                "name": sub["cluster_name"].iloc[0],
+                "color": CLUSTER_COLORS[i % len(CLUSTER_COLORS)],
+                "brands": sub["brand"].tolist(),
+                "top_tokens": list(sub["cluster_top_tokens"].iloc[0]),
+            }
+        )
+    return rows
 
 
 # --- Cluster legend chips -------------------------------------------------
@@ -227,6 +262,8 @@ def render_report(
     top_opps = opportunities.head(config.OPPORTUNITY_TABLE_ROWS).to_dict(orient="records")
     patterns, playbook = load_patterns_and_playbook()
 
+    import json
+
     html = env.get_template("report.html.j2").render(
         inline_css=css,
         author=AUTHOR_NAME,
@@ -234,6 +271,7 @@ def render_report(
         counts=counts,
         map_svg=build_map_svg(coords, clusters, trends),
         legend=build_legend_html(clusters),
+        cluster_panel_json=json.dumps(build_cluster_panel_data(clusters), ensure_ascii=False),
         opportunities=top_opps,
         patterns=patterns,
         playbook=playbook,
