@@ -941,7 +941,7 @@ footer {
     line-height: 1.55;
 }
 
-footer h4 {
+footer h3 {
     font-family: var(--sans);
     font-size: 10px;
     font-weight: 600;
@@ -1772,7 +1772,7 @@ em, i { font-style: normal; font-weight: 600; }</style>
 
 <footer>
     <div>
-        <h4>Brand Reflection Series</h4>
+        <h3>Brand Reflection Series</h3>
         <p><a href="https://sandovabarbora.github.io/color-fingerprint-cz/">Episode 1 &mdash; Color fingerprint</a></p>
         <p><a href="https://sandovabarbora.github.io/sound-fingerprint-cz/">Episode 1.5 &mdash; Sound fingerprint</a></p>
         <p>Episode 2 (this) &mdash; Strategic topography</p>
@@ -1780,12 +1780,12 @@ em, i { font-style: normal; font-weight: 600; }</style>
         <p><a href="https://sandovabarbora.github.io/spot-scorer/">Spot Scorer &mdash; instant brief generator</a></p>
     </div>
     <div>
-        <h4>Code</h4>
+        <h3>Code</h3>
         <p><a href="https://github.com/sandovabarbora/strategic-topography-cz">strategic-topography-cz</a></p>
         <p>MIT for code, CC&#8209;BY&#8209;4.0 for derived data.</p>
     </div>
     <div>
-        <h4>Disclaimer</h4>
+        <h3>Disclaimer</h3>
         <p>Analysis of publicly available brand communication. Brands are referenced for analytical purposes only. Positioning reflects current homepage messaging at time of scrape. No agency attribution is implied.</p>
     </div>
 </footer>
@@ -1800,12 +1800,25 @@ em, i { font-style: normal; font-weight: 600; }</style>
     const out = document.getElementById("generated-brief");
     if (!dataEl || !picker || !out) return;
     const briefs = JSON.parse(dataEl.textContent);
-    const brandNames = Object.keys(briefs).sort();
-    brandNames.forEach(b => {
-        const opt = document.createElement("option");
-        opt.value = b;
-        opt.textContent = b;
-        picker.appendChild(opt);
+    // Group brands by their current neighborhood for the picker. A strategist
+    // scanning the dropdown reads the neighborhood structure (banks here,
+    // mass-market there) before they pick a brand. Alphabetical-only flat
+    // list hides the most useful piece of metadata.
+    const byNeighborhood = {};
+    Object.values(briefs).forEach(b => {
+        if (!byNeighborhood[b.current_cluster]) byNeighborhood[b.current_cluster] = [];
+        byNeighborhood[b.current_cluster].push(b.brand);
+    });
+    Object.keys(byNeighborhood).sort().forEach(n => {
+        const group = document.createElement("optgroup");
+        group.label = n;
+        byNeighborhood[n].sort().forEach(b => {
+            const opt = document.createElement("option");
+            opt.value = b;
+            opt.textContent = b;
+            group.appendChild(opt);
+        });
+        picker.appendChild(group);
     });
 
     function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
