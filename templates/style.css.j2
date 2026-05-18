@@ -823,6 +823,35 @@ main {
     .appendix-body { padding-left: 0; }
 }
 
+.limits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: clamp(18px, 2vw, 24px);
+}
+
+.limits-list li {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 70ch;
+    padding-left: 18px;
+    position: relative;
+}
+
+.limits-list li::before {
+    content: "\2014";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+}
+
+.limits-list strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
 /* ============ Colophon ============ */
 
 footer {

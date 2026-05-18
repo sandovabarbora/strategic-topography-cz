@@ -831,6 +831,35 @@ main {
     .appendix-body { padding-left: 0; }
 }
 
+.limits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: clamp(18px, 2vw, 24px);
+}
+
+.limits-list li {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 70ch;
+    padding-left: 18px;
+    position: relative;
+}
+
+.limits-list li::before {
+    content: "\2014";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+}
+
+.limits-list strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
 /* ============ Colophon ============ */
 
 footer {
@@ -1501,6 +1530,34 @@ em, i { font-style: normal; font-weight: 600; }</style>
                     </div>
                 </article>
             </div>
+        </div>
+    </details>
+
+    <details class="appendix">
+        <summary>What this is and isn&apos;t (limits + robustness)</summary>
+        <div class="appendix-body">
+            <p class="appendix-lede">Honest disclosure. The report is exploratory analysis on a small hand-curated sample, not peer-reviewed methodology. Strategists who plan to act on it should know what holds and what doesn&apos;t.</p>
+
+            <ul class="limits-list">
+                <li>
+                    <strong>Sample is 24 brands, hand-picked.</strong> Findings condition on this set. Claims about &quot;Czech advertising overall&quot; would need a wider corpus. The Brand Reflection Series uses the same 24 brands across all episodes so cross-episode comparisons are internally consistent; external generalization is a separate question.
+                </li>
+                <li>
+                    <strong>k=4 clusters chosen by inspection, not by silhouette or gap statistic.</strong> Qualitative findings (banks cluster tightly; telecoms occupy their own tight neighborhood; mass-market and institutional are clearly distinct) hold across reasonable choices of k. Specific counts (&quot;eight brands in one neighborhood&quot;) are sensitive to k and to UMAP random seed.
+                </li>
+                <li>
+                    <strong>TF-IDF tokens include brand names by construction.</strong> &quot;banka, &scaron;koda, &#269;ez, fio&quot; appear as top tokens for the institutional cluster partly because those brands are in it. A stricter analysis would strip proper nouns and re-derive. The strategic interpretation (a shared institutional register) survives; the exact token list is partly self-referential.
+                </li>
+                <li>
+                    <strong>Homepage text is a narrow proxy for brand identity.</strong> ~600 characters per brand. Brands can position differently in TV, OOH or social and still get classified by this homepage snippet. The map describes &quot;how the homepage reads,&quot; not &quot;how the brand is perceived overall.&quot; Treat homepage as one signal among many.
+                </li>
+                <li>
+                    <strong>Exploratory, not inferential.</strong> No formal test for the headline claim. The map is descriptive evidence consistent with &quot;sector identity dissolves at the homepage layer,&quot; not a rejection of a pre-specified null hypothesis. The right framing is a lens that surfaces patterns worth investigating, not a causal conclusion.
+                </li>
+                <li>
+                    <strong>The Air Bank brief is a recommendation, not a tested prescription.</strong> No counterfactual evidence that drifting toward the mass-market edge causes the perception shift. The brief is a structured starting point for a strategist, not an experimentally validated playbook. The success metric (re-embed after 90 days, observe drift) is the in-flight validation, not a pre-validation.
+                </li>
+            </ul>
         </div>
     </details>
 
